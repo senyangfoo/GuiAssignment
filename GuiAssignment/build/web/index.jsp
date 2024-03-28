@@ -11,6 +11,7 @@
     <body>
         CODE IN HERE
         hello
+        
     </body>
 </html>
 <%@include file="layouts/footer.jsp" %>  
