@@ -9,8 +9,7 @@
 <!DOCTYPE html>
 <html>
     <body>
-        CODE IN HERE !!!
-        <div> test </div>
+        CODE IN HERE
     </body>
 </html>
 <%@include file="layouts/footer.jsp" %>  
