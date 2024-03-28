@@ -10,6 +10,7 @@
 <html>
     <body>
         CODE IN HERE !!!
+        <div> test </div>
     </body>
 </html>
 <%@include file="layouts/footer.jsp" %>  
