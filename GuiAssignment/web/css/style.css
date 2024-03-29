@@ -1,9 +1,10 @@
 /*variable*/
 :root {
     --font_family: Tahoma, "Trebuchet MS", sans-serif;
-    --primary_background_color: rgb(255,255,255);
-    --secondary_background_color: rgba(0,0,0,0.2);
-    --primary_font_color: rgb(0,0,0);
+    --primary_background_color: rgb(255, 255, 255);
+    --secondary_background_color: rgba(0, 0, 0, 0.2);
+    --primary_font_color: rgb(0, 0, 0);
+    --primary_font_size: 20px;
 }
 
 /*html*/
@@ -50,17 +51,19 @@ body {
         nav ul li a {
             color: var(--primary_font_color);
             display: block;
-            font-size: 120%;
+            font-size: var(--primary_font_size);
             line-height: 150%;
             margin-top: 20px;
             text-align: center;
             text-decoration: none;
             width: 100%;
         }
+
         nav ul li a:hover {
             cursor: pointer;
             text-decoration: underline;
         }
+
         ul,
         ol {
             list-style: none;
@@ -69,12 +72,13 @@ body {
 
     .header3 {
         display: flex;
-        margin: 20spx 0 20px 0;
+        margin: 20px 0 20px 0;
         text-align: center;
 
         a {
             margin: auto 0 auto 40px;
         }
+
         img {
             width: 150%;
         }
@@ -83,4 +87,100 @@ body {
 
 .HDcontainer::after {
     clear: both;
+}
+
+/*slideshow*/
+.slideContainer {
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+
+    button {
+        background-color: transparent;
+        border: 2px solid var(--primary_background_color);
+        color: var(--primary_background_color);
+        cursor: pointer;
+        font-size: var(--primary_font_size);
+        padding: 15px 32px;
+        position: absolute;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    button:hover {
+        background-color: var(--primary_background_color);
+        color: var(--primary_font_color);
+    }
+
+    img {
+        margin-top: -200px;
+        width: 100%;
+    }
+
+    .buttonLeft {
+        left: 3.5%;
+        top: 76%;
+    }
+
+    .buttonRight {
+        right: 33%;
+        top: 76%;
+    }
+
+    .prev,
+    .next {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        width: auto;
+        padding: 16px;
+        margin-top: -22px;
+        color: var(--primary_background_color);
+        font-weight: bold;
+        font-size: 18px;
+        transition: 0.3s ease;
+        border-radius: 0 3px 3px 0;
+        user-select: none;
+    }
+
+    .next {
+        right: 0;
+        border-radius: 3px 0 0 3px;
+    }
+
+    .prev:hover,
+    .next:hover {
+        background-color: var(--secondary_background_color);
+    }
+
+    .dot {
+        cursor: pointer;
+        height: 15px;
+        width: 15px;
+        margin: 0 2px;
+        background-color: var(--secondary_background_color);
+        border-radius: 50%;
+        display: inline-block;
+        transition: background-color 0.1s ease;
+    }
+
+    .active,
+    .dot:hover {
+        background-color: var(--primary_font_color);
+    }
+
+    .fadeAnimation {
+        animation-name: fadeAnimation;
+        animation-duration: 0.5s;
+    }
+
+}
+
+@keyframes fadeAnimation {
+    from {
+        opacity: .8
+    }
+
+    to {
+        opacity: 1
+    }
 }
