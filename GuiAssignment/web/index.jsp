@@ -13,8 +13,8 @@
     <body>
         <div class="slideContainer">
             <div class="fadeAnimation imgSlide" onmouseover="pause()" onmouseout="resume()"><img src="images/piano.png" alt="piano"/><button class="buttonLeft">View Products</button></div>
-            <div class="fadeAnimation imgSlide" onmouseover="pause()" onmouseout="resume()" style="display: none"><img src="images/violin.png" alt="pianos"/><button class="buttonLeft">View Products</button></div>
             <div class="fadeAnimation imgSlide" onmouseover="pause()" onmouseout="resume()" style="display: none"><img src="images/guitar.png" alt="guitar"/><button class="buttonRight">View Products</button></div>
+            <div class="fadeAnimation imgSlide" onmouseover="pause()" onmouseout="resume()" style="display: none"><img src="images/violin.png" alt="violin"/><button class="buttonLeft">View Products</button></div>
             <div class="fadeAnimation imgSlide" onmouseover="pause()" onmouseout="resume()" style="display: none"><img src="images/drum.png" alt="drum"/><button class="buttonLeft">View Products</button></div>
 
             <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
