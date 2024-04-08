@@ -11,6 +11,73 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/style.css">
         <title>Music & Muse</title>
+        <style>
+            /*header*/
+            .HDcontainer {
+                border-bottom: 1px solid var(--secondary_background_color);
+                display: grid;
+                grid-template-columns: 20% 60% 20%;
+                height: 100px;
+                max-height: 100px;
+                position: relative;
+                width: 100%;
+
+                .header1 {
+                    margin: auto auto auto 20%;
+                    text-align: center;
+
+                    img {
+                        width: 100%;
+                    }
+                }
+
+                .header2 {
+                    nav ul li {
+                        float: left;
+                        margin-right: 4%;
+                    }
+
+                    nav ul li a {
+                        color: var(--primary_font_color);
+                        display: block;
+                        font-size: var(--primary_font_size);
+                        line-height: 150%;
+                        margin-top: 20px;
+                        text-align: center;
+                        text-decoration: none;
+                        width: 100%;
+                    }
+
+                    nav ul li a:hover {
+                        cursor: pointer;
+                        text-decoration: underline;
+                    }
+
+                    ul,
+                    ol {
+                        list-style: none;
+                    }
+                }
+
+                .header3 {
+                    display: flex;
+                    margin: 20px 0 20px 0;
+                    text-align: center;
+
+                    a {
+                        margin: auto 0 auto 40px;
+                    }
+
+                    img {
+                        width: 150%;
+                    }
+                }
+            }
+
+            .HDcontainer::after {
+                clear: both;
+            }
+        </style>
     </head>
     <header>
         <div class="HDcontainer">
