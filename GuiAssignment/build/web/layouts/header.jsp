@@ -14,7 +14,7 @@
         <style>
             /*header*/
             .HDcontainer {
-                border-bottom: 1px solid var(--secondary_background_color);
+                border-bottom: 1px solid var(--secondary_black_color);
                 display: grid;
                 grid-template-columns: 20% 60% 20%;
                 height: 100px;
@@ -38,7 +38,7 @@
                     }
 
                     nav ul li a {
-                        color: var(--primary_font_color);
+                        color: var(--primary_black_color);
                         display: block;
                         font-size: var(--primary_font_size);
                         line-height: 150%;

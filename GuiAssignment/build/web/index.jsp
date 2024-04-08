@@ -19,8 +19,8 @@
 
             button {
                 background-color: transparent;
-                border: 2px solid var(--primary_background_color);
-                color: var(--primary_background_color);
+                border: 2px solid var(--primary_white_color);
+                color: var(--primary_white_color);
                 cursor: pointer;
                 font-size: var(--primary_font_size);
                 padding: 15px 32px;
@@ -29,8 +29,8 @@
             }
 
             button:hover {
-                background-color: var(--primary_background_color);
-                color: var(--primary_font_color);
+                background-color: var(--primary_white_color);
+                color: var(--primary_black_color);
             }
 
             img {
@@ -51,7 +51,7 @@
             .prev,
             .next {
                 border-radius: 0 3px 3px 0;
-                color: var(--primary_background_color);
+                color: var(--primary_white_color);
                 cursor: pointer;
                 font-size: 18px;
                 font-weight: bold;
@@ -71,11 +71,11 @@
 
             .prev:hover,
                 .next:hover {
-                background-color: var(--secondary_background_color);
+                background-color: var(--secondary_black_color);
             }
 
             .dot {
-                background-color: var(--secondary_background_color);
+                background-color: var(--secondary_black_color);
                 display: inline-block;
                 border-radius: 50%;
                 cursor: pointer;
@@ -87,7 +87,7 @@
 
             .active,
             .dot:hover {
-                background-color: var(--primary_font_color);
+                background-color: var(--primary_black_color);
             }
 
             .fadeAnimation {
@@ -106,6 +106,55 @@
                 opacity: 1
             }
         }
+
+        .contentContainer{
+            margin: 50px 50px 30px 50px;
+
+            .productContainer{
+                display: grid;
+                grid-gap: 10px;
+                grid-template-columns: repeat(4, 1fr);
+                margin: 0 0 50px 0;
+
+                .iconContainer{
+                    overflow: hidden;
+                    position: relative;
+                    display: inline-block;
+
+                    h2{
+                        bottom: 25px;
+                        color: var(--primary_white_color);
+                        left: 15px;
+                        margin: 0;
+                        position: absolute;
+                    }
+                }
+
+                img {
+                    transition: transform 0.3s ease, filter 0.3s ease;
+                    width: 100%;
+                }
+
+                img:hover {
+                    filter: brightness(85%);
+                    transform: scale(1.05);
+                }
+            }
+
+            .topSalesContainer{
+                display: grid;
+                grid-gap: 10px;
+                grid-template-columns: 20% 80%;
+                margin: 0 0 50px 0;
+            }
+
+            .NewsEvenstContainer{
+                display: grid;
+                grid-gap: 10px;
+                grid-template-columns: 20% 80%;
+                margin: 0 0 50px 0;
+            }
+        }
     </style>
     <body>
         <div class="slideContainer">
@@ -122,6 +171,31 @@
                 <span class="dot" onclick="currentSlide(2)"></span> 
                 <span class="dot" onclick="currentSlide(3)"></span>
                 <span class="dot" onclick="currentSlide(4)"></span>
+            </div>
+        </div>
+        <div class="contentContainer">
+            <h2>Products</h2>
+            <div class="productContainer">
+                <div class=iconContainer><a href=""><img src="images/piano_icon.png" alt="piano_icon"/><h2>Pianos</h2></a></div>
+                <div class=iconContainer><a href=""><img src="images/guitar_icon.png" alt="guitar_icon"/><h2>Guitars</h2></a></div>
+                <div class=iconContainer><a href=""><img src="images/drum_icon.png" alt="drum_icon"/><h2>Drums</h2></a></div>
+                <div class=iconContainer><a href=""><img src="images/violin_icon.png" alt="violin_icon"/><h2>Violins</h2></a></div>
+            </div>
+            <h2>Top Sales</h2>
+            <div class="topSalesContainer">
+                <img src="images/null_icon.png" width="100%"/>
+                <div>
+                    <h3>Item Name</h3>
+                    <p>Description</p>
+                </div>
+            </div>
+            <h2>News & Upcoming Events</h2>
+            <div class="NewsEvenstContainer">
+                <img src="images/null_icon.png" width="100%"/>
+                <div>
+                    <h3>Item Name</h3>
+                    <p>Description</p>
+                </div>
             </div>
         </div>
     </body>
