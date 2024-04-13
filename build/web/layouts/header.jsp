@@ -87,7 +87,7 @@
             <div class="header2">
                 <nav>
                     <ul>
-                        <li><a href="">Products</a></li>
+                        <li><a href="product.jsp">Products</a></li>
                         <li><a href="">News & Events</a></li>
                         <li><a href="">Supports</a></li>
                         <li><a href="">About Us</a></li>
