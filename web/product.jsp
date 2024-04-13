@@ -24,7 +24,7 @@
             if(!products.isEmpty()){
                 for(Product p : products){%>
                     <div class="card">
-                        <img src ="images/<%= p.getProductImage() %>" style="max-width: 100px; max-height: 100px;">
+                        <img src ="images/<%= p.getImage() %>" style="max-width: 100px; max-height: 100px;">
                         <h1><%= p.getProductName() %></h1>
                         <p><%= p.getPrice() %></p>
                         <p><%= p.getDescription() %></p>
