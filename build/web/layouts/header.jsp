@@ -1,10 +1,15 @@
-<%-- 
-    Document   : header
-    Created on : 24 Mar 2024, 2:17:31 PM
-    Author     : foose
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<script>
+    function openCartDrawer() {
+        document.getElementById("cart_drawer").classList.add("open");
+        document.getElementById("overlay").classList.add("active");
+    }
+
+    function closeCartDrawer() {
+        document.getElementById("cart_drawer").classList.remove("open");
+        document.getElementById("overlay").classList.remove("active");
+    }
+</script>
 <!DOCTYPE html>
 <html>
     <head>
@@ -32,6 +37,11 @@
                 }
 
                 .header2 {
+                    nav {
+                        background-color: white;
+
+                    }
+
                     nav ul li {
                         float: left;
                         margin-right: 4%;
@@ -66,6 +76,7 @@
 
                     a {
                         margin: auto 0 auto 40px;
+                        cursor: pointer;
                     }
 
                     img {
@@ -77,9 +88,58 @@
             .HDcontainer::after {
                 clear: both;
             }
+
+            .cart_drawer {
+                position: fixed;
+                top: 0;
+                right: -500px;
+                width: 500px;
+                height: 100%;
+                background-color: var(--primary_white_color);
+                transition: right 0.5s;
+                z-index: 1000;
+            }
+
+            .cart_drawer.open {
+                right: 0;
+            }
+
+            .cart_drawer-content {
+                padding: 16px;
+
+                .cart_drawer-headerContainer {
+                    border-bottom: 2px solid var(--secondary_black_color);
+                    display: grid;
+                    grid-template-columns: 6% 94%;
+                    padding: 0 0 16px 0 ;
+                    h3 {
+                        margin: auto auto auto auto ;
+                    }
+                }
+
+                img.close {
+                    width: 30px;
+                    cursor: pointer;
+                }
+            }
+            .overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+                display: none;
+            }
+
+            .overlay.active {
+                display: block;
+            }
         </style>
     </head>
     <header>
+        <div id="overlay" class="overlay" onclick="closeCartDrawer()"></div>
         <div class="HDcontainer">
             <div class="header1">
                 <a href="index.jsp" ><img src="images/logo.png" alt="logo" class="logo"></a>
@@ -97,7 +157,15 @@
             <div class="header3">
                 <a href="" ><img src="images/search.svg" alt="avatar" class="search"></a>
                 <a href="" ><img src="images/account_circle.svg" alt="avatar" class="avatar"></a>
-                <a href="" ><img src="images/shopping_cart.svg" alt="cart" class="cart"></a>
+                <a><img src="images/shopping_cart.svg" alt="cart" class="cart" onclick="openCartDrawer()"></a>
+            </div>
+            <div id="cart_drawer" class="cart_drawer">
+                <div class="cart_drawer-content">
+                    <div class="cart_drawer-headerContainer">
+                        <a><img src="images/close.svg" alt="close" class="close" onclick="closeCartDrawer()"></a>
+                        <h3>My Cart</h3>
+                    </div>
+                </div>
             </div>
         </div>
     </header>  
