@@ -20,6 +20,7 @@
             button {
                 background-color: transparent;
                 border: 2px solid var(--primary_white_color);
+                border-radius: 30px;
                 color: var(--primary_white_color);
                 cursor: pointer;
                 font-size: var(--primary_font_size);

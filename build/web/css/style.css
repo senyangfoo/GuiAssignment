@@ -2,9 +2,15 @@
 :root {
     --font_family: Tahoma, "Trebuchet MS", sans-serif;
     --primary_white_color: rgb(255, 255, 255);
-    --secondary_black_color: rgba(0, 0, 0, 0.2);
     --primary_black_color: rgb(0, 0, 0);
+    --secondary_black_color: rgba(0, 0, 0, 0.2);
+    --third_black_color: rgba(0, 0, 0, 0.9);
+    --primary_grey_color: hsl(0,0%,98%);
+    --primary_brown_color: rgb(51,48,46);
+    --secondary_brown_color: rgba(51,48,46,0.4);
     --primary_font_size: 20px;
+    --secondary-font-size: 18px;
+    --third-font-size: 14px;
 }
 
 /*html*/
