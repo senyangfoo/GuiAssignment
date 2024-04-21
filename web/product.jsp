@@ -23,13 +23,15 @@
         <%
             if(!products.isEmpty()){
                 for(Product p : products){%>
-                    <div class="card">
-                        <img src ="images/<%= p.getImage() %>" style="max-width: 100px; max-height: 100px;">
-                        <h1><%= p.getProductName() %></h1>
-                        <p><%= p.getPrice() %></p>
-                        <p><%= p.getDescription() %></p>
-                        <p><button>Add to Cart</button></p>
-                    </div>
+                    <a href="ProductDetailServlet?productID=<%= p.getProdId()%>" >
+                        <div class="card">
+                            <img src ="images/<%= p.getImage() %>" style="max-width: 100px; max-height: 100px;">
+                            <h1><%= p.getProdName()%></h1>
+                            <p><%= p.getPrice() %></p>
+                            <p><%= p.getDescription() %></p>
+                            <p><button>Add to Cart</button></p>
+                        </div>
+                    </a>
                 <%}
             }
         %>
