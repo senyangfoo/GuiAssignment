@@ -1,9 +1,10 @@
-<%-- 
-    Document   : index
-    Created on : 24 Mar 2024, 1:35:15 PM
-    Author     : foose
---%>
+<script>
+    function scrollToContainer() {
+        var container = document.getElementById('contentContainer');
 
+        container.scrollIntoView({behavior: 'smooth'});
+    }
+</script>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="layouts/header.jsp" %>  
 <!DOCTYPE html>
@@ -159,10 +160,10 @@
     </style>
     <body>
         <div class="slideContainer">
-            <div class="fadeAnimation imgSlide" onmouseover="pause()" onmouseout="resume()"><img src="images/piano.png" alt="piano"/><button class="buttonLeft">View Products</button></div>
-            <div class="fadeAnimation imgSlide" onmouseover="pause()" onmouseout="resume()" style="display: none"><img src="images/guitar.png" alt="guitar"/><button class="buttonRight">View Products</button></div>
-            <div class="fadeAnimation imgSlide" onmouseover="pause()" onmouseout="resume()" style="display: none"><img src="images/violin.png" alt="violin"/><button class="buttonLeft">View Products</button></div>
-            <div class="fadeAnimation imgSlide" onmouseover="pause()" onmouseout="resume()" style="display: none"><img src="images/drum.png" alt="drum"/><button class="buttonLeft">View Products</button></div>
+            <div class="fadeAnimation imgSlide" onmouseover="pause()" onmouseout="resume()"><img src="images/piano.png" alt="piano"/><button class="buttonLeft" onclick="scrollToContainer()">View Products</button></div>
+            <div class="fadeAnimation imgSlide" onmouseover="pause()" onmouseout="resume()" style="display: none"><img src="images/guitar.png" alt="guitar"/><button class="buttonRight" onclick="scrollToContainer()">View Products</button></div>
+            <div class="fadeAnimation imgSlide" onmouseover="pause()" onmouseout="resume()" style="display: none"><img src="images/violin.png" alt="violin"/><button class="buttonLeft" onclick="scrollToContainer()">View Products</button></div>
+            <div class="fadeAnimation imgSlide" onmouseover="pause()" onmouseout="resume()" style="display: none"><img src="images/drum.png" alt="drum"/><button class="buttonLeft" onclick="scrollToContainer()">View Products</button></div>
 
             <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
             <a class="next" onclick="plusSlides(1)">&#10095;</a>
@@ -174,7 +175,7 @@
                 <span class="dot" onclick="currentSlide(4)"></span>
             </div>
         </div>
-        <div class="contentContainer">
+        <div class="contentContainer" id="contentContainer">
             <h2>Products</h2>
             <div class="productContainer">
                 <div class=iconContainer><a href=""><img src="images/piano_icon.png" alt="piano_icon"/><h2>Pianos</h2></a></div>
