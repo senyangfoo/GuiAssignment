@@ -39,7 +39,6 @@
                 .header2 {
                     nav {
                         background-color: white;
-
                     }
 
                     nav ul li {
@@ -128,7 +127,7 @@
                 left: 0;
                 width: 100%;
                 height: 100%;
-                background-color: rgba(0, 0, 0, 0.5);
+                background-color: rgba(0, 0, 0, 0.3);
                 z-index: 999;
                 display: none;
             }
@@ -186,6 +185,53 @@
                 opacity: 1;
                 transform: translateY(0);
             }
+
+            div.products {
+                position: relative;
+            }
+
+            .productsmenu {
+                position: absolute;
+                width: 100%;
+                left: 0;
+                padding: 20px 20px 20px 22%;
+                background-color: var(--primary_white_color);
+                opacity: 0;
+                z-index: 1000;
+                white-space: nowrap;
+                transition: opacity 0.2s ease, transform 0.2s ease;
+                transform: translateY(-10px);
+                pointer-events: none;
+                overflow: hidden;
+                ul {
+                    list-style-type: none;
+                    padding: 0;
+                    margin: 0;
+                }
+
+                li {
+                    text-align: left;
+                    clear: both;
+                }
+
+                li a {
+                    text-decoration: none;
+                    color: var(--primary_black_color);
+                    text-decoration: none !important;
+                    font-size: 18px !important;
+                }
+
+                a:hover {
+                    color: var(--primary_brown_color);
+                    transform: scale(1.03) translateX(2px);
+                }
+            }
+
+            .products:hover .productsmenu{
+                pointer-events: auto;
+                opacity: 1000;
+                transform: translateY(0);
+            }
         </style>
     </head>
     <header>
@@ -197,7 +243,16 @@
             <div class="header2">
                 <nav>
                     <ul>
-                        <li><a href="product.jsp">Products</a></li>
+                        <li class="products"><a href="product.jsp">Products</a>
+                            <div class="productsmenu">
+                                <ul>
+                                    <li><a href="" >Pianos</a></li>
+                                    <li><a href="" >Guitars</a></li>
+                                    <li><a href="" >Drums</a></li>
+                                    <li><a href="" >Violins</a></li>
+                                </ul>
+                            </div>
+                        </li>
                         <li><a href="">News & Events</a></li>
                         <li><a href="">Supports</a></li>
                         <li><a href="">About Us</a></li>
@@ -207,7 +262,7 @@
             <div class="header3">
                 <div href="" ><img src="images/search.svg" alt="avatar" class="search"></div>
                 <div class="avatar"><img src="images/account_circle.svg" alt="avatar" class="avatar">
-                    <div class="avatarmenu" >
+                    <div class="avatarmenu">
                         <ul>
                             <li><a href="">My Profile</a></li>
                             <li><a href="">Order History</a></li>
