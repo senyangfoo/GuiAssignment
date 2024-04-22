@@ -8,4 +8,12 @@
         <servlet-name>ProductDetailServlet</servlet-name>
         <url-pattern>/ProductDetailServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>RetrieveUser</servlet-name>
+        <servlet-class>controller.RetrieveUser</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RetrieveUser</servlet-name>
+        <url-pattern>/RetrieveUser</url-pattern>
+    </servlet-mapping>
 </web-app>
