@@ -74,7 +74,7 @@
                     margin: 20px 0 20px 0;
                     text-align: center;
 
-                    a {
+                    div:not(.avatarmenu) {
                         margin: auto 0 auto 40px;
                         cursor: pointer;
                     }
@@ -136,6 +136,56 @@
             .overlay.active {
                 display: block;
             }
+
+            div.avatar {
+                position: relative;
+            }
+
+            .avatarmenu {
+                position: absolute;
+                background-color: var(--primary_white_color);
+                opacity: 0;
+                z-index: 1;
+                white-space: nowrap;
+                transition: opacity 0.2s ease, transform 0.2s ease;
+                transform: translateY(-10px);
+                pointer-events: none;
+                box-shadow: 5px 5px 20px 0px var(--secondary_brown_color);
+                border-radius: 0 6px 6px 6px;
+                overflow: hidden;
+
+                ul {
+                    list-style-type: none;
+                    padding: 0;
+                    margin: 0;
+
+                }
+
+                li {
+                    text-align: left;
+                    border-radius: 6px;
+                }
+
+                li a {
+                    display: block;
+                    padding: 12px 30px 16px 10px;
+                    text-decoration: none;
+                    color: var(--primary_black_color);
+                }
+
+                a:hover {
+                    background-color: var(--secondary_grey_color);
+                    color: var(--primary_brown_color);
+                    transform: scale(1.01);
+                }
+
+            }
+
+            .avatar:hover .avatarmenu{
+                pointer-events: auto;
+                opacity: 1;
+                transform: translateY(0);
+            }
         </style>
     </head>
     <header>
@@ -155,9 +205,18 @@
                 </nav>
             </div>
             <div class="header3">
-                <a href="" ><img src="images/search.svg" alt="avatar" class="search"></a>
-                <a href="" ><img src="images/account_circle.svg" alt="avatar" class="avatar"></a>
-                <a><img src="images/shopping_cart.svg" alt="cart" class="cart" onclick="openCartDrawer()"></a>
+                <div href="" ><img src="images/search.svg" alt="avatar" class="search"></div>
+                <div class="avatar"><img src="images/account_circle.svg" alt="avatar" class="avatar">
+                    <div class="avatarmenu" >
+                        <ul>
+                            <li><a href="">My Profile</a></li>
+                            <li><a href="">Order History</a></li>
+                            <li><a href="">Track Order</a></li>
+                            <li><a href="">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div><img src="images/shopping_cart.svg" alt="cart" class="cart" onclick="openCartDrawer()"></div>
             </div>
             <div id="cart_drawer" class="cart_drawer">
                 <div class="cart_drawer-content">
