@@ -3,30 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/GuiAssignment/src/java/controller/ProductDetailServlet.java</file>
-            <file>file:/C:/xampp/htdocs/GuiAssignment/src/java/da/ProductDA.java</file>
-            <file>file:/C:/xampp/htdocs/GuiAssignment/src/java/domain/Admin.java</file>
-            <file>file:/C:/xampp/htdocs/GuiAssignment/web/layouts/footer.jsp</file>
-            <file>file:/C:/xampp/htdocs/GuiAssignment/web/images/piano_icon.png</file>
-            <file>file:/C:/xampp/htdocs/GuiAssignment/web/images/shopping_cart.svg</file>
-            <file>file:/C:/xampp/htdocs/GuiAssignment/web/images/violin.png</file>
-            <file>file:/C:/xampp/htdocs/GuiAssignment/src/conf/persistence.xml</file>
-            <file>file:/C:/xampp/htdocs/GuiAssignment/src/java/domain/Product.java</file>
-            <file>file:/C:/xampp/htdocs/GuiAssignment/web/layouts/header.jsp</file>
-            <file>file:/C:/xampp/htdocs/GuiAssignment/web/productdetail.jsp</file>
-            <file>file:/C:/xampp/htdocs/GuiAssignment/web/Register.jsp</file>
-            <file>file:/C:/xampp/htdocs/GuiAssignment/src/java/da/userDA.java</file>
-            <file>file:/C:/xampp/htdocs/GuiAssignment/web/WEB-INF/glassfish-resources.xml</file>
-            <file>file:/C:/xampp/htdocs/GuiAssignment/web/ConfirmRegister.jsp</file>
-            <file>file:/C:/xampp/htdocs/GuiAssignment/src/java/domain/Customer.java</file>
-            <file>file:/C:/xampp/htdocs/GuiAssignment/web/index.jsp</file>
-            <file>file:/C:/xampp/htdocs/GuiAssignment/src/java/controller/RetrieveUser.java</file>
-            <file>file:/C:/xampp/htdocs/GuiAssignment/web/images/piano.png</file>
-            <file>file:/C:/xampp/htdocs/GuiAssignment/web/WEB-INF/web.xml</file>
-            <file>file:/C:/xampp/htdocs/GuiAssignment/web/MainRegister.jsp</file>
-            <file>file:/C:/xampp/htdocs/GuiAssignment/nbproject/build-impl.xml</file>
-            <file>file:/C:/xampp/htdocs/GuiAssignment/web/product.jsp</file>
-            <file>file:/C:/xampp/htdocs/GuiAssignment/web/images/violin_icon.png</file>
+            <file>file:/C:/Users/foose/Desktop/github%20gui/GuiAssignment/web/product.jsp</file>
+            <file>file:/C:/Users/foose/Desktop/github%20gui/GuiAssignment/web/index.jsp</file>
+            <file>file:/C:/Users/foose/Desktop/github%20gui/GuiAssignment/web/layouts/header.jsp</file>
         </group>
     </open-files>
 </project-private>

@@ -39,7 +39,6 @@
                 .header2 {
                     nav {
                         background-color: white;
-
                     }
 
                     nav ul li {
@@ -74,7 +73,7 @@
                     margin: 20px 0 20px 0;
                     text-align: center;
 
-                    a {
+                    div:not(.avatarmenu) {
                         margin: auto 0 auto 40px;
                         cursor: pointer;
                     }
@@ -128,13 +127,110 @@
                 left: 0;
                 width: 100%;
                 height: 100%;
-                background-color: rgba(0, 0, 0, 0.5);
+                background-color: rgba(0, 0, 0, 0.3);
                 z-index: 999;
                 display: none;
             }
 
             .overlay.active {
                 display: block;
+            }
+
+            div.avatar {
+                position: relative;
+            }
+
+            .avatarmenu {
+                position: absolute;
+                background-color: var(--primary_white_color);
+                opacity: 0;
+                z-index: 1;
+                white-space: nowrap;
+                transition: opacity 0.2s ease, transform 0.2s ease;
+                transform: translateY(-10px);
+                pointer-events: none;
+                box-shadow: 5px 5px 20px 0px var(--secondary_brown_color);
+                border-radius: 0 6px 6px 6px;
+                overflow: hidden;
+
+                ul {
+                    list-style-type: none;
+                    padding: 0;
+                    margin: 0;
+
+                }
+
+                li {
+                    text-align: left;
+                    border-radius: 6px;
+                }
+
+                li a {
+                    display: block;
+                    padding: 12px 30px 16px 10px;
+                    text-decoration: none;
+                    color: var(--primary_black_color);
+                }
+
+                a:hover {
+                    background-color: var(--secondary_grey_color);
+                    color: var(--primary_brown_color);
+                    transform: scale(1.01);
+                }
+
+            }
+
+            .avatar:hover .avatarmenu{
+                pointer-events: auto;
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            div.products {
+                position: relative;
+            }
+
+            .productsmenu {
+                position: absolute;
+                width: 100%;
+                left: 0;
+                padding: 20px 20px 20px 22%;
+                background-color: var(--primary_white_color);
+                opacity: 0;
+                z-index: 1000;
+                white-space: nowrap;
+                transition: opacity 0.2s ease, transform 0.2s ease;
+                transform: translateY(-10px);
+                pointer-events: none;
+                overflow: hidden;
+                ul {
+                    list-style-type: none;
+                    padding: 0;
+                    margin: 0;
+                }
+
+                li {
+                    text-align: left;
+                    clear: both;
+                }
+
+                li a {
+                    text-decoration: none;
+                    color: var(--primary_black_color);
+                    text-decoration: none !important;
+                    font-size: 18px !important;
+                }
+
+                a:hover {
+                    color: var(--primary_brown_color);
+                    transform: scale(1.03) translateX(2px);
+                }
+            }
+
+            .products:hover .productsmenu{
+                pointer-events: auto;
+                opacity: 1000;
+                transform: translateY(0);
             }
         </style>
     </head>
@@ -147,7 +243,16 @@
             <div class="header2">
                 <nav>
                     <ul>
-                        <li><a href="product.jsp">Products</a></li>
+                        <li class="products"><a href="product.jsp">Products</a>
+                            <div class="productsmenu">
+                                <ul>
+                                    <li><a href="" >Pianos</a></li>
+                                    <li><a href="" >Guitars</a></li>
+                                    <li><a href="" >Drums</a></li>
+                                    <li><a href="" >Violins</a></li>
+                                </ul>
+                            </div>
+                        </li>
                         <li><a href="">News & Events</a></li>
                         <li><a href="">Supports</a></li>
                         <li><a href="">About Us</a></li>
@@ -155,9 +260,18 @@
                 </nav>
             </div>
             <div class="header3">
-                <a href="" ><img src="images/search.svg" alt="avatar" class="search"></a>
-                <a href="" ><img src="images/account_circle.svg" alt="avatar" class="avatar"></a>
-                <a><img src="images/shopping_cart.svg" alt="cart" class="cart" onclick="openCartDrawer()"></a>
+                <div href="" ><img src="images/search.svg" alt="avatar" class="search"></div>
+                <div class="avatar"><img src="images/account_circle.svg" alt="avatar" class="avatar">
+                    <div class="avatarmenu">
+                        <ul>
+                            <li><a href="">My Profile</a></li>
+                            <li><a href="">Order History</a></li>
+                            <li><a href="">Track Order</a></li>
+                            <li><a href="">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div><img src="images/shopping_cart.svg" alt="cart" class="cart" onclick="openCartDrawer()"></div>
             </div>
             <div id="cart_drawer" class="cart_drawer">
                 <div class="cart_drawer-content">

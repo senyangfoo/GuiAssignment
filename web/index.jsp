@@ -5,12 +5,12 @@
         container.scrollIntoView({behavior: 'smooth'});
     }
 </script>
+<script src="javascripts/slideEventHandler.js"></script>
+<script>window.onload = auto();</script>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="layouts/header.jsp" %>  
 <!DOCTYPE html>
 <html>
-    <script src="javascripts/slideEventHandler.js"></script>
-    <script>window.onload = auto();</script>
     <style>
         /*slideshow*/
         .slideContainer {
