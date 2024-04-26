@@ -25,7 +25,7 @@
             }
 
             .quantityContainer {
-                margin: 50px 0 10px 0;
+                margin: 60px 0 10px 0;
                 display: grid;
                 grid-template-areas:
                     'quantityText quantityText'
@@ -34,13 +34,16 @@
                 .quantityText {
                     font-size: var(--third-font-size);
                     grid-area: quantityText;
+                    margin: 0 0 0 0;
                 }
 
                 .quantitySelector {
                     grid-area:  quantitySelector;
+                    margin: auto 0 auto 0;
 
                     input[type="number"] {
                         width: 50px;
+                        font-size: var(--third-font-size);
                         text-align: center;
                         border: none;
                         -moz-appearance: textfield;
@@ -80,15 +83,16 @@
                 color: var(--primary_white_color);
                 background-color: var(--primary_brown_color);
                 cursor: pointer;
+                font-size: var(--secondary-font-size);
             }
 
             .descContainer {
-                margin: 50px 0 10px 0;
-                
+                margin: 60px 0 10px 0;
+
                 .descTitle {
                     font-size: var(--primary_font_size);
                 }
-                
+
                 .desc {
                     font-size: var(--third-font-size);
                 }
