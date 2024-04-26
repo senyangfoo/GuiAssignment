@@ -9,6 +9,20 @@
         document.getElementById("cart_drawer").classList.remove("open");
         document.getElementById("overlay").classList.remove("active");
     }
+
+    function showProductImage(id) {
+        var element = document.getElementById(id);
+
+        element.style.opacity = "0.2";
+        element.style.right = "0";
+    }
+
+    function hideProductImage(id) {
+        var element = document.getElementById(id);
+
+        element.style.opacity = "0";
+        element.style.right = "-10px";
+    }
 </script>
 <!DOCTYPE html>
 <html>
@@ -193,6 +207,7 @@
             .productsmenu {
                 position: absolute;
                 width: 100%;
+                max-height: 230px;
                 left: 0;
                 padding: 20px 20px 20px 22%;
                 background-color: var(--primary_white_color);
@@ -225,11 +240,47 @@
                     color: var(--primary_brown_color);
                     transform: scale(1.03) translateX(2px);
                 }
+
+                .piano_product {
+                    width: 35%;
+                    opacity: 0;
+                    position: absolute;
+                    right: -10px;
+                    bottom: -50%;
+                    transition: opacity 0.2s ease, right 0.2s ease;
+                }
+
+                .guitar_product {
+                    width: 35%;
+                    opacity: 0;
+                    position: absolute;
+                    right: -10px;
+                    bottom: -20%;
+                    transition: opacity 0.2s ease, right 0.2s ease;
+                }
+
+                .drum_product {
+                    width: 35%;
+                    opacity: 0;
+                    position: absolute;
+                    right: -10px;
+                    bottom: -20%;
+                    transition: opacity 0.2s ease, right 0.2s ease;
+                }
+
+                .violin_product {
+                    width: 35%;
+                    opacity: 0;
+                    position: absolute;
+                    right: -10px;
+                    bottom: -32%;
+                    transition: opacity 0.2s ease, right 0.2s ease;
+                }
             }
 
             .products:hover .productsmenu{
                 pointer-events: auto;
-                opacity: 1000;
+                opacity: 100;
                 transform: translateY(0);
             }
         </style>
@@ -246,11 +297,15 @@
                         <li class="products"><a href="product.jsp">Products</a>
                             <div class="productsmenu">
                                 <ul>
-                                    <li><a href="" >Pianos</a></li>
-                                    <li><a href="" >Guitars</a></li>
-                                    <li><a href="" >Drums</a></li>
-                                    <li><a href="" >Violins</a></li>
+                                    <li><a href="" onmouseover="showProductImage('piano_product')" onmouseout="hideProductImage('piano_product')">Pianos</a></li>
+                                    <li><a href="" onmouseover="showProductImage('guitar_product')" onmouseout="hideProductImage('guitar_product')">Guitars</a></li>
+                                    <li><a href="" onmouseover="showProductImage('drum_product')" onmouseout="hideProductImage('drum_product')">Drums</a></li>
+                                    <li><a href="" onmouseover="showProductImage('violin_product')" onmouseout="hideProductImage('violin_product')">Violins</a></li>
                                 </ul>
+                                <img src="images/piano_product.png" class="piano_product" id="piano_product">
+                                <img src="images/guitar_product.png" class="guitar_product" id="guitar_product">
+                                <img src="images/drum_product.png" class="drum_product" id="drum_product">
+                                <img src="images/violin_product.png" class="violin_product" id="violin_product">
                             </div>
                         </li>
                         <li><a href="">News & Events</a></li>

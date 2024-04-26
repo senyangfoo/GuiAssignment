@@ -7,6 +7,8 @@
     --third_black_color: rgba(0, 0, 0, 0.9);
     --primary_grey_color: hsl(0,0%,98%);
     --secondary_grey_color: hsl(0, 0%, 95%);
+    --third_grey_color: hsl(0, 0%, 50%);
+    --fourth_grey_color: hsl(0, 0%, 80%);
     --primary_brown_color: rgb(51,48,46);
     --secondary_brown_color: rgba(51,48,46,0.4);
     --primary_font_size: 20px;
