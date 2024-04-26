@@ -13,8 +13,10 @@
     function showProductImage(id) {
         var element = document.getElementById(id);
 
-        element.style.opacity = "0.2";
-        element.style.right = "0";
+        setTimeout(function () {
+            element.style.opacity = "0.2";
+            element.style.right = "0";
+        }, 1);
     }
 
     function hideProductImage(id) {
