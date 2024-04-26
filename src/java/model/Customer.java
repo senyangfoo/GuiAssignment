@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package domain;
+package model;
 
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
@@ -15,6 +15,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  *
@@ -51,8 +52,15 @@ public class Customer implements Serializable {
     public Customer() {
     }
 
-    public Customer(String custId) {
+    public Customer(String custName) {
+        this.custName = custName;
+    }
+
+    public Customer(String custId, String custName, String custEmail, String custPassword) {
         this.custId = custId;
+        this.custName = custName;
+        this.custEmail = custEmail;
+        this.custPassword = custPassword;
     }
 
     public String getCustId() {
@@ -90,21 +98,32 @@ public class Customer implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (custId != null ? custId.hashCode() : 0);
+        hash += (custName != null ? custName.hashCode() : 0);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Customer)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Customer other = (Customer) object;
-        if ((this.custId == null && other.custId != null) || (this.custId != null && !this.custId.equals(other.custId))) {
+        if (getClass() != obj.getClass()) {
             return false;
         }
-        return true;
+        final Customer other = (Customer) obj;
+        if (!Objects.equals(this.custId, other.custId)) {
+            return false;
+        }
+        if (!Objects.equals(this.custName, other.custName)) {
+            return false;
+        }
+        if (!Objects.equals(this.custEmail, other.custEmail)) {
+            return false;
+        }
+        return Objects.equals(this.custPassword, other.custPassword);
     }
 
     @Override

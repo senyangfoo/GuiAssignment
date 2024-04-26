@@ -4,20 +4,32 @@
  */
 package controller;
 
+import model.Customer;
+import model.userDA;
+import jakarta.annotation.Resource;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.transaction.UserTransaction;
 
-import model.Product;
-import jakarta.persistence.*;
-public class ProductDetailServlet extends HttpServlet {
-    
-   @PersistenceContext
-   EntityManager em;
+/**
+ *
+ * @author khtee
+ */
+public class RetrieveUser extends HttpServlet {
+    @PersistenceContext EntityManager em;
+      @Resource
+    UserTransaction utx;
+           int count = 3;
+           String err = "Wrong Username Or Password!";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -29,20 +41,42 @@ public class ProductDetailServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+            PrintWriter out = response.getWriter();
+        try {
+           
+            
             HttpSession session = request.getSession();
-            String productID = request.getParameter("productID");
-            Product product = findByProductId(productID);
+            String name = request.getParameter("name"); 
+            String password = request.getParameter("password");
 
-            session.setAttribute("product", product);
-            response.sendRedirect("productdetail.jsp");
+            
+            em.getEntityManagerFactory().getCache().evictAll();
+            userDA user = new userDA(em);
+            List<Customer> customer = user.findAll();
+
+            for (int i = 0; i < customer.size(); i++) {
+                
+                if (customer.get(i).getCustName().equals(name) && customer.get(i).getCustPassword().equals(password)) {
+
+                    session.setAttribute("login",true);
+                    session.setAttribute("name",customer.get(i).getCustName());
+
+                    response.sendRedirect("Main.html"); //homepage
+                }
+
+            request.setAttribute("errorMsg", "<i class=\"fa-solid fa-circle-exclamation error-icon\"></i> Username Or Password is wrong");
+               request.getRequestDispatcher("Login.jsp").forward(request, response); 
+            
+            }
+        }catch(Exception ex){
+
+            out.println("<h1 style='color: red'>Error accure at " + ex + " </h1>");
+
+
+          
+            
+           
         }
-    }
-    
-    public Product findByProductId(String id) {
-        Product product = em.find(Product.class, id);
-        return product;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

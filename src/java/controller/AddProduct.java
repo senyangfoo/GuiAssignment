@@ -10,14 +10,13 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
-import model.Product;
-import jakarta.persistence.*;
-public class ProductDetailServlet extends HttpServlet {
-    
-   @PersistenceContext
-   EntityManager em;
+/**
+ *
+ * @author Abcong
+ */
+public class AddProduct extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -31,18 +30,17 @@ public class ProductDetailServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            HttpSession session = request.getSession();
-            String productID = request.getParameter("productID");
-            Product product = findByProductId(productID);
-
-            session.setAttribute("product", product);
-            response.sendRedirect("productdetail.jsp");
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet AddProduct</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet AddProduct at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
-    }
-    
-    public Product findByProductId(String id) {
-        Product product = em.find(Product.class, id);
-        return product;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -4,8 +4,32 @@
         <servlet-name>ProductDetailServlet</servlet-name>
         <servlet-class>controller.ProductDetailServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewProduct</servlet-name>
+        <servlet-class>controller.ViewProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddProduct</servlet-name>
+        <servlet-class>controller.AddProduct</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProductDetailServlet</servlet-name>
         <url-pattern>/ProductDetailServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>RetrieveUser</servlet-name>
+        <servlet-class>controller.RetrieveUser</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RetrieveUser</servlet-name>
+        <url-pattern>/RetrieveUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewProduct</servlet-name>
+        <url-pattern>/ViewProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddProduct</servlet-name>
+        <url-pattern>/AddProduct</url-pattern>
     </servlet-mapping>
 </web-app>

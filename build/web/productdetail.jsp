@@ -1,5 +1,5 @@
 
-<%@page import="domain.Product"%>
+<%@page import="model.Product"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="layouts/header.jsp" %>  
 <!DOCTYPE html>
