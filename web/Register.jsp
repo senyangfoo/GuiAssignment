@@ -3,7 +3,7 @@
 <%@page import="java.util.Timer"%>  
 <%@page import="java.util.TimerTask"%>
 <%! int count = 3;%>
-<jsp:useBean id="user" class="domain.Customer" scope="session"></jsp:useBean>
+<jsp:useBean id="user" class="model.Customer" scope="session"></jsp:useBean>
 <jsp:useBean id="userDA" class="da.userDA" scope="application"></jsp:useBean>
     <!DOCTYPE html>
     <html>

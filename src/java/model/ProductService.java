@@ -2,52 +2,57 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package da;
+package model;
 
-import java.sql.*;
-import java.util.*;
-import domain.Product;
+import java.util.List;
+import jakarta.annotation.Resource;
+import jakarta.persistence.*;
 
-public class ProductDA {
-    private Connection conn;
-    private PreparedStatement stmt;
-    private String host = "jdbc:derby://localhost:1527/music";
-    private String user = "nbuser";
-    private String password = "nbuser";
+public class ProductService {
+    @PersistenceContext
+    EntityManager mgr;
+    @Resource
+    Query query;
 
-    public void getConnection(){
-        try {
-            Class.forName("org.apache.derby.jdbc.ClientDriver");
-            conn = DriverManager.getConnection(host, user, password);
-            // stmt = conn.prepareStatement(sqlQueryStr);
-        } catch (Exception ex) {
-            ex.getMessage();
-        }
+    public ProductService(EntityManager mgr) {
+        this.mgr = mgr;
     }
-    
-    public List<Product> getAllProduct(){
-        List<Product> products = new ArrayList<Product>();
-        
-        try{
-            String query = "SELECT * FROM PRODUCT";
-            stmt = conn.prepareStatement(query);
-            ResultSet rs = stmt.executeQuery();
-            
-            while(rs.next()){
-                String id = rs.getString("prod_id");
-                String image = rs.getString("image");
-                String name = rs.getString("prod_name");
-                String category = rs.getString("category");
-                String description = rs.getString("description");
-                double price = Double.parseDouble(rs.getString("price"));
-                int stock = Integer.parseInt(rs.getString("stock"));
-                
-                Product p = new Product(id, image, name, category, description, price, stock);
-                products.add(p);
-            }
-        }catch(SQLException e){
-            e.printStackTrace();
+
+    public boolean addItem(Product product) {
+        mgr.persist(product);
+        return true;
+    }
+
+    public Product findItemByID(String ID) {
+        Product product = mgr.find(Product.class, ID);
+        return product;
+    }
+
+    public boolean deleteItem(String ID) {
+        Product product = findItemByID(ID);
+        if (product != null) {
+            mgr.remove(product);
+            return true;
         }
-        return products;
+        return false;
+    }
+
+    public List<Product> findAll() {
+        List itemList = mgr.createNamedQuery("Product.findAll").getResultList();
+        return itemList;
+    }
+
+    public boolean updateItem(Product product) {
+        Product tempProduct = findItemByID(product.getProdId());
+        if (tempProduct != null) {
+            tempProduct.setImage(product.getImage());
+            tempProduct.setProdName(product.getProdName());
+            tempProduct.setCategory(product.getCategory());
+            tempProduct.setDescription(product.getDescription());
+            tempProduct.setPrice(product.getPrice());
+            tempProduct.setStock(product.getStock());
+            return true;
+        }
+        return false;
     }
 }

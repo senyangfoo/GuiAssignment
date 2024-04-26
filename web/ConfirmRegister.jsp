@@ -1,5 +1,5 @@
 <%@page import="domain.Customer"%>
-<jsp:useBean id="user" class="domain.Customer" scope="session"></jsp:useBean>
+<jsp:useBean id="user" class="model.Customer" scope="session"></jsp:useBean>
 <jsp:setProperty name="user" property="*" />
 <%@page import = "java.util.*;" %>
 <%@page import = "domain.Customer;" %>

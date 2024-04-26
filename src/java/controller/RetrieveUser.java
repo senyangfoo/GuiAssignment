@@ -4,8 +4,8 @@
  */
 package controller;
 
-import domain.Customer;
-import da.userDA;
+import model.Customer;
+import model.userDA;
 import jakarta.annotation.Resource;
 import java.io.IOException;
 import java.io.PrintWriter;

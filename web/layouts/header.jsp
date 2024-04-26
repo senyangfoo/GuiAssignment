@@ -294,7 +294,7 @@
             <div class="header2">
                 <nav>
                     <ul>
-                        <li class="products"><a href="product.jsp">Products</a>
+                        <li class="products"><a href="ViewProduct">Products</a>
                             <div class="productsmenu">
                                 <ul>
                                     <li><a href="" onmouseover="showProductImage('piano_product')" onmouseout="hideProductImage('piano_product')">Pianos</a></li>

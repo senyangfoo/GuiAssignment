@@ -10,16 +10,10 @@
     });
 </script>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import = "java.util.*" %>
-<%@page import = "domain.Product" %>
-<%@ page import = "java.sql.*" %>
-
-<jsp:useBean id="pda" class="da.ProductDA"></jsp:useBean>
-
+<%@page import="java.util.*"%>
+<%@page  import="model.Product" %>
 <%
-    List<Product> products = null;
-    pda.getConnection(); 
-    products = pda.getAllProduct();   
+   List<Product> productList = (List)session.getAttribute("productList");
 %>
 <%@include file="layouts/header.jsp" %>  
 <!DOCTYPE html>
@@ -110,8 +104,8 @@
             </div>
             <div class = "productContainer">
                 <%
-                    if(!products.isEmpty()){
-                        for(Product p : products){%>
+                    if(!productList.isEmpty()){
+                        for(Product p : productList){%>
                 <a href="ProductDetailServlet?productID=<%= p.getProdId()%>" class="cardContainer" >
                     <div class="card">
                         <div class="card_imgContainer">

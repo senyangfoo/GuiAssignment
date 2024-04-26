@@ -1,7 +1,7 @@
 
-package da;
+package model;
 
-import domain.Customer;
+import model.Customer;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import java.io.Serializable;
