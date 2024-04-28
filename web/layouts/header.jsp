@@ -1,35 +1,54 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<script>
-    function openCartDrawer() {
-        document.getElementById("cart_drawer").classList.add("open");
-        document.getElementById("overlay").classList.add("active");
-    }
-
-    function closeCartDrawer() {
-        document.getElementById("cart_drawer").classList.remove("open");
-        document.getElementById("overlay").classList.remove("active");
-    }
-
-    function showProductImage(id) {
-        var element = document.getElementById(id);
-
-        element.style.opacity = "0.2";
-        element.style.right = "0";
-    }
-
-    function hideProductImage(id) {
-        var element = document.getElementById(id);
-
-        element.style.opacity = "0";
-        element.style.right = "-10px";
-    }
-</script>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/style.css">
         <title>Music & Muse</title>
+        <script>
+            function openCartDrawer() {
+                document.getElementById("cart_drawer").classList.add("open");
+                document.getElementById("overlay").classList.add("active");
+            }
+
+            function closeCartDrawer() {
+                document.getElementById("cart_drawer").classList.remove("open");
+                document.getElementById("overlay").classList.remove("active");
+            }
+
+            function showProductImage(id) {
+                var element = document.getElementById(id);
+
+                setTimeout(function () {
+                    element.style.opacity = "0.2";
+                    element.style.right = "0";
+                }, 1);
+            }
+
+            function hideProductImage(id) {
+                var element = document.getElementById(id);
+
+                element.style.opacity = "0";
+                element.style.right = "-10px";
+            }
+
+            function openSearchBar() {
+                var searchbarContainer = document.getElementById("searchbarContainer");
+                var searchInput = document.getElementById("searchInput");
+                if (searchbarContainer.style.opacity === "0" || searchbarContainer.style.opacity === "") {
+                    searchbarContainer.style.opacity = "100";
+                    searchbarContainer.style.pointerEvents = "auto";
+                    searchInput.focus();
+                } else {
+                    searchbarContainer.style.opacity = "0";
+                }
+            }
+
+            function closeSearchBar() {
+                var searchbarContainer = document.getElementById("searchbarContainer");
+                searchbarContainer.style.opacity = "0";
+            }
+        </script>
         <style>
             /*header*/
             .HDcontainer {
@@ -87,7 +106,7 @@
                     margin: 20px 0 20px 0;
                     text-align: center;
 
-                    div:not(.avatarmenu) {
+                    div:not(.avatarmenu, .searchbarContainer) {
                         margin: auto 0 auto 40px;
                         cursor: pointer;
                     }
@@ -283,13 +302,42 @@
                 opacity: 100;
                 transform: translateY(0);
             }
+
+            .search {
+                position: relative;
+
+                .searchbarContainer {
+                    position: absolute;
+                    right: 0;
+                    opacity: 0;
+                    width: auto;
+                    padding: 5px;
+                    border: 1px solid var(--primary_black_color);
+                    background-color: var(--primary_white_color);
+                    border-radius: 6px 0 6px 6px;
+                    transition: opacity 0.08s;
+                    pointer-events: none;
+                    transform: translateY(-8px) translateX(8px);
+
+                    .searchInput {
+                        font-size: var(--secondary-font-size);
+                        float: right;
+                        border: none;
+                    }
+
+                    .searchInput:focus {
+                        border: none;
+                        outline: none;
+                    }
+                }
+            }
         </style>
     </head>
     <header>
         <div id="overlay" class="overlay" onclick="closeCartDrawer()"></div>
         <div class="HDcontainer">
             <div class="header1">
-                <a href="index.jsp" ><img src="images/logo.png" alt="logo" class="logo"></a>
+                <a href="index.jsp" ><img src="images/logo.png" alt="logo" class="logo" draggable="false"></a>
             </div>
             <div class="header2">
                 <nav>
@@ -315,8 +363,10 @@
                 </nav>
             </div>
             <div class="header3">
-                <div href="" ><img src="images/search.svg" alt="avatar" class="search"></div>
-                <div class="avatar"><img src="images/account_circle.svg" alt="avatar" class="avatar">
+                <div class="search" ><img src="images/search.svg" alt="avatar" class="search" id="search" onclick="openSearchBar()" draggable="false">
+                    <div class="searchbarContainer" id="searchbarContainer"><input type="text" placeholder="Search..." onblur="closeSearchBar()" id="searchInput" class="searchInput"></div>
+                </div>
+                <div class="avatar"><img src="images/account_circle.svg" alt="avatar" class="avatar" draggable="false">
                     <div class="avatarmenu">
                         <ul>
                             <li><a href="">My Profile</a></li>
@@ -326,7 +376,7 @@
                         </ul>
                     </div>
                 </div>
-                <div><img src="images/shopping_cart.svg" alt="cart" class="cart" onclick="openCartDrawer()"></div>
+                <div><img src="images/shopping_cart.svg" alt="cart" class="cart" onclick="openCartDrawer()" draggable="false"></div>
             </div>
             <div id="cart_drawer" class="cart_drawer">
                 <div class="cart_drawer-content">

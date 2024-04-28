@@ -14,7 +14,6 @@
             display: grid;
             grid-gap: 30px;
             grid-template-columns: 45% 55%;
-            overflow: hidden;
 
             .prodImg {
                 width: 100%;
@@ -25,7 +24,7 @@
             }
 
             .quantityContainer {
-                margin: 50px 0 10px 0;
+                margin: 60px 0 10px 0;
                 display: grid;
                 grid-template-areas:
                     'quantityText quantityText'
@@ -34,13 +33,16 @@
                 .quantityText {
                     font-size: var(--third-font-size);
                     grid-area: quantityText;
+                    margin: 0 0 0 0;
                 }
 
                 .quantitySelector {
                     grid-area:  quantitySelector;
+                    margin: auto 0 auto 0;
 
                     input[type="number"] {
                         width: 50px;
+                        font-size: var(--third-font-size);
                         text-align: center;
                         border: none;
                         -moz-appearance: textfield;
@@ -80,15 +82,16 @@
                 color: var(--primary_white_color);
                 background-color: var(--primary_brown_color);
                 cursor: pointer;
+                font-size: var(--secondary-font-size);
             }
 
             .descContainer {
-                margin: 50px 0 10px 0;
-                
+                margin: 60px 0 10px 0;
+
                 .descTitle {
                     font-size: var(--primary_font_size);
                 }
-                
+
                 .desc {
                     font-size: var(--third-font-size);
                 }
@@ -144,15 +147,15 @@
         updateDecrementButtonState();
     });
 
-    quantityInput.addEventListener('input', function () {
-        if (isNaN(this.value) || this.value.trim() === '') {
+    quantityInput.addEventListener('blur', function () {
+        if (isNaN(this.value) || this.value.trim() === '' || this.value === '0') {
             this.value = 1;
+            updateDecrementButtonState();
+        } else if (this.value > 10) {
+            this.value = 10;
+            updateDecrementButtonState();
         }
     });
-
-    if (quantityInput.value.trim() === '') {
-        quantityInput.value = 1;
-    }
 
     function updateDecrementButtonState() {
         decrementButton.disabled = (quantityInput.value <= quantityInput.min);
@@ -160,7 +163,7 @@
         if (decrementButton.disabled) {
             decrementButton.style.color = 'var(--fourth_grey_color)';
         } else {
-            decrementButton.style.color = 'var(--fourth_grey_color)';
+            decrementButton.style.color = 'var(--third_grey_color)';
         }
     }
 
