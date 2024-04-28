@@ -14,7 +14,6 @@
             display: grid;
             grid-gap: 30px;
             grid-template-columns: 45% 55%;
-            overflow: hidden;
 
             .prodImg {
                 width: 100%;
@@ -77,13 +76,16 @@
                 }
             }
 
-            .addCart {
-                width: 70%;
-                height: 50px;
-                color: var(--primary_white_color);
-                background-color: var(--primary_brown_color);
-                cursor: pointer;
-                font-size: var(--secondary-font-size);
+            .addcart{
+
+                input {
+                    width: 70%;
+                    height: 50px;
+                    color: var(--primary_white_color);
+                    background-color: var(--primary_brown_color);
+                    cursor: pointer;
+                    font-size: var(--secondary-font-size);
+                }
             }
 
             .descContainer {
@@ -106,29 +108,32 @@
         <title>Product Detail Page</title>
     </head>
     <body>
-        <div class="contentContainer">
-            <div class="prodContainer">
-                <img src ="images/<%= p.getImage() %>" class="prodImg">
-                <div class="detailContainer">
-                    <h1><%= p.getProdName()%></h1>
-                    <p class="prodPrice">RM <%= p.getPrice() %></p>
-                    <div class="quantityContainer">
-                        <p class="quantityText">Quantity</p>
-                        <div class="quantitySelector">
-                            <button id="decrement">-</button>
-                            <input type="number" id="quantity" min="1" max="10" value="1">
-                            <button id="increment">+</button>
+        <form action="AddCart?productID=<%=p.getProdId()%>" method="post">
+            <div class="contentContainer">
+                <div class="prodContainer">
+                    <img src ="images/<%= p.getImage() %>" class="prodImg">
+                    <div class="detailContainer">
+                        <h1><%= p.getProdName()%></h1>
+                        <p class="prodPrice">RM <%= p.getPrice() %></p>
+                        <div class="quantityContainer">
+                            <p class="quantityText">Quantity</p>
+                            <div class="quantitySelector">
+                                <button id="decrement">-</button>
+                                <input type="number" id="quantity" min="1" max="10" value="1">
+                                <button id="increment">+</button>
+                            </div>
+                            <p class="stockText"><%= p.getStock()%> item(s) left</p>
                         </div>
-                        <p class="stockText"><%= p.getStock()%> item(s) left</p>
-                    </div>
-                    <button class="addCart">Add to Cart</button>
-                    <div class="descContainer">
-                        <p class="descTitle">Description</p>
-                        <p class="desc"><%= p.getDescription() %></p>
+                        <div class="addcart"><input type="submit" value="Add To Cart"></div>
+                        <div class="descContainer">
+                            <p class="descTitle">Description</p>
+                            <p class="desc"><%= p.getDescription() %></p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
+
     </body>
 </html>
 <script>
@@ -145,15 +150,15 @@
         updateDecrementButtonState();
     });
 
-    quantityInput.addEventListener('input', function () {
-        if (isNaN(this.value) || this.value.trim() === '') {
+    quantityInput.addEventListener('blur', function () {
+        if (isNaN(this.value) || this.value.trim() === '' || this.value === '0') {
             this.value = 1;
+            updateDecrementButtonState();
+        } else if (this.value > 10) {
+            this.value = 10;
+            updateDecrementButtonState();
         }
     });
-
-    if (quantityInput.value.trim() === '') {
-        quantityInput.value = 1;
-    }
 
     function updateDecrementButtonState() {
         decrementButton.disabled = (quantityInput.value <= quantityInput.min);
@@ -161,7 +166,7 @@
         if (decrementButton.disabled) {
             decrementButton.style.color = 'var(--fourth_grey_color)';
         } else {
-            decrementButton.style.color = 'var(--fourth_grey_color)';
+            decrementButton.style.color = 'var(--third_grey_color)';
         }
     }
 
