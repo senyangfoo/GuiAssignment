@@ -102,29 +102,32 @@
         <title>Product Detail Page</title>
     </head>
     <body>
-        <div class="contentContainer">
-            <div class="prodContainer">
-                <img src ="images/<%= p.getImage() %>" class="prodImg">
-                <div class="detailContainer">
-                    <h1><%= p.getProdName()%></h1>
-                    <p class="prodPrice">RM <%= p.getPrice() %></p>
-                    <div class="quantityContainer">
-                        <p class="quantityText">Quantity</p>
-                        <div class="quantitySelector">
-                            <button id="decrement">-</button>
-                            <input type="number" id="quantity" min="1" max="10" value="1">
-                            <button id="increment">+</button>
+        <form action="AddCart?productID=<%=p.getProdId()%>" method="post">
+            <div class="contentContainer">
+                <div class="prodContainer">
+                    <img src ="images/<%= p.getImage() %>" class="prodImg">
+                    <div class="detailContainer">
+                        <h1><%= p.getProdName()%></h1>
+                        <p class="prodPrice">RM <%= p.getPrice() %></p>
+                        <div class="quantityContainer">
+                            <p class="quantityText">Quantity</p>
+                            <div class="quantitySelector">
+                                <button id="decrement">-</button>
+                                <input type="number" id="quantity" min="1" max="10" value="1">
+                                <button id="increment">+</button>
+                            </div>
+                            <p class="stockText"><%= p.getStock()%> item(s) left</p>
                         </div>
-                        <p class="stockText"><%= p.getStock()%> item(s) left</p>
-                    </div>
-                    <button class="addCart">Add to Cart</button>
-                    <div class="descContainer">
-                        <p class="descTitle">Description</p>
-                        <p class="desc"><%= p.getDescription() %></p>
+                        <div class="addcart"><input type="submit" value="Add To Cart"></div>
+                        <div class="descContainer">
+                            <p class="descTitle">Description</p>
+                            <p class="desc"><%= p.getDescription() %></p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
+        
     </body>
 </html>
 <script>
