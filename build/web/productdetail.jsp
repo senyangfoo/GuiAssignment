@@ -76,13 +76,16 @@
                 }
             }
 
-            .addCart {
-                width: 70%;
-                height: 50px;
-                color: var(--primary_white_color);
-                background-color: var(--primary_brown_color);
-                cursor: pointer;
-                font-size: var(--secondary-font-size);
+            .addcart{
+
+                input {
+                    width: 70%;
+                    height: 50px;
+                    color: var(--primary_white_color);
+                    background-color: var(--primary_brown_color);
+                    cursor: pointer;
+                    font-size: var(--secondary-font-size);
+                }
             }
 
             .descContainer {
@@ -130,7 +133,7 @@
                 </div>
             </div>
         </form>
-        
+
     </body>
 </html>
 <script>
