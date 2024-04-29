@@ -4,19 +4,28 @@
  */
 package controller;
 
+import jakarta.annotation.Resource;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
+import jakarta.transaction.UserTransaction;
+import model.Cart;
+import model.CartService;
+import model.Product;
+import model.ProductService;
 /**
  *
  * @author Abcong
  */
-public class AddProduct extends HttpServlet {
-
+public class AddCart extends HttpServlet {
+    @PersistenceContext
+    EntityManager em;
+    @Resource
+    UserTransaction utx;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -28,18 +37,40 @@ public class AddProduct extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AddProduct</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AddProduct at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+
+        try {
+            utx.begin();
+            String productId = request.getParameter("productID");
+            int quantity = Integer.parseInt(request.getParameter("quantity"));
+            ProductService productService = new ProductService(em);
+            Product product = productService.findItemByID(productId);
+
+            if (product != null) {
+                // Create a new Cart object
+                Cart cart = new Cart();
+                cart.setQuantity(quantity);
+                cart.setProdId(product);
+
+                // Add the cart to the database using CartService
+                CartService cartService = new CartService(em);
+                cartService.addCart(cart);
+                utx.commit();
+                
+                // Redirect the user to a confirmation page or back to the product page
+                response.sendRedirect("ProductDetailServlet?productID="+ productId);
+            } else {
+                utx.rollback();
+                response.sendRedirect("index.jsp");
+            }
+        } catch (Exception ex) {
+            try {
+                if (utx != null) {
+                    utx.rollback(); // Rollback transaction in case of exception
+                }
+            } catch (Exception rollbackEx) {
+                rollbackEx.printStackTrace(); // Handle rollback exception
+            }
+            ex.printStackTrace(); // For debugging purposes
         }
     }
 
