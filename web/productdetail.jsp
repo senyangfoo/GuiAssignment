@@ -118,9 +118,10 @@
                         <div class="quantityContainer">
                             <p class="quantityText">Quantity</p>
                             <div class="quantitySelector">
-                                <button id="decrement">-</button>
-                                <input type="number" id="quantity" min="1" max="10" value="1">
-                                <button id="increment">+</button>
+                                <button type="button" id="decrement">-</button>
+                                <input type="number" id="quantity" min="1" max="<%=p.getStock()%>" value="1" disabled>
+                                <input type="hidden" name="quantity" id="quantity" min="1" max="<%=p.getStock()%>" value="1">
+                                <button type="button" id="increment">+</button>
                             </div>
                             <p class="stockText"><%= p.getStock()%> item(s) left</p>
                         </div>
