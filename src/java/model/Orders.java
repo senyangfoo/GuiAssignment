@@ -7,6 +7,8 @@ package model;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -15,7 +17,6 @@ import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
@@ -38,11 +39,10 @@ public class Orders implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 7)
     @Column(name = "ORDER_ID")
-    private String orderId;
+    private Integer orderId;
     @Column(name = "ORDER_DATE")
     @Temporal(TemporalType.DATE)
     private Date orderDate;
@@ -59,15 +59,30 @@ public class Orders implements Serializable {
     public Orders() {
     }
 
-    public Orders(String orderId) {
+    public Orders(Integer orderId, Date orderDate, String address, String phoneNum, Customer custId) {
+        this.orderId = orderId;
+        this.orderDate = orderDate;
+        this.address = address;
+        this.phoneNum = phoneNum;
+        this.custId = custId;
+    }
+
+    public Orders(Date orderDate, String address, String phoneNum, Customer custId) {
+        this.orderDate = orderDate;
+        this.address = address;
+        this.phoneNum = phoneNum;
+        this.custId = custId;
+    }
+
+    public Orders(Integer orderId) {
         this.orderId = orderId;
     }
 
-    public String getOrderId() {
+    public Integer getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(String orderId) {
+    public void setOrderId(Integer orderId) {
         this.orderId = orderId;
     }
 

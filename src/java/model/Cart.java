@@ -46,8 +46,7 @@ public class Cart implements Serializable {
     public Cart() {
     }
 
-    public Cart(Integer cartId, Integer quantity, Product prodId) {
-        this.cartId = cartId;
+    public Cart(Integer quantity, Product prodId) {
         this.quantity = quantity;
         this.prodId = prodId;
     }

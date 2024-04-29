@@ -16,12 +16,13 @@
             <file>file:/C:/xampp/htdocs/GuiAssignment/nbproject/build-impl.xml</file>
             <file>file:/C:/xampp/htdocs/GuiAssignment/src/java/controller/ProductDetailServlet.java</file>
             <file>file:/C:/xampp/htdocs/GuiAssignment/web/layouts/footer.jsp</file>
-            <file>file:/C:/xampp/htdocs/GuiAssignment/src/java/model/Customer.java</file>
             <file>file:/C:/xampp/htdocs/GuiAssignment/src/java/model/CartService.java</file>
+            <file>file:/C:/xampp/htdocs/GuiAssignment/src/java/model/Customer.java</file>
             <file>file:/C:/xampp/htdocs/GuiAssignment/web/images/shopping_cart.svg</file>
             <file>file:/C:/xampp/htdocs/GuiAssignment/web/images/violin.png</file>
             <file>file:/C:/xampp/htdocs/GuiAssignment/src/java/model/Orders.java</file>
             <file>file:/C:/xampp/htdocs/GuiAssignment/web/layouts/header.jsp</file>
+            <file>file:/C:/xampp/htdocs/GuiAssignment/web/css/style.css</file>
             <file>file:/C:/xampp/htdocs/GuiAssignment/web/javascripts/slideEventHandler.js</file>
             <file>file:/C:/xampp/htdocs/GuiAssignment/web/productdetail.jsp</file>
             <file>file:/C:/xampp/htdocs/GuiAssignment/web/Register.jsp</file>

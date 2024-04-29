@@ -32,7 +32,7 @@ public class ProductDetailServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
-            String productID = request.getParameter("productID");
+            int productID = Integer.parseInt(request.getParameter("productID"));
             Product product = findByProductId(productID);
 
             session.setAttribute("product", product);
@@ -40,7 +40,7 @@ public class ProductDetailServlet extends HttpServlet {
         }
     }
     
-    public Product findByProductId(String id) {
+    public Product findByProductId(int id) {
         Product product = em.find(Product.class, id);
         return product;
     }

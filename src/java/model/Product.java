@@ -8,12 +8,13 @@ import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlTransient;
@@ -40,11 +41,10 @@ public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 7)
     @Column(name = "PROD_ID")
-    private String prodId;
+    private Integer prodId;
     @Size(max = 100)
     @Column(name = "IMAGE")
     private String image;
@@ -68,7 +68,7 @@ public class Product implements Serializable {
     public Product() {
     }
 
-    public Product(String prodId, String image, String prodName, String category, String description, Double price, Integer stock) {
+    public Product(Integer prodId, String image, String prodName, String category, String description, Double price, Integer stock) {
         this.prodId = prodId;
         this.image = image;
         this.prodName = prodName;
@@ -78,15 +78,24 @@ public class Product implements Serializable {
         this.stock = stock;
     }
 
-    public Product(String prodId) {
+    public Product(String image, String prodName, String category, String description, Double price, Integer stock) {
+        this.image = image;
+        this.prodName = prodName;
+        this.category = category;
+        this.description = description;
+        this.price = price;
+        this.stock = stock;
+    }
+
+    public Product(Integer prodId) {
         this.prodId = prodId;
     }
 
-    public String getProdId() {
+    public Integer getProdId() {
         return prodId;
     }
 
-    public void setProdId(String prodId) {
+    public void setProdId(Integer prodId) {
         this.prodId = prodId;
     }
 

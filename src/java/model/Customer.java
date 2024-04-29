@@ -8,12 +8,13 @@ import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlTransient;
@@ -37,11 +38,10 @@ public class Customer implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 8)
     @Column(name = "CUST_ID")
-    private String custId;
+    private Integer custId;
     @Size(max = 80)
     @Column(name = "CUST_NAME")
     private String custName;
@@ -57,22 +57,28 @@ public class Customer implements Serializable {
     public Customer() {
     }
 
-    public Customer(String custId, String custName, String custEmail, String custPassword) {
+    public Customer(Integer custId, String custName, String custEmail, String custPassword) {
         this.custId = custId;
         this.custName = custName;
         this.custEmail = custEmail;
         this.custPassword = custPassword;
     }
 
-    public Customer(String custId) {
+    public Customer(String custName, String custEmail, String custPassword) {
+        this.custName = custName;
+        this.custEmail = custEmail;
+        this.custPassword = custPassword;
+    }
+
+    public Customer(Integer custId) {
         this.custId = custId;
     }
 
-    public String getCustId() {
+    public Integer getCustId() {
         return custId;
     }
 
-    public void setCustId(String custId) {
+    public void setCustId(Integer custId) {
         this.custId = custId;
     }
 

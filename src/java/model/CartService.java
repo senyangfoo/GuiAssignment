@@ -31,12 +31,12 @@ public class CartService {
     }
 }
 
-    public Cart findCartById(String code) {
-        Cart cart = mgr.find(Cart.class, code);
+    public Cart findCartById(int id) {
+        Cart cart = mgr.find(Cart.class, id);
         return cart;
     }
 
-    public boolean deleteCart(String id) {
+    public boolean deleteCart(int id) {
         Cart cart = findCartById(id);
         if (cart != null) {
             mgr.remove(cart);
