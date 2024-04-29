@@ -42,7 +42,7 @@ public class userDA implements Serializable{
      public Customer getCurrentRecord() {
         Customer customer = null;
         try {
-            customer = new Customer(rs.getString(1), rs.getString(2), rs.getString(3),rs.getString(4));
+            customer = new Customer(rs.getString(2), rs.getString(3),rs.getString(4));
         } catch (SQLException ex) {
             ex.getMessage();
         }
@@ -70,7 +70,6 @@ public class userDA implements Serializable{
      public void addRecord(Customer user) {
         try {
             PreparedStatement stmt = conn.prepareStatement(sqlInsertStr);
-            stmt.setString(1, user.getCustId());
             stmt.setString(2, user.getCustName());
             stmt.setString(3, user.getCustEmail());
             stmt.setString(4, user.getCustPassword());

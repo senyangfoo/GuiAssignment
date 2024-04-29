@@ -119,8 +119,7 @@
                             <p class="quantityText">Quantity</p>
                             <div class="quantitySelector">
                                 <button type="button" id="decrement">-</button>
-                                <input type="number" id="quantity" min="1" max="<%=p.getStock()%>" value="1" disabled>
-                                <input type="hidden" name="quantity" id="quantity" min="1" max="<%=p.getStock()%>" value="1">
+                                <input type="number" name="quantity" id="quantity" min="1" max="<%=p.getStock()%>" value="1">
                                 <button type="button" id="increment">+</button>
                             </div>
                             <p class="stockText"><%= p.getStock()%> item(s) left</p>
@@ -170,6 +169,15 @@
             decrementButton.style.color = 'var(--third_grey_color)';
         }
     }
+    
+    function updateValue(newValue) {
+        quantityInput.setAttribute('value', newValue);
+    }
+
+    setInterval(function () {
+        var newValue = quantityInput.value;
+        updateValue(newValue);
+    }, 1000);
 
     updateDecrementButtonState();
 </script>
