@@ -40,7 +40,7 @@ public class AddCart extends HttpServlet {
 
         try {
             utx.begin();
-            String productId = request.getParameter("productID");
+            int productId = Integer.parseInt(request.getParameter("productID"));
             int quantity = Integer.parseInt(request.getParameter("quantity"));
             ProductService productService = new ProductService(em);
             Product product = productService.findItemByID(productId);
