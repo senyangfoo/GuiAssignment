@@ -1,13 +1,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:useBean id="userDA" class="da.userDA" scope="application"></jsp:useBean>
-<%! String front_id = "CUST";%>
-<% 
-    int count = 1000; 
-    count = count + userDA.getQuantity();
-    count++;
-    String ID = front_id + count;
-%>
+<jsp:useBean id="userDA" class="model.userDA" scope="application"></jsp:useBean>
+    <%@include file="layouts/header.jsp" %>  
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,8 +12,6 @@
         <div id="register">
         <h3>Register</h3>
         <form method="POST" action="ConfirmRegister.jsp" >
-            <p><label>User ID</label>
-                <input type="text" id="id" name="custId" size="40" readonly="readonly" value="<%=ID%>"/></p>
             <p><label>Username:</label>
                 <input type="text" id="userName" name="custName" size="40" required/></p>
             <p><label>Email:</label>

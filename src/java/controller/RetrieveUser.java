@@ -54,20 +54,23 @@ public class RetrieveUser extends HttpServlet {
             userDA user = new userDA(em);
             List<Customer> customer = user.findAll();
 
-            for (int i = 0; i < customer.size(); i++) {
-                
-                if (customer.get(i).getCustName().equals(name) && customer.get(i).getCustPassword().equals(password)) {
+                for(Customer c: customer){
+                    if(c.getCustName().equals(name) && c.getCustPassword().equals(password)){
+                        session.setAttribute("login",true);
+                        session = request.getSession(true);
 
-                    session.setAttribute("login",true);
-                    session.setAttribute("name",customer.get(i).getCustName());
+                        session.setAttribute("name", request.getParameter("name"));
+                       
+                         session.setAttribute("password",c.getCustName());
 
-                    response.sendRedirect("Main.html"); //homepage
+                    response.sendRedirect("index.jsp"); //homepage
+                    }
                 }
 
             request.setAttribute("errorMsg", "<i class=\"fa-solid fa-circle-exclamation error-icon\"></i> Username Or Password is wrong");
                request.getRequestDispatcher("Login.jsp").forward(request, response); 
             
-            }
+            
         }catch(Exception ex){
 
             out.println("<h1 style='color: red'>Error accure at " + ex + " </h1>");

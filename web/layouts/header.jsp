@@ -1,4 +1,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+ <% 
+     boolean loginStatus = false;
+     if(session.getAttribute("login")!=null){
+        loginStatus = (Boolean) session.getAttribute("login");
+    }
+ %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -369,10 +375,17 @@
                 <div class="avatar"><img src="images/account_circle.svg" alt="avatar" class="avatar" draggable="false">
                     <div class="avatarmenu">
                         <ul>
-                            <li><a href="">My Profile</a></li>
+                            <% if(loginStatus == false){ %>
+                            <li><a href="Login.jsp">Log In</a></li>
+                            <% } %>
+                             <% if(loginStatus == true){ %>
+                            <li><a href="UserProfile.jsp">My Profile</a></li>
+                            <% } %>
                             <li><a href="">Order History</a></li>
                             <li><a href="">Track Order</a></li>
-                            <li><a href="">Logout</a></li>
+                            <% if(loginStatus == true){ %>
+                            <li><a href="logout.jsp">Logout</a></li>
+                            <% } %>
                         </ul>
                     </div>
                 </div>
