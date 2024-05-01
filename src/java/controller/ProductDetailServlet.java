@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import model.Product;
+import model.ProductService;
 import jakarta.persistence.*;
 public class ProductDetailServlet extends HttpServlet {
     
@@ -33,16 +34,12 @@ public class ProductDetailServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
             int productID = Integer.parseInt(request.getParameter("productID"));
-            Product product = findByProductId(productID);
+            ProductService productService = new ProductService(em);
+            Product product = productService.findItemByID(productID);
 
             session.setAttribute("product", product);
             response.sendRedirect("productdetail.jsp");
         }
-    }
-    
-    public Product findByProductId(int id) {
-        Product product = em.find(Product.class, id);
-        return product;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

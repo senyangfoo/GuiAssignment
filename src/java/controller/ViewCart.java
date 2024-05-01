@@ -7,22 +7,22 @@ package controller;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.List;
 import model.Cart;
+import model.CartService;
 
 /**
  *
  * @author Abcong
  */
-public class AddCart extends HttpServlet {
-     @PersistenceContext 
-     EntityManager em;
+public class ViewCart extends HttpServlet {
+    @PersistenceContext
+    EntityManager em;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -33,41 +33,23 @@ public class AddCart extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            ArrayList<Cart> cartList = new ArrayList<>();
-            
-            int id = Integer.parseInt(request.getParameter("productID"));
-            int quantity = Integer.parseInt(request.getParameter("quantity"));
-            Cart cm = new Cart();
-            cm.setProdId(id);
-            cm.setQuantity(quantity);
-            HttpSession session = request.getSession();
-            ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart-list");
-            
-            if (cart_list == null) {
-                cartList.add(cm);
-                session.setAttribute("cart-list", cartList);
-                response.sendRedirect("ViewCart");
-            } else {
-                cartList = cart_list;
-
-                boolean exist = false;
-                for (Cart c : cart_list) {
-                    if (c.getProdId()== id) {
-                        exist = true;
-                        out.println("<h3 style='color:crimson; text-align: center'>Item Already in Cart. <a href='index.jsp'>GO to Home Page</a></h3>");
-                    }
-                }
-
-                if (!exist) {
-                    cartList.add(cm);
-                    response.sendRedirect("ViewCart");
-                }
-            }
+        throws ServletException, IOException {
+    try {
+        ArrayList<Cart> cart_list = (ArrayList<Cart>) request.getSession().getAttribute("cart-list");
+        List<Cart> cartProduct = null;
+        if (cart_list != null) {
+            CartService cartService = new CartService(em);
+            cartProduct = cartService.getCartProducts(cart_list);
+            request.setAttribute("cartProduct", cartProduct);
         }
+        request.getSession().setAttribute("cartProduct", cartProduct);
+        response.sendRedirect("index.jsp");
+        
+    } catch (Exception ex) {
+        
     }
+}
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
