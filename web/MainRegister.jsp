@@ -24,8 +24,8 @@
             <p><input type="submit" value="Create" />
                 <input type="reset" value="Reset" /></p>
         </form>
-            <input type="button" value="Back" onclick="location='Main.html'" />
-            <a  class="login" href="Login.html"><input type="submit" value="Login"/></a>
+            <input type="button" value="Back" onclick="location='index.jsp'" />
+            <a  class="login" href="Login.jsp"><input type="submit" value="Login"/></a>
         </div>
     </body>
 </html>

@@ -14,6 +14,6 @@
         <% userDA.addRecord(user);%>
         <%= user.getCustName()%> has been added to the database<br/>
         
-           <% response.sendRedirect("http://localhost:8080/GuiAssignment-1/index.jsp"); %>
+           <% response.sendRedirect("http://localhost:8080/GuiAssignment/index.jsp"); %>
     </body>
 </html>
