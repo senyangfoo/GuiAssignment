@@ -23,8 +23,8 @@ public class ProductService {
         return true;
     }
 
-    public Product findItemByID(int ID) {
-        Product product = mgr.find(Product.class, ID);
+    public Product findItemByID(int prodId) {
+        Product product = mgr.find(Product.class, prodId);
         return product;
     }
 

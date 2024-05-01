@@ -5,7 +5,6 @@
 package model;
 
 import jakarta.persistence.Basic;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,13 +12,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
 import jakarta.xml.bind.annotation.XmlRootElement;
-import jakarta.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
-import java.util.Collection;
 
 /**
  *
@@ -62,8 +58,6 @@ public class Product implements Serializable {
     private Double price;
     @Column(name = "STOCK")
     private Integer stock;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "prodId")
-    private Collection<Cart> cartCollection;
 
     public Product() {
     }
@@ -145,15 +139,6 @@ public class Product implements Serializable {
 
     public void setStock(Integer stock) {
         this.stock = stock;
-    }
-
-    @XmlTransient
-    public Collection<Cart> getCartCollection() {
-        return cartCollection;
-    }
-
-    public void setCartCollection(Collection<Cart> cartCollection) {
-        this.cartCollection = cartCollection;
     }
 
     @Override

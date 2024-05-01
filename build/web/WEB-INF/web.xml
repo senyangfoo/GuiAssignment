@@ -16,6 +16,10 @@
         <servlet-name>AddCart</servlet-name>
         <servlet-class>controller.AddCart</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewCart</servlet-name>
+        <servlet-class>controller.ViewCart</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProductDetailServlet</servlet-name>
         <url-pattern>/ProductDetailServlet</url-pattern>
@@ -39,5 +43,9 @@
     <servlet-mapping>
         <servlet-name>AddCart</servlet-name>
         <url-pattern>/AddCart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewCart</servlet-name>
+        <url-pattern>/ViewCart</url-pattern>
     </servlet-mapping>
 </web-app>

@@ -3,52 +3,43 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
-
-import jakarta.annotation.Resource;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.Query;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CartService {
     @PersistenceContext
-    EntityManager mgr;
-    @Resource
-    Query query;
+    EntityManager em;
 
-    public CartService(EntityManager mgr) {
-        this.mgr = mgr;
+    public CartService(EntityManager em) {
+        this.em = em;
     }
+    
+    public List<Cart> getCartProducts(ArrayList<Cart> cartList) {
+    List<Cart> products = new ArrayList<>();
+    ProductService productService = new ProductService(em);
+    
+        try {
+            for (Cart cartItem : cartList) {
+                Product product = productService.findItemByID(cartItem.getProdId());
+                if (product != null) {
+                    Cart cartRow = new Cart();
+                    cartRow.setProdId(product.getProdId());
+                    cartRow.setImage(product.getImage());
+                    cartRow.setProdName(product.getProdName());
+                    cartRow.setPrice(product.getPrice());
+                    cartRow.setQuantity(cartItem.getQuantity());
 
-    public boolean addCart(Cart cart) {
-    try {
-        mgr.persist(cart);
-        return true;
-    } catch (Exception ex) {
-        ex.printStackTrace(); // For debugging purposes
-        return false;
-    }
-}
-
-    public Cart findCartById(int id) {
-        Cart cart = mgr.find(Cart.class, id);
-        return cart;
-    }
-
-    public boolean deleteCart(int id) {
-        Cart cart = findCartById(id);
-        if (cart != null) {
-            mgr.remove(cart);
-            return true;
+                    products.add(cartRow);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return false;
-    }
 
-    public List<Cart> findAll() {
-        List cartList = mgr.createNamedQuery("cart.findAll").getResultList();
-        return cartList;
+        return products;
     }
-
 
 }
+

@@ -1,8 +1,19 @@
+<%@page import="java.util.*"%>
+<%@page import="model.Cart" %>
+<%@page import="model.CartService" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
  <% 
+     //Login Status
      boolean loginStatus = false;
      if(session.getAttribute("login")!=null){
         loginStatus = (Boolean) session.getAttribute("login");
+    }
+    
+    //Cart Status
+    List<Cart> cartProduct = null;
+    ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart-list");
+    if (cart_list != null) {
+        cartProduct = (List<Cart>) session.getAttribute("cartProduct");
     }
  %>
 <!DOCTYPE html>
@@ -15,6 +26,16 @@
             function openCartDrawer() {
                 document.getElementById("cart_drawer").classList.add("open");
                 document.getElementById("overlay").classList.add("active");
+            }
+
+            function checkLoginStatus() {
+                var loginstatus = <%= loginStatus %>;
+
+                if (!loginstatus) {
+                  window.location.href = "Login.jsp";
+                } else {
+                  openCartDrawer();
+                }
             }
 
             function closeCartDrawer() {
@@ -389,7 +410,7 @@
                         </ul>
                     </div>
                 </div>
-                <div><img src="images/shopping_cart.svg" alt="cart" class="cart" onclick="openCartDrawer()" draggable="false"></div>
+                <div><img src="images/shopping_cart.svg" alt="cart" class="cart" onclick="checkLoginStatus()" draggable="false"></div>
             </div>
             <div id="cart_drawer" class="cart_drawer">
                 <div class="cart_drawer-content">
@@ -397,6 +418,23 @@
                         <a><img src="images/close.svg" alt="close" class="close" onclick="closeCartDrawer()"></a>
                         <h3>My Cart</h3>
                     </div>
+                        <% if(loginStatus == true){ %>
+                            <%
+                            if (cartProduct != null) {
+                                for (Cart cart : cartProduct) {
+                            %>
+                                <img src ="images/<%= cart.getImage() %>" width="100" height="100">
+                                <div class="item_details">
+                                     <h4><%= cart.getProdName() %></h4>
+                                     <h4><%= cart.getQuantity() %></h4>
+                                     <p>Price: $<%= cart.getPrice() %></p>
+                                </div>
+                            <% }
+                            } else {
+                            %>
+                                <div class="cart_empty">Your cart is empty.</div>
+                            <% } %>
+                        <% } %>   
                 </div>
             </div>
         </div>
