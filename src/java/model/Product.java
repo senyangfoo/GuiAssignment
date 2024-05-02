@@ -7,15 +7,15 @@ package model;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  *
@@ -37,11 +37,10 @@ public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 7)
     @Column(name = "PROD_ID")
-    private String prodId;
+    private Integer prodId;
     @Size(max = 100)
     @Column(name = "IMAGE")
     private String image;
@@ -63,11 +62,7 @@ public class Product implements Serializable {
     public Product() {
     }
 
-    public Product(String prodId) {
-        this.prodId = prodId;
-    }
-
-    public Product(String prodId, String image, String prodName, String category, String description, Double price, Integer stock) {
+    public Product(Integer prodId, String image, String prodName, String category, String description, Double price, Integer stock) {
         this.prodId = prodId;
         this.image = image;
         this.prodName = prodName;
@@ -77,11 +72,24 @@ public class Product implements Serializable {
         this.stock = stock;
     }
 
-    public String getProdId() {
+    public Product(String image, String prodName, String category, String description, Double price, Integer stock) {
+        this.image = image;
+        this.prodName = prodName;
+        this.category = category;
+        this.description = description;
+        this.price = price;
+        this.stock = stock;
+    }
+
+    public Product(Integer prodId) {
+        this.prodId = prodId;
+    }
+
+    public Integer getProdId() {
         return prodId;
     }
 
-    public void setProdId(String prodId) {
+    public void setProdId(Integer prodId) {
         this.prodId = prodId;
     }
 
@@ -135,50 +143,27 @@ public class Product implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 37 * hash + Objects.hashCode(this.prodId);
-        hash = 37 * hash + Objects.hashCode(this.image);
-        hash = 37 * hash + Objects.hashCode(this.prodName);
-        hash = 37 * hash + Objects.hashCode(this.category);
-        hash = 37 * hash + Objects.hashCode(this.description);
-        hash = 37 * hash + Objects.hashCode(this.price);
-        hash = 37 * hash + Objects.hashCode(this.stock);
+        int hash = 0;
+        hash += (prodId != null ? prodId.hashCode() : 0);
         return hash;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Product)) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        Product other = (Product) object;
+        if ((this.prodId == null && other.prodId != null) || (this.prodId != null && !this.prodId.equals(other.prodId))) {
             return false;
         }
-        final Product other = (Product) obj;
-        if (!Objects.equals(this.prodId, other.prodId)) {
-            return false;
-        }
-        if (!Objects.equals(this.image, other.image)) {
-            return false;
-        }
-        if (!Objects.equals(this.prodName, other.prodName)) {
-            return false;
-        }
-        if (!Objects.equals(this.category, other.category)) {
-            return false;
-        }
-        if (!Objects.equals(this.description, other.description)) {
-            return false;
-        }
-        if (!Objects.equals(this.price, other.price)) {
-            return false;
-        }
-        return Objects.equals(this.stock, other.stock);
+        return true;
     }
 
-    
+    @Override
+    public String toString() {
+        return "model.Product[ prodId=" + prodId + " ]";
+    }
     
 }

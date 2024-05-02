@@ -4,32 +4,25 @@
  */
 package controller;
 
-import model.Customer;
-import model.userDA;
-import jakarta.annotation.Resource;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.Query;
+import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import jakarta.transaction.UserTransaction;
+import java.util.ArrayList;
+import model.Cart;
 
 /**
  *
- * @author khtee
+ * @author Abcong
  */
-public class RetrieveUser extends HttpServlet {
-    @PersistenceContext EntityManager em;
-      @Resource
-    UserTransaction utx;
-           int count = 3;
-           String err = "Wrong Username Or Password!";
+public class AddCart extends HttpServlet {
+     @PersistenceContext 
+     EntityManager em;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -41,44 +34,38 @@ public class RetrieveUser extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            PrintWriter out = response.getWriter();
-        try {
-           
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            ArrayList<Cart> cartList = new ArrayList<>();
             
+            int id = Integer.parseInt(request.getParameter("productID"));
+            int quantity = Integer.parseInt(request.getParameter("quantity"));
+            Cart cm = new Cart();
+            cm.setProdId(id);
+            cm.setQuantity(quantity);
             HttpSession session = request.getSession();
-            String name = request.getParameter("name"); 
-            String password = request.getParameter("password");
-
+            ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart-list");
             
-            em.getEntityManagerFactory().getCache().evictAll();
-            userDA user = new userDA(em);
-            List<Customer> customer = user.findAll();
+            if (cart_list == null) {
+                cartList.add(cm);
+                session.setAttribute("cart-list", cartList);
+                response.sendRedirect("ViewCart");
+            } else {
+                cartList = cart_list;
 
-                for(Customer c: customer){
-                    if(c.getCustName().equals(name) && c.getCustPassword().equals(password)){
-                        session.setAttribute("login",true);
-                        session = request.getSession(true);
-
-                        session.setAttribute("name", request.getParameter("name"));
-                       
-                         session.setAttribute("password",c.getCustName());
-
-                    response.sendRedirect("index.jsp"); //homepage
+                boolean exist = false;
+                for (Cart c : cart_list) {
+                    if (c.getProdId()== id) {
+                        exist = true;
+                        out.println("<h3 style='color:crimson; text-align: center'>Item Already in Cart. <a href='index.jsp'>GO to Home Page</a></h3>");
                     }
                 }
 
-            request.setAttribute("errorMsg", "<i class=\"fa-solid fa-circle-exclamation error-icon\"></i> Username Or Password is wrong");
-               request.getRequestDispatcher("Login.jsp").forward(request, response); 
-            
-            
-        }catch(Exception ex){
-
-            out.println("<h1 style='color: red'>Error accure at " + ex + " </h1>");
-
-
-          
-            
-           
+                if (!exist) {
+                    cartList.add(cm);
+                    response.sendRedirect("ViewCart");
+                }
+            }
         }
     }
 

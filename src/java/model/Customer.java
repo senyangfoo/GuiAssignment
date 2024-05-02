@@ -7,19 +7,19 @@ package model;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
-import jakarta.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Objects;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Abcong
+ * @author khtee
  */
 @Entity
 @Table(name = "CUSTOMER")
@@ -34,43 +34,39 @@ public class Customer implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 8)
     @Column(name = "CUST_ID")
-    private String custId;
-    @Size(max = 80)
+    private Integer custId;
     @Column(name = "CUST_NAME")
     private String custName;
-    @Size(max = 80)
     @Column(name = "CUST_EMAIL")
     private String custEmail;
-    @Size(max = 20)
     @Column(name = "CUST_PASSWORD")
     private String custPassword;
 
     public Customer() {
     }
 
-    public Customer(String custName) {
-        this.custName = custName;
-    }
-
-    public Customer(String custId, String custName, String custEmail, String custPassword) {
+    public Customer(Integer custId, String custName, String custEmail, String custPassword) {
         this.custId = custId;
         this.custName = custName;
         this.custEmail = custEmail;
         this.custPassword = custPassword;
     }
 
-    public String getCustId() {
+ 
+    public Customer(String custName){
+        this.custName = custName;
+    }
+    public Integer getCustId() {
         return custId;
     }
 
-    public void setCustId(String custId) {
+    public void setCustId(Integer custId) {
         this.custId = custId;
     }
-
+    
     public String getCustName() {
         return custName;
     }
@@ -98,11 +94,11 @@ public class Customer implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (custName != null ? custName.hashCode() : 0);
+        hash += (custId != null ? custId.hashCode() : 0);
         return hash;
     }
 
-    @Override
+     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -114,7 +110,7 @@ public class Customer implements Serializable {
             return false;
         }
         final Customer other = (Customer) obj;
-        if (!Objects.equals(this.custId, other.custId)) {
+        if (!Objects.equals(this.custId,other.custId)) {
             return false;
         }
         if (!Objects.equals(this.custName, other.custName)) {
@@ -126,9 +122,11 @@ public class Customer implements Serializable {
         return Objects.equals(this.custPassword, other.custPassword);
     }
 
+    
+
     @Override
     public String toString() {
-        return "domain.Customer[ custId=" + custId + " ]";
+        return "model.Customer[ \ncustId=" + custId + " \ncustName=" + custName + "\ncustEmail=" + custEmail + " \ncustPassword=" + custPassword + " ]";
     }
     
 }

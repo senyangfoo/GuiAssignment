@@ -1,8 +1,9 @@
-<%@page import="domain.Customer"%>
+<%@page import="model.Customer"%>
 <jsp:useBean id="user" class="model.Customer" scope="session"></jsp:useBean>
 <jsp:setProperty name="user" property="*" />
 <%@page import = "java.util.*;" %>
-<%@page import = "domain.Customer;" %>
+<%@page import = "model.Customer;" %>
+<%@include file="layouts/header.jsp" %>  
 
 <!DOCTYPE html>
 <html>
@@ -13,7 +14,6 @@
     <body>
         <p>You entered the following data</p>
         
-        <p>ID: <%= user.getCustId()%></p>
         <p>Name: <%= user.getCustName() %></p>
         <p>Mail: <%= user.getCustEmail() %></p>
         <p>Password : <%= user.getCustPassword() %></p>

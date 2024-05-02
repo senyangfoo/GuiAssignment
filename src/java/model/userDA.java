@@ -1,18 +1,18 @@
-
 package model;
 
-import model.Customer;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
 import java.io.Serializable;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class userDA implements Serializable{
-     @PersistenceContext
+public class userDA implements Serializable {
+
+    @PersistenceContext
     EntityManager em;
-     
+
     private String host = "jdbc:derby://localhost:1527/music";
     private String user = "nbuser";
     private String password = "nbuser";
@@ -20,16 +20,16 @@ public class userDA implements Serializable{
     private Connection conn;
     private PreparedStatement stmt;
     private String sqlQueryStr = "SELECT * from " + tableName;
-    private String sqlInsertStr = "INSERT INTO " + tableName + " VALUES(?, ?, ?,?)";
+    private String sqlInsertStr = "INSERT INTO " + tableName + " (\"CUST_NAME\", \"CUST_EMAIL\", \"CUST_PASSWORD\")" + " VALUES(?, ?,?)";
     private ResultSet rs;
     private int count;
-    
-     public userDA(EntityManager em) {
+
+    public userDA(EntityManager em) {
         this.em = em;
     }
-     
+
     public userDA() {
-        
+
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
             conn = DriverManager.getConnection(host, user, password);
@@ -38,50 +38,49 @@ public class userDA implements Serializable{
             ex.getMessage();
         }
     }
-    
-     public Customer getCurrentRecord() {
+
+    public Customer getCurrentRecord() {
         Customer customer = null;
         try {
-            customer = new Customer(rs.getString(1), rs.getString(2), rs.getString(3),rs.getString(4));
+            String test = rs.getString("CUST_ID");
+            customer = new Customer(Integer.valueOf(test), rs.getString("CUST_NAME"), rs.getString("CUST_EMAIL"),rs.getString("CUST_PASSWORD"));
         } catch (SQLException ex) {
             ex.getMessage();
         }
         return customer;
     }
-     
-    public int getQuantity(){
-        
-          String queryStr = "SELECT COUNT(*) FROM CUSTOMER";
-        try{
-            
-           stmt = conn.prepareStatement(queryStr);
+
+    public int getQuantity() {
+
+        String queryStr = "SELECT COUNT(*) FROM CUSTOMER";
+        try {
+
+            stmt = conn.prepareStatement(queryStr);
             ResultSet rs2 = stmt.executeQuery();
-            while(rs2.next()){
+            while (rs2.next()) {
                 count = rs2.getInt(1);
             }
-        }catch (SQLException ex) {
+        } catch (SQLException ex) {
             ex.getMessage();
         }
-        
-         return count;
+
+        return count;
     }
-    
-    
-     public void addRecord(Customer user) {
+
+    public void addRecord(Customer user) {
         try {
-            PreparedStatement stmt = conn.prepareStatement(sqlInsertStr);
-            stmt.setString(1, user.getCustId());
-            stmt.setString(2, user.getCustName());
-            stmt.setString(3, user.getCustEmail());
-            stmt.setString(4, user.getCustPassword());
-            
+            stmt = conn.prepareStatement(sqlInsertStr);
+            stmt.setString(1, user.getCustName());
+            stmt.setString(2, user.getCustEmail());
+            stmt.setString(3, user.getCustPassword());
+
             stmt.executeUpdate();
         } catch (SQLException ex) {
             ex.getMessage();
         }
     }
-     
-      public ArrayList<Customer> getUsers() {
+
+    public ArrayList<Customer> getUsers() {
 
         ArrayList<Customer> customers = new ArrayList<Customer>();
         try {
@@ -96,10 +95,10 @@ public class userDA implements Serializable{
 
         return customers;
     }
-      
+
     public List<Customer> findAll() {
-        List<Customer> customer = em.createNamedQuery("Customer.findAll").getResultList();
-        return customer;
+           List<Customer> customers = em.createNamedQuery("Customer.findAll").getResultList();
+        return customers;
     }
 
     public int getCount() {
@@ -109,11 +108,9 @@ public class userDA implements Serializable{
     public void setCount(int count) {
         this.count = count;
     }
-    
-      
-    public static void main(String [] args){
-       userDA uses = new userDA();
-       uses.findAll();
+
+    public static void main(String[] args) {
+        userDA uses = new userDA();
+        System.out.print(uses.getUsers());
     }
 }
-

@@ -23,12 +23,12 @@ public class ProductService {
         return true;
     }
 
-    public Product findItemByID(String ID) {
-        Product product = mgr.find(Product.class, ID);
+    public Product findItemByID(int prodId) {
+        Product product = mgr.find(Product.class, prodId);
         return product;
     }
 
-    public boolean deleteItem(String ID) {
+    public boolean deleteItem(int ID) {
         Product product = findItemByID(ID);
         if (product != null) {
             mgr.remove(product);

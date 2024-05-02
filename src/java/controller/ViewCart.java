@@ -4,32 +4,25 @@
  */
 package controller;
 
-import model.Customer;
-import model.userDA;
-import jakarta.annotation.Resource;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.Query;
+import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import jakarta.transaction.UserTransaction;
+import java.util.ArrayList;
+import java.util.List;
+import model.Cart;
+import model.CartService;
 
 /**
  *
- * @author khtee
+ * @author Abcong
  */
-public class RetrieveUser extends HttpServlet {
-    @PersistenceContext EntityManager em;
-      @Resource
-    UserTransaction utx;
-           int count = 3;
-           String err = "Wrong Username Or Password!";
+public class ViewCart extends HttpServlet {
+    @PersistenceContext
+    EntityManager em;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,47 +33,23 @@ public class RetrieveUser extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-            PrintWriter out = response.getWriter();
-        try {
-           
-            
-            HttpSession session = request.getSession();
-            String name = request.getParameter("name"); 
-            String password = request.getParameter("password");
-
-            
-            em.getEntityManagerFactory().getCache().evictAll();
-            userDA user = new userDA(em);
-            List<Customer> customer = user.findAll();
-
-                for(Customer c: customer){
-                    if(c.getCustName().equals(name) && c.getCustPassword().equals(password)){
-                        session.setAttribute("login",true);
-                        session = request.getSession(true);
-
-                        session.setAttribute("name", request.getParameter("name"));
-                       
-                         session.setAttribute("password",c.getCustName());
-
-                    response.sendRedirect("index.jsp"); //homepage
-                    }
-                }
-
-            request.setAttribute("errorMsg", "<i class=\"fa-solid fa-circle-exclamation error-icon\"></i> Username Or Password is wrong");
-               request.getRequestDispatcher("Login.jsp").forward(request, response); 
-            
-            
-        }catch(Exception ex){
-
-            out.println("<h1 style='color: red'>Error accure at " + ex + " </h1>");
-
-
-          
-            
-           
+        throws ServletException, IOException {
+    try {
+        ArrayList<Cart> cart_list = (ArrayList<Cart>) request.getSession().getAttribute("cart-list");
+        List<Cart> cartProduct = null;
+        if (cart_list != null) {
+            CartService cartService = new CartService(em);
+            cartProduct = cartService.getCartProducts(cart_list);
+            request.setAttribute("cartProduct", cartProduct);
         }
+        request.getSession().setAttribute("cartProduct", cartProduct);
+        response.sendRedirect("index.jsp");
+        
+    } catch (Exception ex) {
+        
     }
+}
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
