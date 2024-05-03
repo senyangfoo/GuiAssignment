@@ -2,6 +2,7 @@
 :root {
     --font_family: Tahoma, "Trebuchet MS", sans-serif;
     --primary_white_color: rgb(255, 255, 255);
+    --secondary_white_color: rgba(255,255,255,0.65);
     --primary_black_color: rgb(0, 0, 0);
     --secondary_black_color: rgba(0, 0, 0, 0.2);
     --third_black_color: rgba(0, 0, 0, 0.9);

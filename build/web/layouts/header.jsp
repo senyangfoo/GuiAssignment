@@ -2,20 +2,20 @@
 <%@page import="model.Cart" %>
 <%@page import="model.CartService" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
- <% 
-     //Login Status
-     boolean loginStatus = false;
-     if(session.getAttribute("login")!=null){
-        loginStatus = (Boolean) session.getAttribute("login");
-    }
+<% 
+    //Login Status
+    boolean loginStatus = false;
+    if(session.getAttribute("login")!=null){
+       loginStatus = (Boolean) session.getAttribute("login");
+   }
     
-    //Cart Status
-    List<Cart> cartProduct = null;
-    ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart-list");
-    if (cart_list != null) {
-        cartProduct = (List<Cart>) session.getAttribute("cartProduct");
-    }
- %>
+   //Cart Status
+   List<Cart> cartProduct = null;
+   ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart-list");
+   if (cart_list != null) {
+       cartProduct = (List<Cart>) session.getAttribute("cartProduct");
+   }
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -32,9 +32,9 @@
                 var loginstatus = <%= loginStatus %>;
 
                 if (!loginstatus) {
-                  window.location.href = "Login.jsp";
+                    window.location.href = "Login.jsp";
                 } else {
-                  openCartDrawer();
+                    openCartDrawer();
                 }
             }
 
@@ -398,15 +398,15 @@
                         <ul>
                             <% if(loginStatus == false){ %>
                             <li><a href="Login.jsp">Log In</a></li>
-                            <% } %>
-                             <% if(loginStatus == true){ %>
+                                <% } %>
+                                <% if(loginStatus == true){ %>
                             <li><a href="UserProfile.jsp">My Profile</a></li>
-                            <% } %>
+                                <% } %>
                             <li><a href="">Order History</a></li>
                             <li><a href="">Track Order</a></li>
-                            <% if(loginStatus == true){ %>
+                                <% if(loginStatus == true){ %>
                             <li><a href="logout.jsp">Logout</a></li>
-                            <% } %>
+                                <% } %>
                         </ul>
                     </div>
                 </div>
@@ -418,23 +418,23 @@
                         <a><img src="images/close.svg" alt="close" class="close" onclick="closeCartDrawer()"></a>
                         <h3>My Cart</h3>
                     </div>
-                        <% if(loginStatus == true){ %>
-                            <%
-                            if (cartProduct != null) {
-                                for (Cart cart : cartProduct) {
-                            %>
-                                <img src ="images/<%= cart.getImage() %>" width="100" height="100">
-                                <div class="item_details">
-                                     <h4><%= cart.getProdName() %></h4>
-                                     <h4><%= cart.getQuantity() %></h4>
-                                     <p>Price: $<%= cart.getPrice() %></p>
-                                </div>
-                            <% }
-                            } else {
-                            %>
-                                <div class="cart_empty">Your cart is empty.</div>
-                            <% } %>
-                        <% } %>   
+                    <% if(loginStatus == true){ %>
+                    <%
+                    if (cartProduct != null) {
+                        for (Cart cart : cartProduct) {
+                    %>
+                    <img src ="images/<%= cart.getImage() %>" width="100" height="100">
+                    <div class="item_details">
+                        <h4><%= cart.getProdName() %></h4>
+                        <h4><%= cart.getQuantity() %></h4>
+                        <p>Price: $<%= cart.getPrice() %></p>
+                    </div>
+                    <% }
+                    } else {
+                    %>
+                    <div class="cart_empty">Your cart is empty.</div>
+                    <% } %>
+                    <% } %>   
                 </div>
             </div>
         </div>
