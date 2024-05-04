@@ -21,6 +21,7 @@ public class userDA implements Serializable {
     private PreparedStatement stmt;
     private String sqlQueryStr = "SELECT * from " + tableName;
     private String sqlInsertStr = "INSERT INTO " + tableName + " (\"CUST_NAME\", \"CUST_EMAIL\", \"CUST_PASSWORD\")" + " VALUES(?, ?,?)";
+    private String sqlUpdateStr = "UPDATE " + tableName + " SET CUST_EMAIL = ? , CUST_PASSWORD = ?" + " WHERE CUST_NAME = ?";
     private ResultSet rs;
     private int count;
 
@@ -79,6 +80,20 @@ public class userDA implements Serializable {
             ex.getMessage();
         }
     }
+     public boolean editRecord(Customer user) {
+        try {
+            stmt = conn.prepareStatement(sqlUpdateStr);
+            stmt.setString(1, user.getCustEmail());
+            stmt.setString(2, user.getCustPassword());
+            stmt.setString(3, user.getCustName());
+
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            ex.getMessage();
+            return false;
+        }
+    }
 
     public ArrayList<Customer> getUsers() {
 
@@ -111,6 +126,7 @@ public class userDA implements Serializable {
 
     public static void main(String[] args) {
         userDA uses = new userDA();
-        System.out.print(uses.getUsers());
+        Customer custs = new Customer("111","aaa","aaa");
+        System.out.print(uses.editRecord(custs));
     }
 }

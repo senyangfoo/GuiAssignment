@@ -4,15 +4,13 @@
  */
 package controller;
 
-import model.Customer;
-import model.userDA;
 import jakarta.annotation.Resource;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
+import model.userDA;
+import model.Customer;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.Query;
+import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,57 +22,44 @@ import jakarta.transaction.UserTransaction;
  *
  * @author khtee
  */
-public class RetrieveUser extends HttpServlet {
+public class EditUser extends HttpServlet {
 
     @PersistenceContext
     EntityManager em;
     @Resource
     UserTransaction utx;
-    int count = 3;
-    String err = "Wrong Username Or Password!";
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         try {
-
             HttpSession session = request.getSession();
             String name = request.getParameter("name");
+            String mail = request.getParameter("mail");
             String password = request.getParameter("password");
+            Customer user = new Customer(name, mail, password);
+            userDA users = new userDA();
 
-            em.getEntityManagerFactory().getCache().evictAll();
-            userDA user = new userDA(em);
-            List<Customer> customer = user.findAll();
+            utx.begin();
+            boolean success = users.editRecord(user);
+            utx.commit();
 
-            for (Customer c : customer) {
-                if (c.getCustName().equals(name) && c.getCustPassword().equals(password)) {
-                    session.setAttribute("login", true);
-                    session = request.getSession(true);
+            if (success = true) {
+                session.setAttribute("login", true);
+                session = request.getSession(true);
+                
+                session.setAttribute("name", name);
+                session.setAttribute("password", password);
+                session.setAttribute("mail", mail);
 
-                    session.setAttribute("name", c.getCustName());
-                    session.setAttribute("password", c.getCustPassword());
-                    session.setAttribute("mail", c.getCustEmail());
-
-                    response.sendRedirect("index.jsp"); //homepage
-                }
+                response.sendRedirect("UserProfile.jsp"); //Back to profile
+            } else {
+                request.setAttribute("errorMsg", "<i class=\"fa-solid fa-circle-exclamation error-icon\"></i> Error occurred!");
+                request.getRequestDispatcher("UserProfile.jsp").forward(request, response);
             }
 
-            request.setAttribute("errorMsg", "<i class=\"fa-solid fa-circle-exclamation error-icon\"></i> Username Or Password is wrong");
-            request.getRequestDispatcher("Login.jsp").forward(request, response);
-
         } catch (Exception ex) {
-
-            out.println("<h1 style='color: red'>Error accure at " + ex + " </h1>");
-
+            out.println("Error: " + ex);
         }
     }
 
