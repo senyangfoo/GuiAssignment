@@ -1,6 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.*"%>
 <%@page  import="model.Product" %>
+<%@include file="layouts/header.jsp" %>
+<%@include file="layouts/adminNavBar.jsp" %>
 <%
    List<Product> productList = (List)session.getAttribute("productList");
 %>
@@ -8,10 +10,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Product Table</title>
+        <style>
+            .prodTable {
+                margin: 50px 0 0 250px;
+            }
+        </style>
     </head>
     <body>
-        <table>
+        <table class="prodTable">
             <tr>
                 <td>ID</td>
                 <td>Image</td>
