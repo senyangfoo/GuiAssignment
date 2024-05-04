@@ -154,8 +154,8 @@
         if (isNaN(this.value) || this.value.trim() === '' || this.value === '0') {
             this.value = 1;
             updateDecrementButtonState();
-        } else if (this.value > 10) {
-            this.value = 10;
+        } else if (this.value > <%=p.getStock()%>) {
+            this.value = <%=p.getStock()%>;
             updateDecrementButtonState();
         }
     });
