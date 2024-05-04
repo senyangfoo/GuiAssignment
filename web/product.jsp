@@ -1,3 +1,11 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.*"%>
+<%@page  import="model.Product" %>
+<%@page  import="enums.prodCategory" %>
+<%
+   List<Product> productList = (List)session.getAttribute("productList");
+%>
+<%@include file="layouts/header.jsp" %>  
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         var elements = document.querySelectorAll('.prodDesc');
@@ -8,14 +16,30 @@
             }
         });
     });
+
+    function changeCategory() {
+        var selectedCategory = document.getElementById("category").value;
+        var products = document.getElementsByClassName("cardContainer");
+        var emptyBox = document.querySelector(".emptyProduct");
+        var productCount = 0;
+
+        for (var i = 0; i < products.length; i++) {
+            var category = products[i].getAttribute("data-category");
+            if (selectedCategory === "all" || category === selectedCategory) {
+                products[i].style.display = "block";
+                productCount++;
+            } else {
+                products[i].style.display = "none";
+            }
+        }
+
+        if (productCount <= 0) {
+            emptyBox.style.display = "block";
+        } else {
+            emptyBox.style.display = "none";
+        }
+    }
 </script>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="java.util.*"%>
-<%@page  import="model.Product" %>
-<%
-   List<Product> productList = (List)session.getAttribute("productList");
-%>
-<%@include file="layouts/header.jsp" %>  
 <!DOCTYPE html>
 <html>
     <style>
@@ -25,9 +49,34 @@
             .titleContainer {
                 border-bottom: 2px solid var(--primary_black_color);
                 margin: 0 0 30px 0;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                justify-content: space-between;
 
                 h2 {
                     margin: 0 0 10px 0;
+                    justify-self: start;
+                }
+
+                .catogoryContainer {
+                    justify-self: end;
+                    width: 25%;
+
+                    select {
+                        font-size: var(--secondary-font-size);
+                        color: var(--primary_black_color);
+                        width: 100%;
+                        padding: 5px;
+                        border: none;
+                        outline: none;
+                        appearance: none;
+                        -webkit-appearance: none;
+                        -moz-appearance: none;
+                        background-image: url('images/filter_alt.svg');
+                        background-repeat: no-repeat;
+                        background-position: right center;
+                        padding-right: 20px;
+                    }
                 }
             }
 
@@ -95,18 +144,39 @@
                     box-shadow: 2px 2px 10px var(--secondary_brown_color);
                 }
             }
+
+            .emptyProduct {
+                display: none;
+                width: 100%;
+                height: 250px;
+
+                h2 {
+                    text-align: center;
+                }
+            }
         }
     </style>
     <body>
         <div class="contentContainer">
             <div class="titleContainer">
                 <h2>Product List</h2>
+                <div class="catogoryContainer">
+                    <select id="category" name="category" onchange="changeCategory()">
+                        <%
+                            for (prodCategory option: prodCategory.values()) {
+                        %>
+                        <option value="<%= option %>"><%= option %></option>
+                        <% 
+                         }
+                        %>
+                    </select>
+                </div>
             </div>
             <div class = "productContainer">
                 <%
                     if(!productList.isEmpty()){
                         for(Product p : productList){%>
-                <a href="ProductDetailServlet?productID=<%= p.getProdId()%>" class="cardContainer" >
+                <a href="ProductDetailServlet?productID=<%= p.getProdId()%>" class="cardContainer" data-category='<%= p.getCategory() %>'>
                     <div class="card">
                         <div class="card_imgContainer">
                             <img src ="images/<%= p.getImage() %>">
@@ -122,6 +192,7 @@
             }
                 %>
             </div>
+            <div class="emptyProduct"><h2>No products found!</h2></div>
         </div>
     </body>
 </html>
