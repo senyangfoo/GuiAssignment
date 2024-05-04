@@ -22,7 +22,7 @@
         var products = document.getElementsByClassName("cardContainer");
         var emptyBox = document.querySelector(".emptyProduct");
         var productCount = 0;
-
+        console.log(selectedCategory);
         for (var i = 0; i < products.length; i++) {
             var category = products[i].getAttribute("data-category");
             if (selectedCategory === "all" || category === selectedCategory) {
@@ -39,6 +39,33 @@
             emptyBox.style.display = "none";
         }
     }
+
+    function getSelectedValueFromURL() {
+        var urlParams = new URLSearchParams(window.location.search);
+        var selectedValue = urlParams.get('selectedValue');
+        return selectedValue;
+    }
+
+    function changeCategoryFromURL() {
+        var selectedValue = getSelectedValueFromURL();
+        var selectedCategory = document.getElementById('category');
+
+        if (selectedValue) {
+            var desiredOption = selectedCategory.querySelector('option[value="' + selectedValue + '"]');
+            var allOptions = selectedCategory.querySelectorAll('option');
+            allOptions.forEach(function (option) {
+                option.removeAttribute('selected');
+            });
+            if (desiredOption) {
+                desiredOption.setAttribute('selected', 'selected');
+            }
+        }
+        changeCategory();
+    }
+
+    window.onload = function () {
+        changeCategoryFromURL();
+    };
 </script>
 <!DOCTYPE html>
 <html>
@@ -163,7 +190,7 @@
                 <div class="catogoryContainer">
                     <select id="category" name="category" onchange="changeCategory()">
                         <%
-                            for (prodCategory option: prodCategory.values()) {
+                                for (prodCategory option: prodCategory.values()) {
                         %>
                         <option value="<%= option %>"><%= option %></option>
                         <% 

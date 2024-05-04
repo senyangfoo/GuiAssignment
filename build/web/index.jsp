@@ -9,6 +9,7 @@
 <script>window.onload = auto();</script>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="layouts/header.jsp" %>  
+<%@page  import="enums.prodCategory" %>
 <!DOCTYPE html>
 <html>
     <style>
@@ -178,10 +179,10 @@
         <div class="contentContainer" id="contentContainer">
             <h2>Products</h2>
             <div class="productContainer">
-                <div class=iconContainer><a href=""><img src="images/piano_icon.png" alt="piano_icon"/><h2>Pianos</h2></a></div>
-                <div class=iconContainer><a href=""><img src="images/guitar_icon.png" alt="guitar_icon"/><h2>Guitars</h2></a></div>
-                <div class=iconContainer><a href=""><img src="images/drum_icon.png" alt="drum_icon"/><h2>Drums</h2></a></div>
-                <div class=iconContainer><a href=""><img src="images/violin_icon.png" alt="violin_icon"/><h2>Violins</h2></a></div>
+                <div class=iconContainer><a href="product.jsp?selectedValue=<%= prodCategory.piano%>"><img src="images/piano_icon.png" alt="piano_icon"/><h2>Pianos</h2></a></div>
+                <div class=iconContainer><a href="product.jsp?selectedValue=<%= prodCategory.guitar%>"><img src="images/guitar_icon.png" alt="guitar_icon"/><h2>Guitars</h2></a></div>
+                <div class=iconContainer><a href="product.jsp?selectedValue=<%= prodCategory.drum%>"><img src="images/drum_icon.png" alt="drum_icon"/><h2>Drums</h2></a></div>
+                <div class=iconContainer><a href="product.jsp?selectedValue=<%= prodCategory.violin%>"><img src="images/violin_icon.png" alt="violin_icon"/><h2>Violins</h2></a></div>
             </div>
             <h2>Top Sales</h2>
             <div class="topSalesContainer">
