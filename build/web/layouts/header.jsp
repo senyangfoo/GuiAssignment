@@ -1,6 +1,7 @@
 <%@page import="java.util.*"%>
 <%@page import="model.Cart" %>
 <%@page import="model.CartService" %>
+<%@page  import="enums.prodCategory" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% 
     //Login Status
@@ -30,7 +31,6 @@
 
             function checkLoginStatus() {
                 var loginstatus = <%= loginStatus %>;
-
                 if (!loginstatus) {
                     window.location.href = "Login.jsp";
                 } else {
@@ -45,7 +45,6 @@
 
             function showProductImage(id) {
                 var element = document.getElementById(id);
-
                 setTimeout(function () {
                     element.style.opacity = "0.2";
                     element.style.right = "0";
@@ -54,7 +53,6 @@
 
             function hideProductImage(id) {
                 var element = document.getElementById(id);
-
                 element.style.opacity = "0";
                 element.style.right = "-10px";
             }
@@ -74,6 +72,23 @@
             function closeSearchBar() {
                 var searchbarContainer = document.getElementById("searchbarContainer");
                 searchbarContainer.style.opacity = "0";
+            }
+
+            function increaseCartValue(prodId) {
+                var input = document.getElementById(prodId);
+                input.stepUp();
+                updateValueCart(prodId, input.value);
+            }
+
+            function decreaseCartValue(prodId) {
+                var input = document.getElementById(prodId);
+                input.stepDown();
+                updateValueCart(prodId, input.value);
+            }
+
+            function updateValueCart(prodId, value) {
+                var input = document.getElementById(prodId);
+                input.setAttribute('value', value);
             }
         </script>
         <style>
@@ -372,10 +387,10 @@
                         <li class="products"><a href="ViewProduct">Products</a>
                             <div class="productsmenu">
                                 <ul>
-                                    <li><a href="" onmouseover="showProductImage('piano_product')" onmouseout="hideProductImage('piano_product')">Pianos</a></li>
-                                    <li><a href="" onmouseover="showProductImage('guitar_product')" onmouseout="hideProductImage('guitar_product')">Guitars</a></li>
-                                    <li><a href="" onmouseover="showProductImage('drum_product')" onmouseout="hideProductImage('drum_product')">Drums</a></li>
-                                    <li><a href="" onmouseover="showProductImage('violin_product')" onmouseout="hideProductImage('violin_product')">Violins</a></li>
+                                    <li><a href="product.jsp?selectedValue=<%= prodCategory.piano%>" onmouseover="showProductImage('piano_product')" onmouseout="hideProductImage('piano_product')">Pianos</a></li>
+                                    <li><a href="product.jsp?selectedValue=<%= prodCategory.guitar%>" onmouseover="showProductImage('guitar_product')" onmouseout="hideProductImage('guitar_product')">Guitars</a></li>
+                                    <li><a href="product.jsp?selectedValue=<%= prodCategory.drum%>" onmouseover="showProductImage('drum_product')" onmouseout="hideProductImage('drum_product')">Drums</a></li>
+                                    <li><a href="product.jsp?selectedValue=<%= prodCategory.violin%>" onmouseover="showProductImage('violin_product')" onmouseout="hideProductImage('violin_product')">Violins</a></li>
                                 </ul>
                                 <img src="images/piano_product.png" class="piano_product" id="piano_product">
                                 <img src="images/guitar_product.png" class="guitar_product" id="guitar_product">
@@ -385,7 +400,7 @@
                         </li>
                         <li><a href="">News & Events</a></li>
                         <li><a href="">Supports</a></li>
-                        <li><a href="">About Us</a></li>
+                        <li><a href="aboutUs.jsp">About Us</a></li>
                     </ul>
                 </nav>
             </div>
@@ -427,6 +442,11 @@
                     <div class="item_details">
                         <h4><%= cart.getProdName() %></h4>
                         <h4><%= cart.getQuantity() %></h4>
+                        <div class="quantitySelector">
+                            <button type="button" onclick="decreaseCartValue('quanCart_<%= cart.getProdId() %>')">-</button>
+                            <input type="number" name="quantity" id="quanCart_<%= cart.getProdId() %>" min="1" max="10" value="<%= cart.getQuantity() %>" disabled>
+                            <button type="button" onclick="increaseCartValue('quanCart_<%= cart.getProdId() %>')">+</button>
+                        </div>
                         <p>Price: $<%= cart.getPrice() %></p>
                     </div>
                     <% }

@@ -1,5 +1,4 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="model.Customer" %>
 <%
     String name = (String)request.getSession().getAttribute("name");
      String mail = (String)request.getSession().getAttribute("mail");
@@ -16,11 +15,14 @@
         <title>User Profile</title>
     </head>
     <body>
+        <form action="EditUser" method="POST">
         <h1>User Profile</h1>
-         <p>Name: <%= name %></p>
-          <p>Mail <%= mail %></p>
+         <p>Name: <input type="text" name="name" value="<%= name %>"></p>
+          <p>Mail: <input type="text" name="mail" value="<%= mail %>"></p>
 
-        <p>Password : <%= password %></p>
-        <a href="UserEdit.jsp"><button>Edit Profile</button></a>
+        <p>Password : <input type="text" name="password" value="<%= password %>"></p>
+        <input type="submit" value="Confirm">
+        </form>
+          <a href="UserProfile.jsp"><button>Back</button></a>
     </body>
 </html>
