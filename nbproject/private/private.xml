@@ -5,6 +5,7 @@
         <group>
             <file>file:/C:/xampp/htdocs/GuiAssignment/web/images/piano_icon.png</file>
             <file>file:/C:/xampp/htdocs/GuiAssignment/src/conf/persistence.xml</file>
+            <file>file:/C:/xampp/htdocs/GuiAssignment/src/java/enums/prodCategory.java</file>
             <file>file:/C:/xampp/htdocs/GuiAssignment/src/java/controller/ViewCart.java</file>
             <file>file:/C:/xampp/htdocs/GuiAssignment/src/java/model/Product.java</file>
             <file>file:/C:/xampp/htdocs/GuiAssignment/web/WEB-INF/glassfish-resources.xml</file>
@@ -24,6 +25,7 @@
             <file>file:/C:/xampp/htdocs/GuiAssignment/web/images/shopping_cart.svg</file>
             <file>file:/C:/xampp/htdocs/GuiAssignment/web/images/violin.png</file>
             <file>file:/C:/xampp/htdocs/GuiAssignment/src/java/model/Orders.java</file>
+            <file>file:/C:/xampp/htdocs/GuiAssignment/web/productTable.jsp</file>
             <file>file:/C:/xampp/htdocs/GuiAssignment/web/layouts/header.jsp</file>
             <file>file:/C:/xampp/htdocs/GuiAssignment/web/css/style.css</file>
             <file>file:/C:/xampp/htdocs/GuiAssignment/web/javascripts/slideEventHandler.js</file>

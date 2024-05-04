@@ -452,6 +452,7 @@
                         </div>
                         <p>Price: RM<%= String.format("%.2f", cart.getPrice()) %></p>
                         <p>Subtotal: RM<%= String.format("%.2f", cart.getPrice()*cart.getQuantity())%></p>
+                        <a href="RemoveProductFromCart?productID=<%= cart.getProdId() %>">Remove</a>
                     </div>
                     <% }
                     } else {
