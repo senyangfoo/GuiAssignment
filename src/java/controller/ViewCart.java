@@ -37,12 +37,16 @@ public class ViewCart extends HttpServlet {
     try {
         ArrayList<Cart> cart_list = (ArrayList<Cart>) request.getSession().getAttribute("cart-list");
         List<Cart> cartProduct = null;
+        double totalPrice = 0;
         if (cart_list != null) {
             CartService cartService = new CartService(em);
             cartProduct = cartService.getCartProducts(cart_list);
+            totalPrice = cartService.getTotalCartPrice(cartProduct);
             request.setAttribute("cartProduct", cartProduct);
+            request.setAttribute("totalPrice", totalPrice);
         }
         request.getSession().setAttribute("cartProduct", cartProduct);
+        request.getSession().setAttribute("totalPrice", totalPrice);
         response.sendRedirect("index.jsp");
         
     } catch (Exception ex) {

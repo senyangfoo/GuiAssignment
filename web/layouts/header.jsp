@@ -15,7 +15,7 @@
    ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart-list");
    if (cart_list != null) {
        cartProduct = (List<Cart>) session.getAttribute("cartProduct");
-   }
+       Double totalPrice = (Double) session.getAttribute("totalPrice");   }
 %>
 <!DOCTYPE html>
 <html>
@@ -434,20 +434,24 @@
                         <h3>My Cart</h3>
                     </div>
                     <% if(loginStatus == true){ %>
+                    <% if (cartProduct != null) { %>
+                      <div>
+                        <h3>Total Price: RM${totalPrice}</h3>
+                        <a href="CheckOutServlet">CheckOut</a>
+                      </div>
                     <%
-                    if (cartProduct != null) {
                         for (Cart cart : cartProduct) {
                     %>
                     <img src ="images/<%= cart.getImage() %>" width="100" height="100">
                     <div class="item_details">
                         <h4><%= cart.getProdName() %></h4>
-                        <h4><%= cart.getQuantity() %></h4>
                         <div class="quantitySelector">
                             <button type="button" onclick="decreaseCartValue('quanCart_<%= cart.getProdId() %>')">-</button>
                             <input type="number" name="quantity" id="quanCart_<%= cart.getProdId() %>" min="1" max="10" value="<%= cart.getQuantity() %>" disabled>
                             <button type="button" onclick="increaseCartValue('quanCart_<%= cart.getProdId() %>')">+</button>
                         </div>
-                        <p>Price: $<%= cart.getPrice() %></p>
+                        <p>Price: RM<%= String.format("%.2f", cart.getPrice()) %></p>
+                        <p>Subtotal: RM<%= String.format("%.2f", cart.getPrice()*cart.getQuantity())%></p>
                     </div>
                     <% }
                     } else {

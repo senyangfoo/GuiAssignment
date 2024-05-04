@@ -114,7 +114,7 @@
                     <img src ="images/<%= p.getImage() %>" class="prodImg">
                     <div class="detailContainer">
                         <h1><%= p.getProdName()%></h1>
-                        <p class="prodPrice">RM <%= p.getPrice() %></p>
+                        <p class="prodPrice">RM <%= String.format("%.2f", p.getPrice())%></p>
                         <div class="quantityContainer">
                             <p class="quantityText">Quantity</p>
                             <div class="quantitySelector">
