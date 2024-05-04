@@ -2,7 +2,6 @@
 <jsp:useBean id="user" class="model.Customer" scope="session"></jsp:useBean>
 <jsp:setProperty name="user" property="*" />
 <%@page import = "java.util.*;" %>
-<%@page import = "model.Customer;" %>
 <%@include file="layouts/header.jsp" %>  
 
 <!DOCTYPE html>

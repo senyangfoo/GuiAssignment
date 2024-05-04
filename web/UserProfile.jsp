@@ -1,10 +1,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="model.Customer" %>
 <%
-    String username = (String)request.getAttribute("username");
-  String password = (String)request.getAttribute("password");
-  session.setAttribute("name", username);
-  session.setAttribute("password", password);
+    String name = (String)request.getSession().getAttribute("name");
+     String mail = (String)request.getSession().getAttribute("mail");
+     String password = (String)request.getSession().getAttribute("password");
+ 
 %> 
 <%@include file="layouts/header.jsp" %>
 
@@ -17,8 +17,10 @@
     </head>
     <body>
         <h1>User Profile</h1>
-         <p>Name: <%= username %></p>
+         <p>Name: <%= name %></p>
+          <p>Mail <%= mail %></p>
 
         <p>Password : <%= password %></p>
+        <a href="UserEdit.jsp"><button>Edit Profile</button></a>
     </body>
 </html>
