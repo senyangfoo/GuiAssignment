@@ -4,25 +4,21 @@
  */
 package controller;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
-import java.util.List;
 import model.Cart;
-import model.CartService;
 
 /**
  *
  * @author Abcong
  */
-public class ViewCart extends HttpServlet {
-    @PersistenceContext
-    EntityManager em;
+public class RemoveProductFromCart extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -33,27 +29,28 @@ public class ViewCart extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-    try {
-        ArrayList<Cart> cart_list = (ArrayList<Cart>) request.getSession().getAttribute("cart-list");
-        List<Cart> cartProduct = null;
-        double totalPrice = 0;
-        if (cart_list != null) {
-            CartService cartService = new CartService(em);
-            cartProduct = cartService.getCartProducts(cart_list);
-            totalPrice = cartService.getTotalCartPrice(cartProduct);
-            request.setAttribute("cartProduct", cartProduct);
-            request.setAttribute("totalPrice", totalPrice);
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+           String productID = request.getParameter("productID");
+           
+           if(productID != null){
+              ArrayList<Cart> cart_list = (ArrayList<Cart>) request.getSession().getAttribute("cart-list");
+              if (cart_list != null) {
+                    for (Cart c : cart_list) {
+                        if (c.getProdId() == Integer.parseInt(productID)) {
+                            cart_list.remove(cart_list.indexOf(c));
+                            break;
+                        }
+                    }
+               }
+            request.getSession().setAttribute("cart-list", cart_list);
+            response.sendRedirect("ViewCart");
+           }else{
+            response.sendRedirect("index.jsp");
+           }
         }
-        request.getSession().setAttribute("cartProduct", cartProduct);
-        request.getSession().setAttribute("totalPrice", totalPrice);
-        response.sendRedirect("index.jsp");
-        
-    } catch (Exception ex) {
-        
     }
-}
-
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

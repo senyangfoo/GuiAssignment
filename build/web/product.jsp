@@ -211,7 +211,7 @@
                         <div class="card_textContainer">
                             <p class="prodName"><%= p.getProdName()%></p>
                             <p class="prodDesc"><%= p.getDescription() %></p>
-                            <p class="prodPrice">RM <%= p.getPrice() %></p>
+                            <p class="prodPrice">RM <%= String.format("%.2f", p.getPrice()) %></p>
                         </div>
                     </div>
                 </a>
