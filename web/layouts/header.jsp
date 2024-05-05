@@ -415,7 +415,7 @@
                 <div class="avatar"><img src="images/account_circle.svg" alt="avatar" class="avatar" draggable="false">
                     <div class="avatarmenu">
                         <ul>
-                            <% if(loginStatus == false){ %>
+                            <% if(loginStatus == false && staffLogin == false){ %>
                             <li><a href="Login.jsp">Log In</a></li>
                                 <% } %>
                                 <% if(loginStatus == true){ %>
