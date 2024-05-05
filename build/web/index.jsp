@@ -4,6 +4,19 @@
 
         container.scrollIntoView({behavior: 'smooth'});
     }
+    setInterval(function () {
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('Animation');
+                }
+            });
+        });
+
+        observer.observe(document.querySelector('.productAnim'));
+        observer.observe(document.querySelector('.salesAnim'));
+        observer.observe(document.querySelector('.eventsAnim'));
+    }, 1);
 </script>
 <script src="javascripts/slideEventHandler.js"></script>
 <script>window.onload = auto();</script>
@@ -157,6 +170,35 @@
                 grid-template-columns: 20% 80%;
                 margin: 0 0 50px 0;
             }
+
+            .Animation {
+                .Anim1 {
+                    animation: slideFadeIn .8s;
+                }
+                .Anim2 {
+                    animation: slideFadeIn 1s;
+                }
+                .Anim3 {
+                    animation: slideFadeIn 1.2s;
+                }
+                .Anim4 {
+                    animation: slideFadeIn 1.4s;
+                }
+            }
+        }
+
+        @keyframes slideFadeIn {
+            0% {
+                transform: translateY(10%);
+                opacity: 0;
+            }
+            20% {
+                opacicy: 0.2;
+            }
+            80% {
+                transform: translateY(0%);
+                opacity: 1;
+            }
         }
     </style>
     <body>
@@ -177,27 +219,33 @@
             </div>
         </div>
         <div class="contentContainer" id="contentContainer">
-            <h2>Products</h2>
-            <div class="productContainer">
-                <div class=iconContainer><a href="product.jsp?selectedValue=<%= prodCategory.piano%>"><img src="images/piano_icon.png" alt="piano_icon"/><h2>Pianos</h2></a></div>
-                <div class=iconContainer><a href="product.jsp?selectedValue=<%= prodCategory.guitar%>"><img src="images/guitar_icon.png" alt="guitar_icon"/><h2>Guitars</h2></a></div>
-                <div class=iconContainer><a href="product.jsp?selectedValue=<%= prodCategory.drum%>"><img src="images/drum_icon.png" alt="drum_icon"/><h2>Drums</h2></a></div>
-                <div class=iconContainer><a href="product.jsp?selectedValue=<%= prodCategory.violin%>"><img src="images/violin_icon.png" alt="violin_icon"/><h2>Violins</h2></a></div>
-            </div>
-            <h2>Top Sales</h2>
-            <div class="topSalesContainer">
-                <img src="images/null_icon.png" width="100%"/>
-                <div>
-                    <h3>Item Name</h3>
-                    <p>Description</p>
+            <div class="productAnim">
+                <h2 class="Anim1">Products</h2>
+                <div class="productContainer">
+                    <div class="iconContainer Anim1"><a href="product.jsp?selectedValue=<%= prodCategory.piano%>"><img src="images/piano_icon.png" alt="piano_icon"/><h2>Pianos</h2></a></div>
+                    <div class="iconContainer Anim2"><a href="product.jsp?selectedValue=<%= prodCategory.guitar%>"><img src="images/guitar_icon.png" alt="guitar_icon"/><h2>Guitars</h2></a></div>
+                    <div class="iconContainer Anim3"><a href="product.jsp?selectedValue=<%= prodCategory.drum%>"><img src="images/drum_icon.png" alt="drum_icon"/><h2>Drums</h2></a></div>
+                    <div class="iconContainer Anim4"><a href="product.jsp?selectedValue=<%= prodCategory.violin%>"><img src="images/violin_icon.png" alt="violin_icon"/><h2>Violins</h2></a></div>
                 </div>
             </div>
-            <h2>News & Upcoming Events</h2>
-            <div class="NewsEvenstContainer">
-                <img src="images/null_icon.png" width="100%"/>
-                <div>
-                    <h3>Item Name</h3>
-                    <p>Description</p>
+            <div class="salesAnim">
+                <h2 class="Anim1">Top Sales</h2>
+                <div class="topSalesContainer Anim1">
+                    <img src="images/null_icon.png" width="100%"/>
+                    <div>
+                        <h3>Item Name</h3>
+                        <p>Description</p>
+                    </div>
+                </div>
+            </div>
+            <div class="eventsAnim">
+                <h2 class="Anim1">News & Upcoming Events</h2>
+                <div class="NewsEvenstContainer Anim1">
+                    <img src="images/null_icon.png" width="100%"/>
+                    <div>
+                        <h3>Item Name</h3>
+                        <p>Description</p>
+                    </div>
                 </div>
             </div>
         </div>
