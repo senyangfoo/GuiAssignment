@@ -100,6 +100,46 @@
                 }
             }
         }
+
+        .ratingSalesContainer {
+            display: flex;
+            align-items: center;
+        }
+
+        .stars {
+            display: inline-block;
+            font-size: 24px;
+        }
+
+        .reviewContainer {
+            width: 90%;
+
+            .reviewTitle {
+                font-size: var(--primary_font_size);
+                border-bottom: 2px solid var(--primary_black_color);
+                padding: 10px 0 5px 0;
+            }
+
+            .reviewContent {
+                width: 100%;
+                padding: 10px 10px 0 10px;
+            }
+
+            .timeUserName {
+                font-size: var(--third-font-size);
+                margin: 10px 0 10px 0;
+                color: var(--third_black_color);
+            }
+
+            .text {
+                font-size: var(--secondary-font-size);
+            }
+
+            .breakline {
+                border-bottom: 1px solid var(--third_grey_color);
+                padding: 0 0 30px 0;
+            }
+        }
     }
 </style>
 <html>
@@ -113,8 +153,14 @@
                 <div class="prodContainer">
                     <img src ="images/<%= p.getImage() %>" class="prodImg">
                     <div class="detailContainer">
-                        <h1><%= p.getProdName()%></h1>
-                        <p class="prodPrice">RM <%= p.getPrice() %></p>
+                        <h1 style="margin: 10px auto 0 auto"><%= p.getProdName()%></h1>
+                        <div class="ratingSalesContainer">
+                            <div class="stars" data-rating="0"></div>
+                            <p>(0)</p>
+                            <p style="padding: 0 10px">|</p>
+                            <p>200 Sold</p>
+                        </div>
+                        <p class="prodPrice">RM <%= String.format("%.2f", p.getPrice())%></p>
                         <div class="quantityContainer">
                             <p class="quantityText">Quantity</p>
                             <div class="quantitySelector">
@@ -129,6 +175,15 @@
                             <p class="descTitle">Description</p>
                             <p class="desc"><%= p.getDescription() %></p>
                         </div>
+                    </div>
+                </div>
+                <div class="reviewContainer">
+                    <p class="reviewTitle">Reviews</p>
+                    <div class="reviewContent">
+                        <div class="stars" data-rating="5"></div>
+                        <p class="timeUserName">5/5/2024 Mr Superman</p>
+                        <p class="text">非常好鋼琴 使我琴鍵旋轉</p>
+                        <div class="breakline"></div>
                     </div>
                 </div>
             </div>
@@ -154,8 +209,8 @@
         if (isNaN(this.value) || this.value.trim() === '' || this.value === '0') {
             this.value = 1;
             updateDecrementButtonState();
-        } else if (this.value > 10) {
-            this.value = 10;
+        } else if (this.value > <%=p.getStock()%>) {
+            this.value = <%=p.getStock()%>;
             updateDecrementButtonState();
         }
     });
@@ -169,7 +224,7 @@
             decrementButton.style.color = 'var(--third_grey_color)';
         }
     }
-    
+
     function updateValue(newValue) {
         quantityInput.setAttribute('value', newValue);
     }
@@ -180,4 +235,20 @@
     }, 1000);
 
     updateDecrementButtonState();
+
+    const starsDivs = document.querySelectorAll('.stars');
+
+    starsDivs.forEach(starsDiv => {
+        const ratingValue = parseInt(starsDiv.dataset.rating);
+        displayRating(starsDiv, ratingValue);
+    });
+
+    function displayRating(starsDiv, value) {
+        const stars = '★★★★★';
+        const emptyStars = '☆☆☆☆☆';
+        starsDiv.textContent = stars.slice(0, value) + emptyStars.slice(value);
+    }
+
+    displayRating(ratingValue);
 </script>
+<%@include file="layouts/footer.jsp" %>  
