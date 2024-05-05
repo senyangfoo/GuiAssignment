@@ -4,83 +4,77 @@
  */
 package controller;
 
+import model.Staff;
+import model.staffDA;
 import jakarta.annotation.Resource;
-import model.userDA;
-import model.Customer;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.UserTransaction;
-import java.util.List;
 
 /**
  *
  * @author khtee
  */
-public class EditUser extends HttpServlet {
+public class RetrieveStaff extends HttpServlet {
 
     @PersistenceContext
     EntityManager em;
     @Resource
     UserTransaction utx;
-    private boolean exist;
-    private boolean tempexist = false;
+    int count = 3;
+    String err = "Wrong Username Or Password!";
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         try {
+
             HttpSession session = request.getSession();
             String name = request.getParameter("name");
-            String mail = request.getParameter("mail");
             String password = request.getParameter("password");
-            Customer user = new Customer(name, mail, password);
-            userDA users = new userDA();
-            userDA checkUser = new userDA(em);
-            List<Customer> existCust = checkUser.findAll();
-            for (Customer c : existCust) {
-                if (c.getCustName().equals(name)) {
-                    tempexist = true;
-                } else {
-                    exist = false;
-                }
-            }
-            String currentName = (String)request.getSession().getAttribute("name");
-            if (currentName.equals(name)){
-                tempexist = false;
-            }
-            exist = tempexist;
-            if (exist == false) {
-                utx.begin();
-                boolean success = users.editRecord(user);
-                utx.commit();
 
-                if (success = true) {
-                    session.setAttribute("login", true);
+            em.getEntityManagerFactory().getCache().evictAll();
+            staffDA user = new staffDA(em);
+            List<Staff> staff = user.findAll();
+
+            for (Staff c : staff) {
+                if (c.getStaffName().equals(name) && c.getStaffPassword().equals(password)) {
+                    session.setAttribute("staffLogin", true);
                     session = request.getSession(true);
 
-                    session.setAttribute("name", name);
-                    session.setAttribute("password", password);
-                    session.setAttribute("mail", mail);
+                    session.setAttribute("name", c.getStaffName());
+                    session.setAttribute("password", c.getStaffPassword());
+                    session.setAttribute("mail", c.getStaffEmail());
 
-                    response.sendRedirect("UserProfile.jsp"); //Back to profile
-                } else {
-                    request.setAttribute("errorMsg", "<i class=\"fa-solid fa-circle-exclamation error-icon\"></i> Error occurred!");
-                    request.getRequestDispatcher("UserProfile.jsp").forward(request, response);
+                    response.sendRedirect("index.jsp"); //homepage
                 }
             }
-            else if(exist == true){
-                 request.setAttribute("errorMsg", "<i class=\"fa-solid fa-circle-exclamation error-icon\"></i> Username taken!!");
-                    request.getRequestDispatcher("UserEdit.jsp").forward(request, response);
-            }
+
+            request.setAttribute("errorMsg", "<i class=\"fa-solid fa-circle-exclamation error-icon\"></i> Username Or Password is wrong");
+            request.getRequestDispatcher("StaffLogin.jsp").forward(request, response);
+
         } catch (Exception ex) {
-            out.println("Error: " + ex);
+
+            out.println("<h1 style='color: red'>Error accure at " + ex + " </h1>");
+
         }
     }
 

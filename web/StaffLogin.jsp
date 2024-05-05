@@ -1,18 +1,17 @@
 <%@include file="layouts/header.jsp" %>  
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import = "java.util.*;" %>
-<%@page import = "model.Customer;" %>
-<%@page import = "java.sql.*;" %>
-<jsp:useBean id="customer" class="model.Customer" scope="session"></jsp:useBean>
-<%@page import="model.Customer, java.util.*" %>
 
 <!DOCTYPE html>
 <% 
      loginStatus = false;
+     staffLogin = false;
  Object loginStatusObj = session.getAttribute("login");
     if (loginStatusObj != null) {
         loginStatus = Boolean.parseBoolean(loginStatusObj.toString());
+    }
+    Object staffLoginObj = session.getAttribute("staffLogin");
+    if (staffLoginObj != null) {
+        staffLogin = Boolean.parseBoolean(staffLoginObj.toString());
     }
 %>
 <html>
@@ -100,16 +99,16 @@
                     font-size: var(--secondary-font-size);
                     cursor: pointer;
                 }
-                
+
                 .register {
                     text-align: center;
                     text-decoration: none;
                     color: var(--primary_black_color);
-                    
+
                     :hover {
                         text-decoration: underline;
                     }
-                }         
+                }
             }
         </style>
     </head>
@@ -121,7 +120,7 @@
         <div class="login">
             <div class="titleContainer">
                 <a href="index.jsp" class="titleBack"><img src="images/arrow_back.svg"></a>
-                <h2>Login</h2>        
+                <h2>Staff Login</h2>        
             </div>
             <c:if test="${requestScope.errorMsg !=null}">                       
                 <div class="login-error" style="color: red;">
@@ -130,15 +129,14 @@
                         ${requestScope.errorMsg}</p>
                 </div>
             </c:if>
-            <form action="RetrieveUser" method="POST" >
+            <form action="RetrieveStaff" method="POST" >
                 <label class="labelField">Username</label>
                 <input type="text" name="name" class="inputField" required/><br/>
                 <label class="labelField">Password</label>
                 <input type="password" name="password" class="inputField" required/><br/>
                 <input type="submit" value="Login" name="submit" class="submitButton"/>
             </form>
-                <a  class="register" href="MainRegister.jsp"><p>Don't have an account? Register</p></a>
-                 <a  class="register" href="StaffLogin.jsp"><p>Staff Login</p></a>
+            <a  class="Back" href="Login.jsp"><p>Back</p></a>
         </div>
     </body>
 </html>

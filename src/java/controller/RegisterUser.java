@@ -23,7 +23,7 @@ import java.util.List;
  *
  * @author khtee
  */
-public class EditUser extends HttpServlet {
+public class RegisterUser extends HttpServlet {
 
     @PersistenceContext
     EntityManager em;
@@ -47,18 +47,18 @@ public class EditUser extends HttpServlet {
             for (Customer c : existCust) {
                 if (c.getCustName().equals(name)) {
                     tempexist = true;
-                } else {
+                    request.setAttribute("errorMsg", "<i class=\"fa-solid fa-circle-exclamation error-icon\"></i> Username taken!!");
+                    request.getRequestDispatcher("MainRegister.jsp").forward(request, response);
+
+                }
+                else {
                     exist = false;
                 }
-            }
-            String currentName = (String)request.getSession().getAttribute("name");
-            if (currentName.equals(name)){
-                tempexist = false;
             }
             exist = tempexist;
             if (exist == false) {
                 utx.begin();
-                boolean success = users.editRecord(user);
+                boolean success = users.addRecord(user);
                 utx.commit();
 
                 if (success = true) {
@@ -69,16 +69,17 @@ public class EditUser extends HttpServlet {
                     session.setAttribute("password", password);
                     session.setAttribute("mail", mail);
 
-                    response.sendRedirect("UserProfile.jsp"); //Back to profile
+                    response.sendRedirect("index.jsp"); //Back to profile
                 } else {
                     request.setAttribute("errorMsg", "<i class=\"fa-solid fa-circle-exclamation error-icon\"></i> Error occurred!");
-                    request.getRequestDispatcher("UserProfile.jsp").forward(request, response);
+                    request.getRequestDispatcher("MainRegister.jsp").forward(request, response);
                 }
             }
-            else if(exist == true){
-                 request.setAttribute("errorMsg", "<i class=\"fa-solid fa-circle-exclamation error-icon\"></i> Username taken!!");
-                    request.getRequestDispatcher("UserEdit.jsp").forward(request, response);
+            else{
+                 request.setAttribute("errorMsg", "<i class=\"fa-solid fa-circle-exclamation error-icon\"></i> Error occurred!");
+                    request.getRequestDispatcher("MainRegister.jsp").forward(request, response);
             }
+
         } catch (Exception ex) {
             out.println("Error: " + ex);
         }

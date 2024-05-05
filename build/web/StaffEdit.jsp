@@ -12,7 +12,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>User Profile</title>
+        <title>Staff Profile</title>
     </head>
     <body>
          <c:if test="${requestScope.errorMsg !=null}">                       
@@ -22,14 +22,14 @@
                         ${requestScope.errorMsg}</p>
                 </div>
             </c:if>
-        <form action="EditUser" method="POST">
-        <h1>User Profile</h1>
+        <form action="EditStaff" method="POST">
+        <h1>Staff Profile</h1>
          <p>Name: <input type="text" name="name" value="<%= name %>"></p>
           <p>Mail: <input type="text" name="mail" value="<%= mail %>"></p>
 
         <p>Password : <input type="text" name="password" value="<%= password %>"></p>
         <input type="submit" value="Confirm">
         </form>
-          <a href="UserProfile.jsp"><button>Back</button></a>
+          <a href="StaffProfile.jsp"><button>Back</button></a>
     </body>
 </html>

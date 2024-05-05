@@ -5,8 +5,8 @@
 package controller;
 
 import jakarta.annotation.Resource;
-import model.userDA;
-import model.Customer;
+import model.staffDA;
+import model.Staff;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import java.io.IOException;
@@ -23,7 +23,7 @@ import java.util.List;
  *
  * @author khtee
  */
-public class EditUser extends HttpServlet {
+public class EditStaff extends HttpServlet {
 
     @PersistenceContext
     EntityManager em;
@@ -40,12 +40,12 @@ public class EditUser extends HttpServlet {
             String name = request.getParameter("name");
             String mail = request.getParameter("mail");
             String password = request.getParameter("password");
-            Customer user = new Customer(name, mail, password);
-            userDA users = new userDA();
-            userDA checkUser = new userDA(em);
-            List<Customer> existCust = checkUser.findAll();
-            for (Customer c : existCust) {
-                if (c.getCustName().equals(name)) {
+            Staff staff = new Staff(name, mail, password);
+            staffDA staffs = new staffDA();
+            staffDA checkUser = new staffDA(em);
+            List<Staff> existCust = checkUser.findAll();
+            for (Staff c : existCust) {
+                if (c.getStaffName().equals(name)) {
                     tempexist = true;
                 } else {
                     exist = false;
@@ -58,26 +58,26 @@ public class EditUser extends HttpServlet {
             exist = tempexist;
             if (exist == false) {
                 utx.begin();
-                boolean success = users.editRecord(user);
+                boolean success = staffs.editRecord(staff);
                 utx.commit();
 
                 if (success = true) {
-                    session.setAttribute("login", true);
+                    session.setAttribute("staffLogin", true);
                     session = request.getSession(true);
 
                     session.setAttribute("name", name);
                     session.setAttribute("password", password);
                     session.setAttribute("mail", mail);
 
-                    response.sendRedirect("UserProfile.jsp"); //Back to profile
+                    response.sendRedirect("StaffProfile.jsp"); //Back to profile
                 } else {
                     request.setAttribute("errorMsg", "<i class=\"fa-solid fa-circle-exclamation error-icon\"></i> Error occurred!");
-                    request.getRequestDispatcher("UserProfile.jsp").forward(request, response);
+                    request.getRequestDispatcher("StaffProfile.jsp").forward(request, response);
                 }
             }
             else if(exist == true){
                  request.setAttribute("errorMsg", "<i class=\"fa-solid fa-circle-exclamation error-icon\"></i> Username taken!!");
-                    request.getRequestDispatcher("UserEdit.jsp").forward(request, response);
+                    request.getRequestDispatcher("StaffEdit.jsp").forward(request, response);
             }
         } catch (Exception ex) {
             out.println("Error: " + ex);

@@ -6,9 +6,13 @@
 <% 
     //Login Status
     boolean loginStatus = false;
+    boolean staffLogin = false;
     if(session.getAttribute("login")!=null){
        loginStatus = (Boolean) session.getAttribute("login");
    }
+   if(session.getAttribute("staffLogin")!=null){
+        staffLogin = (Boolean) session.getAttribute("staffLogin");
+    }
     
    //Cart Status
    List<Cart> cartProduct = null;
@@ -417,9 +421,12 @@
                                 <% if(loginStatus == true){ %>
                             <li><a href="UserProfile.jsp">My Profile</a></li>
                                 <% } %>
+                            <% if(staffLogin == true){ %>
+                            <li><a href="StaffProfile.jsp">My Profile</a></li>
+                                <% } %>
                             <li><a href="">Order History</a></li>
                             <li><a href="">Track Order</a></li>
-                                <% if(loginStatus == true){ %>
+                                <% if(loginStatus == true || staffLogin == true){ %>
                             <li><a href="logout.jsp">Logout</a></li>
                                 <% } %>
                         </ul>

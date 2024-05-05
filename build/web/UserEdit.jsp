@@ -15,6 +15,13 @@
         <title>User Profile</title>
     </head>
     <body>
+         <c:if test="${requestScope.errorMsg !=null}">                       
+                <div class="login-error" style="color: red;">
+                    <p class="error">
+
+                        ${requestScope.errorMsg}</p>
+                </div>
+            </c:if>
         <form action="EditUser" method="POST">
         <h1>User Profile</h1>
          <p>Name: <input type="text" name="name" value="<%= name %>"></p>

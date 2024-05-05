@@ -115,13 +115,20 @@
                 <a href="index.jsp" class="titleBack"><img src="images/arrow_back.svg"></a>
                 <h2>Register</h2>        
             </div>
-            <form method="POST" action="ConfirmRegister.jsp" >
+            <c:if test="${requestScope.errorMsg !=null}">                       
+                <div class="login-error" style="color: red;">
+                    <p class="error">
+
+                        ${requestScope.errorMsg}</p>
+                </div>
+            </c:if>
+            <form method="POST" action="RegisterUser" >
                 <label class="labelField">Username</label>
-                <input type="text" id="userName" name="custName" size="40" class="inputField" required/><br/>
+                <input type="text" id="userName" name="name" size="40" class="inputField" required/><br/>
                 <label class="labelField">Email</label>
-                <input type="text" id="userMail" name="custEmail" size="40" class="inputField" required/><br/>
+                <input type="text" id="userMail" name="mail" size="40" class="inputField" required/><br/>
                 <label class="labelField">Password</label>
-                <input type="password" name="custPassword" size="40"  class="inputField" required/><br/>
+                <input type="password" name="password" size="40"  class="inputField" required/><br/>
                 <label class="labelField">Confirm Password</label>
                 <input type="password" name="confirmPass" size="40" class="inputField" required/>
 
