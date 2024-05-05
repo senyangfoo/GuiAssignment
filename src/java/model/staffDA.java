@@ -8,7 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class userDA implements Serializable {
+public class staffDA implements Serializable {
 
     @PersistenceContext
     EntityManager em;
@@ -16,20 +16,20 @@ public class userDA implements Serializable {
     private String host = "jdbc:derby://localhost:1527/music";
     private String user = "nbuser";
     private String password = "nbuser";
-    private String tableName = "CUSTOMER";
+    private String tableName = "STAFF";
     private Connection conn;
     private PreparedStatement stmt;
     private String sqlQueryStr = "SELECT * from " + tableName;
-    private String sqlInsertStr = "INSERT INTO " + tableName + " (\"CUST_NAME\", \"CUST_EMAIL\", \"CUST_PASSWORD\")" + " VALUES(?, ?,?)";
-    private String sqlUpdateStr = "UPDATE " + tableName + " SET CUST_EMAIL = ? , CUST_PASSWORD = ?" + " WHERE CUST_NAME = ?";
+    private String sqlInsertStr = "INSERT INTO " + tableName + " (\"STAFF_NAME\", \"STAFF_EMAIL\", \"STAFF_PASSWORD\")" + " VALUES(?, ?,?)";
+    private String sqlUpdateStr = "UPDATE " + tableName + " SET STAFF_EMAIL = ? , STAFF_PASSWORD = ?" + " WHERE STAFF_NAME = ?";
     private ResultSet rs;
     private int count;
 
-    public userDA(EntityManager em) {
+    public staffDA(EntityManager em) {
         this.em = em;
     }
 
-    public userDA() {
+    public staffDA() {
 
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
@@ -40,20 +40,20 @@ public class userDA implements Serializable {
         }
     }
 
-    public Customer getCurrentRecord() {
-        Customer customer = null;
+    public Staff getCurrentRecord() {
+        Staff staff = null;
         try {
             String test = rs.getString("CUST_ID");
-            customer = new Customer(Integer.valueOf(test), rs.getString("CUST_NAME"), rs.getString("CUST_EMAIL"),rs.getString("CUST_PASSWORD"));
+            staff = new Staff(Integer.valueOf(test), rs.getString("CUST_NAME"), rs.getString("CUST_EMAIL"),rs.getString("CUST_PASSWORD"));
         } catch (SQLException ex) {
             ex.getMessage();
         }
-        return customer;
+        return staff;
     }
 
     public int getQuantity() {
 
-        String queryStr = "SELECT COUNT(*) FROM CUSTOMER";
+        String queryStr = "SELECT COUNT(*) FROM STAFF";
         try {
 
             stmt = conn.prepareStatement(queryStr);
@@ -68,12 +68,12 @@ public class userDA implements Serializable {
         return count;
     }
 
-    public boolean addRecord(Customer user) {
+    public boolean addRecord(Staff user) {
         try {
             stmt = conn.prepareStatement(sqlInsertStr);
-            stmt.setString(1, user.getCustName());
-            stmt.setString(2, user.getCustEmail());
-            stmt.setString(3, user.getCustPassword());
+            stmt.setString(1, user.getStaffName());
+            stmt.setString(2, user.getStaffEmail());
+            stmt.setString(3, user.getStaffPassword());
 
             stmt.executeUpdate();
             return true;
@@ -82,12 +82,12 @@ public class userDA implements Serializable {
             return false;
         }
     }
-     public boolean editRecord(Customer user) {
+     public boolean editRecord(Staff user) {
         try {
             stmt = conn.prepareStatement(sqlUpdateStr);
-            stmt.setString(1, user.getCustEmail());
-            stmt.setString(2, user.getCustPassword());
-            stmt.setString(3, user.getCustName());
+            stmt.setString(1, user.getStaffEmail());
+            stmt.setString(2, user.getStaffPassword());
+            stmt.setString(3, user.getStaffName());
 
             stmt.executeUpdate();
             return true;
@@ -97,9 +97,9 @@ public class userDA implements Serializable {
         }
     }
 
-    public ArrayList<Customer> getUsers() {
+    public ArrayList<Staff> getUsers() {
 
-        ArrayList<Customer> customers = new ArrayList<Customer>();
+        ArrayList<Staff> customers = new ArrayList<Staff>();
         try {
             stmt = conn.prepareStatement(sqlQueryStr);
             rs = stmt.executeQuery();
@@ -113,9 +113,9 @@ public class userDA implements Serializable {
         return customers;
     }
 
-    public List<Customer> findAll() {
-           List<Customer> customers = em.createNamedQuery("Customer.findAll").getResultList();
-        return customers;
+    public List<Staff> findAll() {
+           List<Staff> staff = em.createNamedQuery("Staff.findAll").getResultList();
+        return staff;
     }
 
     public int getCount() {
@@ -132,9 +132,9 @@ public class userDA implements Serializable {
 //        String mail = "aaa";
 //        String CustPass = "aaa";
 //        boolean exist;
-//        Customer custs = new Customer(name,mail,CustPass);
-//        List<Customer> existCust = uses.findAll();
-//        for (Customer c : existCust){
+//        Staff custs = new Staff(name,mail,CustPass);
+//        List<Staff> existCust = uses.findAll();
+//        for (Staff c : existCust){
 //            if(c.getCustName().equals(name)){
 //                exist = true;
 //                System.out.println("Userrname Repeated!");

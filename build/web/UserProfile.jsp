@@ -18,7 +18,7 @@
     <body>
         <h1>User Profile</h1>
          <p>Name: <%= name %></p>
-          <p>Mail <%= mail %></p>
+          <p>Mail: <%= mail %></p>
 
         <p>Password : <%= password %></p>
         <a href="UserEdit.jsp"><button>Edit Profile</button></a>

@@ -28,6 +28,18 @@
         <servlet-name>RemoveProductFromCart</servlet-name>
         <servlet-class>controller.RemoveProductFromCart</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RegisterUser</servlet-name>
+        <servlet-class>controller.RegisterUser</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RetrieveStaff</servlet-name>
+        <servlet-class>controller.RetrieveStaff</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditStaff</servlet-name>
+        <servlet-class>controller.EditStaff</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProductDetailServlet</servlet-name>
         <url-pattern>/ProductDetailServlet</url-pattern>
@@ -63,5 +75,17 @@
     <servlet-mapping>
         <servlet-name>RemoveProductFromCart</servlet-name>
         <url-pattern>/RemoveProductFromCart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegisterUser</servlet-name>
+        <url-pattern>/RegisterUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RetrieveStaff</servlet-name>
+        <url-pattern>/RetrieveStaff</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditStaff</servlet-name>
+        <url-pattern>/EditStaff</url-pattern>
     </servlet-mapping>
 </web-app>

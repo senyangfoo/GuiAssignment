@@ -1,3 +1,4 @@
+<%@page  import="enums.prodCategory" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -66,10 +67,10 @@
                 <div class="footer2">
                     <h3>Products</h3>
                     <ul>
-                        <li><a href="">Pianos</a></li>
-                        <li><a href="">Guitars</a></li>
-                        <li><a href="">Drums</a></li>
-                        <li><a href="">Violins</a></li>
+                        <li><a href="product.jsp?selectedValue=<%= prodCategory.piano%>">Pianos</a></li>
+                        <li><a href="product.jsp?selectedValue=<%= prodCategory.guitar%>">Guitars</a></li>
+                        <li><a href="product.jsp?selectedValue=<%= prodCategory.drum%>">Drums</a></li>
+                        <li><a href="product.jsp?selectedValue=<%= prodCategory.violin%>">Violins</a></li>
                     </ul>
                 </div>
                 <div class="footer3">

@@ -138,6 +138,7 @@
                 <input type="submit" value="Login" name="submit" class="submitButton"/>
             </form>
                 <a  class="register" href="MainRegister.jsp"><p>Don't have an account? Register</p></a>
+                 <a  class="register" href="StaffLogin.jsp"><p>Staff Login</p></a>
         </div>
     </body>
 </html>
