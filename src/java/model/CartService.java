@@ -40,6 +40,18 @@ public class CartService {
 
         return products;
     }
+    
+    public double getTotalCartPrice(List<Cart> cartProduct) {
+        double sum = 0.00;
+        
+        if (cartProduct != null) {
+            for (Cart cart : cartProduct) {
+                sum += cart.getPrice() * cart.getQuantity();
+                System.out.println(sum);
+            }
+        }
+        return sum;
+    }
 
 }
 
