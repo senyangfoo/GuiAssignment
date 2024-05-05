@@ -119,7 +119,7 @@
         </video>
         <div class="login">
             <div class="titleContainer">
-                <a href="index.jsp" class="titleBack"><img src="images/arrow_back.svg"></a>
+                <a href="Login.jsp" class="titleBack"><img src="images/arrow_back.svg"></a>
                 <h2>Staff Login</h2>        
             </div>
             <c:if test="${requestScope.errorMsg !=null}">                       
@@ -136,7 +136,6 @@
                 <input type="password" name="password" class="inputField" required/><br/>
                 <input type="submit" value="Login" name="submit" class="submitButton"/>
             </form>
-            <a  class="Back" href="Login.jsp"><p>Back</p></a>
         </div>
     </body>
 </html>
