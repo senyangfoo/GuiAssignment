@@ -5,6 +5,7 @@
 package model;
 
 import jakarta.persistence.Basic;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,8 +13,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Objects;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -31,6 +35,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Customer.findByCustEmail", query = "SELECT c FROM Customer c WHERE c.custEmail = :custEmail"),
     @NamedQuery(name = "Customer.findByCustPassword", query = "SELECT c FROM Customer c WHERE c.custPassword = :custPassword")})
 public class Customer implements Serializable {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "custId")
+    private Collection<Orders> ordersCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -133,6 +140,15 @@ public class Customer implements Serializable {
     @Override
     public String toString() {
         return "model.Customer[ \ncustName=" + custName + "\ncustEmail=" + custEmail + " \ncustPassword=" + custPassword + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Orders> getOrdersCollection() {
+        return ordersCollection;
+    }
+
+    public void setOrdersCollection(Collection<Orders> ordersCollection) {
+        this.ordersCollection = ordersCollection;
     }
     
 }

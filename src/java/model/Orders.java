@@ -32,6 +32,7 @@ import java.util.Date;
 @NamedQueries({
     @NamedQuery(name = "Orders.findAll", query = "SELECT o FROM Orders o"),
     @NamedQuery(name = "Orders.findByOrderId", query = "SELECT o FROM Orders o WHERE o.orderId = :orderId"),
+    @NamedQuery(name = "Orders.findByQuantity", query = "SELECT o FROM Orders o WHERE o.quantity = :quantity"),
     @NamedQuery(name = "Orders.findByOrderDate", query = "SELECT o FROM Orders o WHERE o.orderDate = :orderDate"),
     @NamedQuery(name = "Orders.findByAddress", query = "SELECT o FROM Orders o WHERE o.address = :address"),
     @NamedQuery(name = "Orders.findByPhoneNum", query = "SELECT o FROM Orders o WHERE o.phoneNum = :phoneNum")})
@@ -43,6 +44,8 @@ public class Orders implements Serializable {
     @Basic(optional = false)
     @Column(name = "ORDER_ID")
     private Integer orderId;
+    @Column(name = "QUANTITY")
+    private Integer quantity;
     @Column(name = "ORDER_DATE")
     @Temporal(TemporalType.DATE)
     private Date orderDate;
@@ -55,23 +58,11 @@ public class Orders implements Serializable {
     @JoinColumn(name = "CUST_ID", referencedColumnName = "CUST_ID")
     @ManyToOne(optional = false)
     private Customer custId;
+    @JoinColumn(name = "PROD_ID", referencedColumnName = "PROD_ID")
+    @ManyToOne(optional = false)
+    private Product prodId;
 
     public Orders() {
-    }
-
-    public Orders(Integer orderId, Date orderDate, String address, String phoneNum, Customer custId) {
-        this.orderId = orderId;
-        this.orderDate = orderDate;
-        this.address = address;
-        this.phoneNum = phoneNum;
-        this.custId = custId;
-    }
-
-    public Orders(Date orderDate, String address, String phoneNum, Customer custId) {
-        this.orderDate = orderDate;
-        this.address = address;
-        this.phoneNum = phoneNum;
-        this.custId = custId;
     }
 
     public Orders(Integer orderId) {
@@ -84,6 +75,14 @@ public class Orders implements Serializable {
 
     public void setOrderId(Integer orderId) {
         this.orderId = orderId;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
     public Date getOrderDate() {
@@ -116,6 +115,14 @@ public class Orders implements Serializable {
 
     public void setCustId(Customer custId) {
         this.custId = custId;
+    }
+
+    public Product getProdId() {
+        return prodId;
+    }
+
+    public void setProdId(Product prodId) {
+        this.prodId = prodId;
     }
 
     @Override

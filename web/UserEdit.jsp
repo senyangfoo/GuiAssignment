@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    String name = (String)request.getSession().getAttribute("name");
+     String name = (String)request.getSession().getAttribute("name");
      String mail = (String)request.getSession().getAttribute("mail");
      String password = (String)request.getSession().getAttribute("password");
  

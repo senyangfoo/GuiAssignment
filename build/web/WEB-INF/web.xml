@@ -40,6 +40,10 @@
         <servlet-name>EditStaff</servlet-name>
         <servlet-class>controller.EditStaff</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CheckOutServlet</servlet-name>
+        <servlet-class>controller.CheckOutServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProductDetailServlet</servlet-name>
         <url-pattern>/ProductDetailServlet</url-pattern>
@@ -87,5 +91,9 @@
     <servlet-mapping>
         <servlet-name>EditStaff</servlet-name>
         <url-pattern>/EditStaff</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckOutServlet</servlet-name>
+        <url-pattern>/CheckOutServlet</url-pattern>
     </servlet-mapping>
 </web-app>
