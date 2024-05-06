@@ -29,6 +29,7 @@ public class CartService {
                     cartRow.setImage(product.getImage());
                     cartRow.setProdName(product.getProdName());
                     cartRow.setPrice(product.getPrice());
+                    cartRow.setStock(product.getStock());
                     cartRow.setQuantity(cartItem.getQuantity());
 
                     products.add(cartRow);
