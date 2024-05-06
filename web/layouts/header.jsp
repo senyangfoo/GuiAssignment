@@ -78,16 +78,33 @@
                 searchbarContainer.style.opacity = "0";
             }
 
-            function increaseCartValue(prodId) {
+            function increaseCartValue(prodId, priceId, price) {
                 var input = document.getElementById(prodId);
+                var priceName = document.getElementById(priceId);
+                var textNodes = priceName.childNodes;
+
                 input.stepUp();
                 updateValueCart(prodId, input.value);
+//                for (var i = 0; i < textNodes.length; i++) {
+//                    if (textNodes[i].nodeType === Node.TEXT_NODE) {
+//                        textNodes[i].textContent = "RM " + price.toFixed(2) + " ";
+//                    }
+//                }
+
             }
 
-            function decreaseCartValue(prodId) {
+            function decreaseCartValue(prodId, priceId, price) {
                 var input = document.getElementById(prodId);
+                var priceName = document.getElementById(priceId);
+                var textNodes = priceName.childNodes;
+
                 input.stepDown();
                 updateValueCart(prodId, input.value);
+//                for (var i = 0; i < textNodes.length; i++) {
+//                    if (textNodes[i].nodeType === Node.TEXT_NODE) {
+//                        textNodes[i].textContent = "RM " + price.toFixed(2) + " ";
+//                    }
+//                }
             }
 
             function updateValueCart(prodId, value) {
@@ -184,6 +201,8 @@
 
             .cart_drawer-content {
                 padding: 16px;
+                height: 100%;
+                width: 100%;
 
                 .cart_drawer-headerContainer {
                     border-bottom: 2px solid var(--secondary_black_color);
@@ -198,6 +217,138 @@
                 img.close {
                     width: 30px;
                     cursor: pointer;
+                }
+
+                .cart_empty {
+                    position: absolute;
+                    top: 50%;
+                    width: 100%;
+                    text-align: center;
+                }
+
+                .item_details {
+                    padding: 10px 0;
+
+                    .item {
+                        max-height: 480px;
+                        overflow: auto;
+
+                        .itemCard {
+                            display: grid;
+                            grid-template-columns: 20% 1fr;
+                            grid-gap: 10px;
+                            padding: 20px 5px 30px 5px;
+                            border-bottom: 1px solid var(--primary_black_color);
+
+                            .cardImage {
+                                overflow: hidden;
+                                justify-content: center;
+                                align-items: center;
+
+                                img {
+                                    max-width: 100%;
+                                    max-height: 100%;
+                                    min-height: auto;
+                                    width: auto;
+                                    height: auto;
+                                    margin: auto;
+                                }
+                            }
+
+                            .cardContent {
+                                display: grid;
+                                grid-template-areas:
+                                    'title title empty remove'
+                                    'price price empty quantity';
+
+                                .cardProdName {
+                                    grid-area: title;
+                                    margin: 0;
+                                    font-size: var(--secondary-font-size);
+                                }
+
+                                .cardRemoveProd {
+                                    grid-area: remove;
+                                    margin: 0 0 auto auto;
+                                    display: inline-block;
+                                    width: 25px;
+
+                                    img {
+                                        display: block;
+                                        width: 100%;
+                                        height: auto;
+                                    }
+                                }
+
+                                .cardPrice {
+                                    grid-area: price;
+                                    margin: auto auto 0 0;
+
+                                    .cardEachPrice {
+                                        margin: 0;
+                                        font-size: var(--third-font-size);
+                                    }
+
+                                    .cardTotalPrice {
+                                        margin: 0;
+                                        font-size: var(--fourth-font-size);
+                                    }
+                                }
+
+                                .cardQuantitySelector {
+                                    grid-area: quantity;
+                                    margin: auto 0 0 auto;
+
+                                    input[type="number"] {
+                                        width: 30px;
+                                        background-color: var(--primary_white_color);
+                                        font-size: var(--third-font-size);
+                                        border: none;
+                                        text-align: center;
+                                        -moz-appearance: textfield;
+                                    }
+
+                                    input[type=number]::-webkit-inner-spin-button,
+                                    input[type=number]::-webkit-outer-spin-button {
+                                        -webkit-appearance: none;
+                                        margin: 0;
+                                    }
+
+                                    button {
+                                        cursor: pointer;
+                                        width: 25px;
+                                        height: 25px;
+                                        border: none;
+                                        border-radius: 10%;
+                                        color: var(--third_grey_color);
+                                        background-color: var(--secondary_grey_color);
+                                        font-weight: bold;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .summary {
+                        position: absolute;
+                        padding: 0 0 16px 0;
+                        width: 93.5%;
+                        bottom: 0;
+
+                        button {
+                            width: 100%;
+                            height: 50px;
+                            background-color: var(--primary_brown_color);
+                            color: var(--primary_white_color);
+                            font-size: var(--fourth-font-size);
+                            cursor: pointer;
+                        }
+
+                        .subTotal {
+                            display: grid;
+                            grid-template-columns: auto auto;
+                        }
+                    }
                 }
             }
             .overlay {
@@ -421,7 +572,7 @@
                                 <% if(loginStatus == true){ %>
                             <li><a href="UserProfile.jsp">My Profile</a></li>
                                 <% } %>
-                            <% if(staffLogin == true){ %>
+                                <% if(staffLogin == true){ %>
                             <li><a href="StaffProfile.jsp">My Profile</a></li>
                                 <% } %>
                             <li><a href="">Order History</a></li>
@@ -442,32 +593,49 @@
                     </div>
                     <% if(loginStatus == true){ %>
                     <% if (cartProduct != null) { %>
-                      <div>
-                        <a href="Checkout.jsp">CheckOut</a>
-                      </div>
-                    <%
-                        for (Cart cart : cartProduct) {
-                    %>
-                    <img src ="images/<%= cart.getImage() %>" width="100" height="100">
-                    <div class="item_details">
-                        <h4><%= cart.getProdName() %></h4>
-                        <div class="quantitySelector">
-                            <button type="button" onclick="decreaseCartValue('quanCart_<%= cart.getProdId() %>')">-</button>
-                            <input type="number" name="quantity" id="quanCart_<%= cart.getProdId() %>" min="1" max="10" value="<%= cart.getQuantity() %>" disabled>
-                            <button type="button" onclick="increaseCartValue('quanCart_<%= cart.getProdId() %>')">+</button>
-                        </div>
-                        <p>Price: RM<%= String.format("%.2f", cart.getPrice()) %></p>
-                        <p>Subtotal: RM<%= String.format("%.2f", cart.getPrice()*cart.getQuantity())%></p>
-                        <a href="RemoveProductFromCart?productID=<%= cart.getProdId() %>">Remove</a>
+                    <div>
                     </div>
-                    <% }
-                    } else {
-                    %>
-                    <div class="cart_empty">Your cart is empty.</div>
-                    <% } %>
-                    <% } %>   
+                    <div class="item_details">
+                        <div class="item">
+                            <% float subTotal = 0;%>
+                            <%
+                                for (Cart cart : cartProduct) {
+                            %>
+                            <div class="itemCard">
+                                <div class="cardImage">
+                                    <img src ="images/<%= cart.getImage() %>" width="100" height="100">
+                                </div>
+                                <div class="cardContent">
+                                    <p class="cardProdName"><%= cart.getProdName() %></p>
+                                    <a href="RemoveProductFromCart?productID=<%= cart.getProdId() %>" class="cardRemoveProd"><img src="images/delete.svg" alt="remove"></a>
+                                    <div class="cardQuantitySelector">
+                                        <button type="button" onclick="decreaseCartValue('quanCart_<%= cart.getProdId() %>', 'priceCart_<%= cart.getProdId() %>', <%= cart.getPrice()*cart.getQuantity() %>)">-</button>
+                                        <input type="number" name="quantity" id="quanCart_<%= cart.getProdId() %>" min="1" max="<%= cart.getStock() %>" value="<%= cart.getQuantity() %>" disabled>
+                                        <button type="button" onclick="increaseCartValue('quanCart_<%= cart.getProdId() %>', 'priceCart_<%= cart.getProdId() %>', <%= cart.getPrice()*cart.getQuantity() %>)">+</button>
+                                    </div>
+                                    <div class="cardPrice">
+                                        <p class="cardEachPrice">RM <%= String.format("%.2f", cart.getPrice()) %> <span style="font-size: var(--fifth-font-size); color: var(--third_black_color)">each</span></p>
+                                        <p class="cardTotalPrice" id="priceCart_<%= cart.getProdId() %>">RM <%= String.format("%.2f", cart.getPrice()*cart.getQuantity())%> <span style="font-size: var(--third-font-size); color: var(--third_black_color)">total</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <% subTotal += cart.getPrice()*cart.getQuantity();%>
+                            <% } %>
+                        </div>
+                        <div class="summary">
+                            <div class="subTotal">
+                                <h3 style="text-align: left;">Subtotal:</h3>
+                                <h3 style="text-align: right;">RM <%= String.format("%.2f", subTotal) %></h3>
+                            </div>
+                            <button onclick="location.href = 'Checkout.jsp';">Checkout</button>
+                        </div>
+                        <% } else {
+                        %>
+                        <div class="cart_empty">Your cart is empty</div>
+                        <% } %>
+                        <% } %>   
+                    </div>
                 </div>
             </div>
-        </div>
     </header>  
 </html>
