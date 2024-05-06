@@ -92,52 +92,10 @@
         <servlet-name>EditStaff</servlet-name>
         <url-pattern>/EditStaff</url-pattern>
     </servlet-mapping>
-    <security-constraint>
-        <display-name>AdminConstraint</display-name>
-        <web-resource-collection>
-            <web-resource-name>Admin</web-resource-name>
-            <description/>
-            <url-pattern>AdminMain.jsp</url-pattern>
-        </web-resource-collection>
-        <auth-constraint>
-            <description/>
-            <role-name>AdminRole</role-name>
-        </auth-constraint>
-    </security-constraint>
-    <security-constraint>
-        <display-name>StaffConstraint</display-name>
-        <web-resource-collection>
-            <web-resource-name>Staff</web-resource-name>
-            <description/>
-            <url-pattern>StaffEdit.jsp</url-pattern>
-            <url-pattern>StaffLogin.jsp</url-pattern>
-            <url-pattern>StaffProfile.jsp</url-pattern>
-            <url-pattern>staffTable.jsp</url-pattern>
-        </web-resource-collection>
-        <auth-constraint>
-            <description/>
-            <role-name>AdminRole</role-name>
-            <role-name>StaffRole</role-name>
-        </auth-constraint>
-    </security-constraint>
-    <security-constraint>
-        <display-name>UserConstraint</display-name>
-        <web-resource-collection>
-            <web-resource-name>User</web-resource-name>
-            <description/>
-            <url-pattern>UserEdit.jsp</url-pattern>
-            <url-pattern>UserProfile.jsp</url-pattern>
-            <url-pattern>product.jsp</url-pattern>
-            <url-pattern>productdetail.jsp</url-pattern>
-            <url-pattern>productTable.jsp</url-pattern>
-        </web-resource-collection>
-        <auth-constraint>
-            <description/>
-            <role-name>AdminRole</role-name>
-            <role-name>StaffRole</role-name>
-            <role-name>UserRole</role-name>
-        </auth-constraint>
-    </security-constraint>
+    <servlet-mapping>
+        <servlet-name>CheckOutServlet</servlet-name>
+        <url-pattern>/CheckOutServlet</url-pattern>
+    </servlet-mapping>
     <login-config>
         <auth-method>FORM</auth-method>
         <realm-name>file</realm-name>
@@ -158,8 +116,4 @@
         <description/>
         <role-name>UserRole</role-name>
     </security-role>
-    <servlet-mapping>
-        <servlet-name>CheckOutServlet</servlet-name>
-        <url-pattern>/CheckOutServlet</url-pattern>
-    </servlet-mapping>
 </web-app>
