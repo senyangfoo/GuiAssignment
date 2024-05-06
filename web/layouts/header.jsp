@@ -12,14 +12,14 @@
    }
    if(session.getAttribute("staffLogin")!=null){
         staffLogin = (Boolean) session.getAttribute("staffLogin");
-    }
+   }
     
    //Cart Status
    List<Cart> cartProduct = null;
    ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart-list");
    if (cart_list != null) {
        cartProduct = (List<Cart>) session.getAttribute("cartProduct");
-       Double totalPrice = (Double) session.getAttribute("totalPrice");   }
+       }
 %>
 <!DOCTYPE html>
 <html>
@@ -443,8 +443,7 @@
                     <% if(loginStatus == true){ %>
                     <% if (cartProduct != null) { %>
                       <div>
-                        <h3>Total Price: RM${totalPrice}</h3>
-                        <a href="CheckOutServlet">CheckOut</a>
+                        <a href="Checkout.jsp">CheckOut</a>
                       </div>
                     <%
                         for (Cart cart : cartProduct) {

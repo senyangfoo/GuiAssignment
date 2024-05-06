@@ -47,7 +47,6 @@ public class CartService {
         if (cartProduct != null) {
             for (Cart cart : cartProduct) {
                 sum += cart.getPrice() * cart.getQuantity();
-                System.out.println(sum);
             }
         }
         return sum;
