@@ -5,6 +5,7 @@
 package model;
 
 import jakarta.persistence.Basic;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,12 +15,15 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.Size;
 import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 
 /**
@@ -32,10 +36,12 @@ import java.util.Date;
 @NamedQueries({
     @NamedQuery(name = "Orders.findAll", query = "SELECT o FROM Orders o"),
     @NamedQuery(name = "Orders.findByOrderId", query = "SELECT o FROM Orders o WHERE o.orderId = :orderId"),
-    @NamedQuery(name = "Orders.findByQuantity", query = "SELECT o FROM Orders o WHERE o.quantity = :quantity"),
     @NamedQuery(name = "Orders.findByOrderDate", query = "SELECT o FROM Orders o WHERE o.orderDate = :orderDate"),
     @NamedQuery(name = "Orders.findByAddress", query = "SELECT o FROM Orders o WHERE o.address = :address"),
-    @NamedQuery(name = "Orders.findByPhoneNum", query = "SELECT o FROM Orders o WHERE o.phoneNum = :phoneNum")})
+    @NamedQuery(name = "Orders.findByPhoneNum", query = "SELECT o FROM Orders o WHERE o.phoneNum = :phoneNum"),
+    @NamedQuery(name = "Orders.findByCustId", query = "SELECT o FROM Orders o WHERE o.custId = :custId"),
+    @NamedQuery(name = "Orders.findByTotalAmount", query = "SELECT o FROM Orders o WHERE o.totalAmount = :totalAmount")})
+
 public class Orders implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -44,8 +50,6 @@ public class Orders implements Serializable {
     @Basic(optional = false)
     @Column(name = "ORDER_ID")
     private Integer orderId;
-    @Column(name = "QUANTITY")
-    private Integer quantity;
     @Column(name = "ORDER_DATE")
     @Temporal(TemporalType.DATE)
     private Date orderDate;
@@ -55,12 +59,14 @@ public class Orders implements Serializable {
     @Size(max = 10)
     @Column(name = "PHONE_NUM")
     private String phoneNum;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "TOTAL_AMOUNT")
+    private Double totalAmount;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderId")
+    private Collection<OrderDetail> orderDetailCollection;
     @JoinColumn(name = "CUST_ID", referencedColumnName = "CUST_ID")
     @ManyToOne(optional = false)
     private Customer custId;
-    @JoinColumn(name = "PROD_ID", referencedColumnName = "PROD_ID")
-    @ManyToOne(optional = false)
-    private Product prodId;
 
     public Orders() {
     }
@@ -75,14 +81,6 @@ public class Orders implements Serializable {
 
     public void setOrderId(Integer orderId) {
         this.orderId = orderId;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
     }
 
     public Date getOrderDate() {
@@ -109,20 +107,29 @@ public class Orders implements Serializable {
         this.phoneNum = phoneNum;
     }
 
+    public Double getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(Double totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
+    @XmlTransient
+    public Collection<OrderDetail> getOrderDetailCollection() {
+        return orderDetailCollection;
+    }
+
+    public void setOrderDetailCollection(Collection<OrderDetail> orderDetailCollection) {
+        this.orderDetailCollection = orderDetailCollection;
+    }
+
     public Customer getCustId() {
         return custId;
     }
 
     public void setCustId(Customer custId) {
         this.custId = custId;
-    }
-
-    public Product getProdId() {
-        return prodId;
-    }
-
-    public void setProdId(Product prodId) {
-        this.prodId = prodId;
     }
 
     @Override

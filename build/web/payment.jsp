@@ -24,13 +24,81 @@
        cartProduct = (List<Cart>) session.getAttribute("cartProduct");
        subtotalPrice = (double) session.getAttribute("totalPrice");
     }
+    String name = (String)request.getSession().getAttribute("name");
+    String mail = (String)request.getSession().getAttribute("mail");
+    String phoneNumber = (String)session.getAttribute("phoneNumber");
+    String fullAddress= (String)session.getAttribute("fullAddress");
 %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Payment Page</title>
+        <script>
+            function showPaymentForm(paymentMethod) {
+                var paymentForms = document.querySelectorAll('.payment-form');
+                paymentForms.forEach(function(form) {
+                    form.style.display = 'none';
+                });
+                document.getElementById(paymentMethod + "-form").style.display = 'block';
+            }
+        </script>
     </head>
     <body>
+        <h2>Shipping Details</h2>
+        <p>Name: <%= name %></p>
+        <p>Email: <%= mail %></p>
+        <p>Phone Number: <%= phoneNumber %></p>
+        <p>Ship to: <%= fullAddress %></p>
+        <h2>Select Payment Method</h2>
+        
+        <input type="radio" name="method" value="debit" onclick="showPaymentForm('debit')"> Debit Card<br>
+        <input type="radio" name="method" value="credit" onclick="showPaymentForm('credit')"> Credit Card<br>
+        <input type="radio" name="method" value="ewallet" onclick="showPaymentForm('ewallet')"> E-Wallet<br>
+
+        <form action="PaymentServlet/method=debit" method="POST" id="debit-form" class="payment-form" style="display:none;">
+            <h2>Debit Card (Visa or MasterCard)</h2>
+            <input type="radio" name="cardType" value="visa">Visa<br>
+            <input type="radio" name="cardType" value="masterCard">MasterCard<br>
+            
+            <label for="card-number">Card Number:</label>
+            <input type="text" id="cardNumber" name="cardNumber" maxlength="16" pattern="\d{16}" required><br>
+
+            <label for="card-holder">Name on Card:</label>
+            <input type="text" id="cardName" name="cardName" required><br>
+
+            <label for="expiry-date">Expiration Date:</label>
+            <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YY" pattern="(0[1-9]|1[0-2])\/\d{2}" title="Please enter a valid expiration date in the format MM/YY" required><br>
+
+            <label for="cvv">CVV:</label>
+            <input type="text" id="cvv" name="cvv" maxlength="3" pattern="\d{3}" required><br>
+
+            <input type="submit" value="Submit Payment">
+        </form>
+        
+        <form action="PaymentServlet/method=credit" method="POST" id="credit-form" class="payment-form" style="display:none;">
+            <h2>Credit Card</h2>
+            <input type="radio" name="cardType" value="visa">Visa<br>
+            <input type="radio" name="cardType" value="masterCard">MasterCard<br>
+            
+            <label for="card-number">Card Number:</label>
+            <input type="text" id="cardNumber" name="cardNumber" maxlength="16" pattern="\d{16}" required><br>
+
+            <label for="card-holder">Name on Card:</label>
+            <input type="text" id="cardName" name="cardName" required><br>
+
+            <label for="expiry-date">Expiration Date:</label>
+            <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YY" pattern="(0[1-9]|1[0-2])\/\d{2}" title="Please enter a valid expiration date in the format MM/YY" required><br>
+
+            <label for="cvv">CVV:</label>
+            <input type="text" id="cvv" name="cvv" maxlength="3" pattern="\d{3}" required><br>
+
+            <input type="submit" value="Submit Payment">
+        </form>
+        
+        <form action="PaymentServlet/method=ewallet" method="POST" id="ewallet-form" class="payment-form" style="display:none;">
+            <h2>Ewallet</h2>
+        </form>
+       
         <% if (cartProduct != null) { %>
         <h2>Product List</h2>
         <%

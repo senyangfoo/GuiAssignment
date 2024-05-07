@@ -59,7 +59,8 @@ public class RetrieveUser extends HttpServlet {
                 if (c.getCustName().equals(name) && c.getCustPassword().equals(password)) {
                     session.setAttribute("login", true);
                     session = request.getSession(true);
-
+                    
+                    session.setAttribute("id", c.getCustId());
                     session.setAttribute("name", c.getCustName());
                     session.setAttribute("password", c.getCustPassword());
                     session.setAttribute("mail", c.getCustEmail());

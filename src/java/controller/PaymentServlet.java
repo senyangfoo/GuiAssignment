@@ -10,39 +10,45 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.util.*;
+import model.Cart;
 
-/**
- *
- * @author Abcong
- */
-public class CheckOutServlet extends HttpServlet {
+public class PaymentServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            String phoneNumber = request.getParameter("phoneNumber");
-            String address = request.getParameter("address");
-            String postcode = request.getParameter("postcode");
-            String city = request.getParameter("city");
-            String unitNo = request.getParameter("unitNo");
-            String state = request.getParameter("state");
+            HttpSession session = request.getSession();
             
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append(address);
-            if (unitNo != null && !unitNo.isEmpty()) {
-                stringBuilder.append(", ").append(unitNo);
+            List<Cart> cartProduct = null;
+            double subtotalPrice = 0;
+            double deliveryFee = 0;
+            double total=0;
+            
+            ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart-list");
+            if (cart_list != null) {
+                cartProduct = (List<Cart>) session.getAttribute("cartProduct");
+                subtotalPrice = (double) session.getAttribute("totalPrice");
+                if(subtotalPrice >= 1000){
+                   deliveryFee = 0.0; 
+                   total = subtotalPrice;
+                } else {
+                   deliveryFee = 25.0;
+                   total = subtotalPrice + deliveryFee;
+                }
+             }
+            String userid = request.getParameter("id");
+            String method = request.getParameter("method");
+            
+            if(method.equals("debit")){
+                String cardType = request.getParameter("cardType");
+                String cardNumber = request.getParameter("cardNumber");
+                String expiryDate = request.getParameter("expiryDate");
+                String ccv = request.getParameter("ccv");
             }
-            stringBuilder.append(", ").append(postcode).append(" ").append(city).append(", ").append(state);
-            String fullAddress = stringBuilder.toString();
-
-            // Set the merged address as a request attribute
-            request.getSession().setAttribute("phoneNumber", phoneNumber);
-            request.getSession().setAttribute("fullAddress", fullAddress);
-
-            // Forward the request to the payment.jsp page
-            response.sendRedirect("payment.jsp");
+            
         }
     }
 
