@@ -11,8 +11,10 @@
                 height: 100%;
                 position: fixed;
                 width: 220px;
+                top: 0;
                 background-color: var(--primary_brown_color);
-                padding-top: 20px;
+                padding-top: 150px;
+                z-index: 1;
             }
 
             .sidenav a {
@@ -41,10 +43,7 @@
                 }
             }
 
-            .content {
-                margin-left: 220px;
-                padding: 20px;
-            }
+
         </style>
     </head>
     <body>
