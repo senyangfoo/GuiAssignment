@@ -38,11 +38,11 @@ public class CheckOutServlet extends HttpServlet {
             String fullAddress = stringBuilder.toString();
 
             // Set the merged address as a request attribute
-            request.setAttribute("phoneNumber", phoneNumber);
-            request.setAttribute("fullAddress", fullAddress);
+            request.getSession().setAttribute("phoneNumber", phoneNumber);
+            request.getSession().setAttribute("fullAddress", fullAddress);
 
             // Forward the request to the payment.jsp page
-            request.getRequestDispatcher("payment.jsp").forward(request, response);
+            response.sendRedirect("payment.jsp");
         }
     }
 

@@ -15,7 +15,6 @@
        subtotalPrice = (double) session.getAttribute("totalPrice");
     }
     String mail = (String)request.getSession().getAttribute("mail");
-    String fullAddress= (String)session.getAttribute("fullAddress");
 %>
 <html>
     <head>
