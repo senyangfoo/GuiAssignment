@@ -553,8 +553,8 @@
                                 <img src="images/violin_product.png" class="violin_product" id="violin_product">
                             </div>
                         </li>
-                        <li><a href="">News & Events</a></li>
-                        <li><a href="">Supports</a></li>
+                        <li><a href="https://www.youtube.com/watch?v=117SgWVAdWk">News & Events</a></li>
+                        <li><a href="https://www.youtube.com/watch?v=qzKaTmjNalY">Supports</a></li>
                         <li><a href="aboutUs.jsp">About Us</a></li>
                     </ul>
                 </nav>
