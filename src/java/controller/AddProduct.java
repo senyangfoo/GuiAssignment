@@ -4,12 +4,22 @@
  */
 package controller;
 
+import jakarta.annotation.Resource;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import jakarta.transaction.UserTransaction;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.Product;
+import model.ProductService;
 
 /**
  *
@@ -17,29 +27,33 @@ import jakarta.servlet.http.HttpServletResponse;
  */
 public class AddProduct extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    @PersistenceContext
+    EntityManager em;
+    @Resource
+    UserTransaction utx;
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AddProduct</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AddProduct at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        try {
+            String prodName = request.getParameter("prodName");
+            String prodImage = request.getParameter("prodImage");
+            String prodCategory = request.getParameter("prodCategory");
+            String prodDesc = request.getParameter("prodDesc");
+            double prodPrice = Double.parseDouble(request.getParameter("prodPrice"));
+            int prodStock = Integer.parseInt(request.getParameter("prodStock"));
+
+            Product product = new Product(prodImage, prodName, prodCategory, prodDesc, prodPrice, prodStock);
+            ProductService prodService = new ProductService(em);
+            utx.begin();
+            boolean success = prodService.addItem(product);
+            utx.commit();
+            List<Product> productList = prodService.findAll();
+            HttpSession session = request.getSession();
+            session.setAttribute("productList", productList);
+            response.sendRedirect("productTable.jsp");
+
+        } catch (Exception ex) {
+            Logger.getLogger(AddProduct.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -122,6 +122,8 @@
                 max-height: 100px;
                 position: relative;
                 width: 100%;
+                background-color: var(--primary_white_color);
+                z-index: 2;
 
                 .header1 {
                     margin: auto auto auto 20%;
