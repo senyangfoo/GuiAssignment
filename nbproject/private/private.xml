@@ -3,15 +3,6 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< Updated upstream
-            <file>file:/C:/Users/foose/Desktop/github%20gui/GuiAssignment/web/productdetail.jsp</file>
-            <file>file:/C:/Users/foose/Desktop/github%20gui/GuiAssignment/web/index.jsp</file>
-            <file>file:/C:/Users/foose/Desktop/github%20gui/GuiAssignment/web/css/style.css</file>
-            <file>file:/C:/Users/foose/Desktop/github%20gui/GuiAssignment/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/foose/Desktop/github%20gui/GuiAssignment/web/product.jsp</file>
-            <file>file:/C:/Users/foose/Desktop/github%20gui/GuiAssignment/web/layouts/footer.jsp</file>
-            <file>file:/C:/Users/foose/Desktop/github%20gui/GuiAssignment/web/layouts/header.jsp</file>
-=======
             <file>file:/C:/xampp/htdocs/GuiAssignment/src/java/controller/RemoveProductFromCart.java</file>
             <file>file:/C:/xampp/htdocs/GuiAssignment/web/UserEdit.jsp</file>
             <file>file:/C:/xampp/htdocs/GuiAssignment/src/java/model/Product.java</file>
@@ -23,15 +14,18 @@
             <file>file:/C:/xampp/htdocs/GuiAssignment/src/java/controller/ProductDetailServlet.java</file>
             <file>file:/C:/xampp/htdocs/GuiAssignment/web/Login.jsp</file>
             <file>file:/C:/xampp/htdocs/GuiAssignment/src/java/controller/CheckOutServlet.java</file>
+            <file>file:/C:/xampp/htdocs/GuiAssignment/src/java/model/OrderService.java</file>
             <file>file:/C:/xampp/htdocs/GuiAssignment/web/layouts/footer.jsp</file>
             <file>file:/C:/xampp/htdocs/GuiAssignment/src/java/model/CartService.java</file>
             <file>file:/C:/xampp/htdocs/GuiAssignment/web/images/violin.png</file>
+            <file>file:/C:/xampp/htdocs/GuiAssignment/src/java/model/staffDA.java</file>
             <file>file:/C:/xampp/htdocs/GuiAssignment/web/productTable.jsp</file>
             <file>file:/C:/xampp/htdocs/GuiAssignment/src/java/model/Orders.java</file>
             <file>file:/C:/xampp/htdocs/GuiAssignment/web/css/style.css</file>
             <file>file:/C:/xampp/htdocs/GuiAssignment/src/java/controller/EditUser.java</file>
             <file>file:/C:/xampp/htdocs/GuiAssignment/src/java/controller/RetrieveStaff.java</file>
             <file>file:/C:/xampp/htdocs/GuiAssignment/web/productdetail.jsp</file>
+            <file>file:/C:/xampp/htdocs/GuiAssignment/src/java/model/OrderDetail.java</file>
             <file>file:/C:/xampp/htdocs/GuiAssignment/web/logout.jsp</file>
             <file>file:/C:/xampp/htdocs/GuiAssignment/src/java/model/userDA.java</file>
             <file>file:/C:/xampp/htdocs/GuiAssignment/web/StaffLogin.jsp</file>
@@ -54,15 +48,15 @@
             <file>file:/C:/xampp/htdocs/GuiAssignment/web/payment.jsp</file>
             <file>file:/C:/xampp/htdocs/GuiAssignment/web/aboutUs.jsp</file>
             <file>file:/C:/xampp/htdocs/GuiAssignment/src/java/model/Staff.java</file>
-            <file>file:/C:/xampp/htdocs/GuiAssignment/src/java/model/Customer.java</file>
             <file>file:/C:/xampp/htdocs/GuiAssignment/web/AdminMain.jsp</file>
+            <file>file:/C:/xampp/htdocs/GuiAssignment/src/java/model/Customer.java</file>
             <file>file:/C:/xampp/htdocs/GuiAssignment/web/images/shopping_cart.svg</file>
             <file>file:/C:/xampp/htdocs/GuiAssignment/web/layouts/header.jsp</file>
             <file>file:/C:/xampp/htdocs/GuiAssignment/web/javascripts/slideEventHandler.js</file>
             <file>file:/C:/xampp/htdocs/GuiAssignment/src/java/model/ProductService.java</file>
             <file>file:/C:/xampp/htdocs/GuiAssignment/src/java/controller/AddProduct.java</file>
+            <file>file:/C:/xampp/htdocs/GuiAssignment/src/java/controller/PaymentServlet.java</file>
             <file>file:/C:/xampp/htdocs/GuiAssignment/web/StaffProfile.jsp</file>
->>>>>>> Stashed changes
         </group>
     </open-files>
 </project-private>

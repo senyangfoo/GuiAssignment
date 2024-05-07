@@ -39,6 +39,12 @@ import java.util.Collection;
     @NamedQuery(name = "Product.findByStock", query = "SELECT p FROM Product p WHERE p.stock = :stock")})
 public class Product implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "PROD_ID")
+    private Integer prodId;
     @Size(max = 100)
     @Column(name = "IMAGE")
     private String image;
@@ -51,20 +57,13 @@ public class Product implements Serializable {
     @Size(max = 200)
     @Column(name = "DESCRIPTION")
     private String description;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "prodId")
-    private Collection<Orders> ordersCollection;
-
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "PROD_ID")
-    private Integer prodId;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "PRICE")
     private Double price;
     @Column(name = "STOCK")
     private Integer stock;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "prodId")
+    private Collection<OrderDetail> orderDetailCollection;
 
     public Product() {
     }
@@ -100,6 +99,13 @@ public class Product implements Serializable {
         this.prodId = prodId;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     public String getProdName() {
         return prodName;
@@ -109,6 +115,21 @@ public class Product implements Serializable {
         this.prodName = prodName;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public Double getPrice() {
         return price;
@@ -124,6 +145,15 @@ public class Product implements Serializable {
 
     public void setStock(Integer stock) {
         this.stock = stock;
+    }
+
+    @XmlTransient
+    public Collection<OrderDetail> getOrderDetailCollection() {
+        return orderDetailCollection;
+    }
+
+    public void setOrderDetailCollection(Collection<OrderDetail> orderDetailCollection) {
+        this.orderDetailCollection = orderDetailCollection;
     }
 
     @Override
@@ -149,40 +179,6 @@ public class Product implements Serializable {
     @Override
     public String toString() {
         return "model.Product[ prodId=" + prodId + " ]";
-    }
-
-
-    @XmlTransient
-    public Collection<Orders> getOrdersCollection() {
-        return ordersCollection;
-    }
-
-    public void setOrdersCollection(Collection<Orders> ordersCollection) {
-        this.ordersCollection = ordersCollection;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
     
 }
