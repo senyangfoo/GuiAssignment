@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Cart;
 import model.CartService;
+import model.Product;
+import model.ProductService;
 
 /**
  *
@@ -37,20 +39,28 @@ public class ViewCart extends HttpServlet {
     try {
         ArrayList<Cart> cart_list = (ArrayList<Cart>) request.getSession().getAttribute("cart-list");
         List<Cart> cartProduct = null;
+        List<Product> cartProductList = new ArrayList<>();
         double totalPrice = 0;
         if (cart_list != null) {
             CartService cartService = new CartService(em);
+            ProductService productService = new ProductService(em);
             cartProduct = cartService.getCartProducts(cart_list);
             totalPrice = cartService.getTotalCartPrice(cartProduct);
-            request.setAttribute("cartProduct", cartProduct);
-            request.setAttribute("totalPrice", totalPrice);
+            
+            for (Cart cart : cartProduct) {
+                Product product = productService.findItemByID(cart.getProdId());
+                cartProductList.add(product);
+                System.out.println("cartProduct: "+cart);
+                System.out.println("cartProductList: "+cartProductList);
+            }
         }
+        request.getSession().setAttribute("cartProductList", cartProductList);
         request.getSession().setAttribute("cartProduct", cartProduct);
         request.getSession().setAttribute("totalPrice", totalPrice);
         response.sendRedirect("index.jsp");
         
     } catch (Exception ex) {
-        
+        ex.printStackTrace();
     }
 }
 

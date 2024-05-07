@@ -55,7 +55,7 @@
         <input type="radio" name="method" value="credit" onclick="showPaymentForm('credit')"> Credit Card<br>
         <input type="radio" name="method" value="ewallet" onclick="showPaymentForm('ewallet')"> E-Wallet<br>
 
-        <form action="PaymentServlet/method=debit" method="POST" id="debit-form" class="payment-form" style="display:none;">
+        <form action="PaymentServlet?method=debit" method="POST" id="debit-form" class="payment-form" style="display:none;">
             <h2>Debit Card (Visa or MasterCard)</h2>
             <input type="radio" name="cardType" value="visa">Visa<br>
             <input type="radio" name="cardType" value="masterCard">MasterCard<br>
@@ -69,13 +69,13 @@
             <label for="expiry-date">Expiration Date:</label>
             <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YY" pattern="(0[1-9]|1[0-2])\/\d{2}" title="Please enter a valid expiration date in the format MM/YY" required><br>
 
-            <label for="cvv">CVV:</label>
-            <input type="text" id="cvv" name="cvv" maxlength="3" pattern="\d{3}" required><br>
+            <label for="cvv">CCV:</label>
+            <input type="text" id="ccv" name="ccv" maxlength="3" pattern="\d{3}" required><br>
 
             <input type="submit" value="Submit Payment">
         </form>
         
-        <form action="PaymentServlet/method=credit" method="POST" id="credit-form" class="payment-form" style="display:none;">
+        <form action="PaymentServlet?method=credit" method="POST" id="credit-form" class="payment-form" style="display:none;">
             <h2>Credit Card</h2>
             <input type="radio" name="cardType" value="visa">Visa<br>
             <input type="radio" name="cardType" value="masterCard">MasterCard<br>
@@ -89,8 +89,8 @@
             <label for="expiry-date">Expiration Date:</label>
             <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YY" pattern="(0[1-9]|1[0-2])\/\d{2}" title="Please enter a valid expiration date in the format MM/YY" required><br>
 
-            <label for="cvv">CVV:</label>
-            <input type="text" id="cvv" name="cvv" maxlength="3" pattern="\d{3}" required><br>
+            <label for="cvv">CCV:</label>
+            <input type="text" id="ccv" name="ccv" maxlength="3" pattern="\d{3}" required><br>
 
             <input type="submit" value="Submit Payment">
         </form>
