@@ -36,12 +36,6 @@ import java.util.Collection;
     @NamedQuery(name = "Customer.findByCustPassword", query = "SELECT c FROM Customer c WHERE c.custPassword = :custPassword")})
 public class Customer implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "CUST_ID")
-    private Integer custId;
     @Size(max = 80)
     @Column(name = "CUST_NAME")
     private String custName;
@@ -51,6 +45,15 @@ public class Customer implements Serializable {
     @Size(max = 20)
     @Column(name = "CUST_PASSWORD")
     private String custPassword;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "custId")
+    private Collection<CardInfo> cardInfoCollection;
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "CUST_ID")
+    private Integer custId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "custId")
     private Collection<Orders> ordersCollection;
 
@@ -138,6 +141,15 @@ public class Customer implements Serializable {
     @Override
     public String toString() {
         return "model.Customer[ custId=" + custId + " ]";
+    }
+
+    @XmlTransient
+    public Collection<CardInfo> getCardInfoCollection() {
+        return cardInfoCollection;
+    }
+
+    public void setCardInfoCollection(Collection<CardInfo> cardInfoCollection) {
+        this.cardInfoCollection = cardInfoCollection;
     }
     
 }

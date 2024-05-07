@@ -1,5 +1,6 @@
 <%@page import="java.util.*"%>
 <%@page import="model.Cart" %>
+<%@page import="model.Product" %>
 <%@page import="model.CartService" %>
 <%@page  import="enums.prodCategory" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -14,12 +15,15 @@
         staffLogin = (Boolean) session.getAttribute("staffLogin");
    }
     
-   //Cart Status
-   List<Cart> cartProduct = null;
-   ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart-list");
-   if (cart_list != null) {
+    //Cart Status
+    List<Cart> cartProduct = null;
+    List<Product> cartProductList = null;
+    
+    ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart-list");
+    if (cart_list != null) {
        cartProduct = (List<Cart>) session.getAttribute("cartProduct");
-       }
+       cartProductList = (List<Product>) session.getAttribute("cartProductList");
+    }
 %>
 <!DOCTYPE html>
 <html>
@@ -123,7 +127,6 @@
                 position: relative;
                 width: 100%;
                 background-color: var(--primary_white_color);
-                z-index: 2;
 
                 .header1 {
                     margin: auto auto auto 20%;

@@ -60,7 +60,7 @@ public class OrderService {
         return false;
     }
     
-    public boolean addOrderProduct(OrderDetail orderDetail) {
+    public boolean addOrderDetail(OrderDetail orderDetail) {
         em.persist(orderDetail);
         return true;
     }

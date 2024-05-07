@@ -39,9 +39,8 @@ import java.util.Date;
     @NamedQuery(name = "Orders.findByOrderDate", query = "SELECT o FROM Orders o WHERE o.orderDate = :orderDate"),
     @NamedQuery(name = "Orders.findByAddress", query = "SELECT o FROM Orders o WHERE o.address = :address"),
     @NamedQuery(name = "Orders.findByPhoneNum", query = "SELECT o FROM Orders o WHERE o.phoneNum = :phoneNum"),
-    @NamedQuery(name = "Orders.findByCustId", query = "SELECT o FROM Orders o WHERE o.custId = :custId"),
+    @NamedQuery(name = "Orders.findByPaymenttype", query = "SELECT o FROM Orders o WHERE o.paymenttype = :paymenttype"),
     @NamedQuery(name = "Orders.findByTotalAmount", query = "SELECT o FROM Orders o WHERE o.totalAmount = :totalAmount")})
-
 public class Orders implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -56,9 +55,12 @@ public class Orders implements Serializable {
     @Size(max = 200)
     @Column(name = "ADDRESS")
     private String address;
-    @Size(max = 10)
+    @Size(max = 50)
     @Column(name = "PHONE_NUM")
     private String phoneNum;
+    @Size(max = 25)
+    @Column(name = "PAYMENTTYPE")
+    private String paymenttype;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "TOTAL_AMOUNT")
     private Double totalAmount;
@@ -71,8 +73,13 @@ public class Orders implements Serializable {
     public Orders() {
     }
 
-    public Orders(Integer orderId) {
-        this.orderId = orderId;
+    public Orders(Date orderDate, String address, String phoneNum, String paymenttype, Double totalAmount,Customer custId) {
+        this.orderDate = orderDate;
+        this.address = address;
+        this.phoneNum = phoneNum;
+        this.paymenttype = paymenttype;
+        this.totalAmount = totalAmount;
+        this.custId = custId;
     }
 
     public Integer getOrderId() {
@@ -105,6 +112,14 @@ public class Orders implements Serializable {
 
     public void setPhoneNum(String phoneNum) {
         this.phoneNum = phoneNum;
+    }
+
+    public String getPaymenttype() {
+        return paymenttype;
+    }
+
+    public void setPaymenttype(String paymenttype) {
+        this.paymenttype = paymenttype;
     }
 
     public Double getTotalAmount() {
