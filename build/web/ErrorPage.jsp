@@ -10,7 +10,7 @@
     <body>
         <h1 style="color: red;"><b>You Have No Access!</b></h1>
        <p>You will be redirect to the main page in 
-            <%= count +"seconds."%>
+            <%= count +" seconds."%>
             <%
             if(count>0){
                 --count;
