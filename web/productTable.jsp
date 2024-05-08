@@ -18,7 +18,7 @@
     </head>
     <body>
         <div class="contentContainer">
-            <button onclick="window.location.href = 'productAdd.jsp'" class="addButton">Add Product</button>
+            <button onclick="window.location.href = 'productAddEdit.jsp'" class="addButton">Add Product</button>
             <table class="prodTable">
                 <tr>
                     <td>ID</td>
@@ -28,6 +28,7 @@
                     <td>Category</td>
                     <td>Price</td>
                     <td>Stock</td>
+                    <td>Action</td>
                 </tr>
                 <%
                     if(!productList.isEmpty()){
@@ -40,6 +41,7 @@
                     <td><%= p.getCategory() %></td>
                     <td>RM <%= String.format("%.2f", p.getPrice()) %></td>
                     <td><%= p.getStock() %></td>
+                    <td><a href="RetrieveProduct?productID=<%= p.getProdId()%>">Edit</a></td>
                 </tr>
                 <%}
             }
