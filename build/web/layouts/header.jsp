@@ -579,7 +579,11 @@
             </div>
             <div class="header3">
                 <div class="search" ><img src="images/search.svg" alt="avatar" class="search" id="search" onclick="openSearchBar()" draggable="false">
-                    <div class="searchbarContainer" id="searchbarContainer"><input type="text" placeholder="Search..." onblur="closeSearchBar()" id="searchInput" class="searchInput"></div>
+                    <div class="searchbarContainer" id="searchbarContainer">
+                        <form action="SearchProduct" method="GET">
+                            <input type="text" placeholder="Search..." onblur="closeSearchBar()" id="searchInput" class="searchInput" name="searchInput">
+                        </form>
+                    </div>
                 </div>
                 <div class="avatar"><img src="images/account_circle.svg" alt="avatar" class="avatar" draggable="false" onclick="clickCount()">
                     <div class="avatarmenu">

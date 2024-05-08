@@ -100,7 +100,6 @@ public class Product implements Serializable {
         this.prodId = prodId;
     }
 
-
     public String getProdName() {
         return prodName;
     }
@@ -108,7 +107,6 @@ public class Product implements Serializable {
     public void setProdName(String prodName) {
         this.prodName = prodName;
     }
-
 
     public Double getPrice() {
         return price;
@@ -183,5 +181,5 @@ public class Product implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-    
+
 }

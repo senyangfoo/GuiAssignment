@@ -9,6 +9,7 @@ import jakarta.annotation.Resource;
 import jakarta.persistence.*;
 
 public class ProductService {
+
     @PersistenceContext
     EntityManager mgr;
     @Resource
