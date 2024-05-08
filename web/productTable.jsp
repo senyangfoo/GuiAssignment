@@ -41,7 +41,7 @@
                     <td><%= p.getCategory() %></td>
                     <td>RM <%= String.format("%.2f", p.getPrice()) %></td>
                     <td><%= p.getStock() %></td>
-                    <td><a href="RetrieveProduct?productID=<%= p.getProdId()%>">Edit</a></td>
+                    <td><a href="RetrieveProduct?productID=<%= p.getProdId()%>">Edit</a> <a href="DeleteProduct?productID=<%= p.getProdId()%>" onclick="return confirm('Are u sure u want to DELETE this Product?')">Delete</a></td>
                 </tr>
                 <%}
             }
