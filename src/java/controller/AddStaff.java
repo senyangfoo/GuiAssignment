@@ -4,15 +4,16 @@
  */
 package controller;
 
+import jakarta.annotation.Resource;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.transaction.UserTransaction;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,22 +24,40 @@ import model.StaffService;
  *
  * @author foose
  */
-public class ViewStaff extends HttpServlet {
+public class AddStaff extends HttpServlet {
 
     @PersistenceContext
     EntityManager em;
+    @Resource
+    UserTransaction utx;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
+            String staffName = request.getParameter("staffName");
+            String staffEmail = request.getParameter("staffEmail");
+            String staffPassword = request.getParameter("staffPassword");
+
+            Staff staff = new Staff(staffName, staffEmail, staffPassword);
             StaffService staffService = new StaffService(em);
+
+            List staffNameExists = staffService.findStaffByName(staffName);
+            if (!staffNameExists.isEmpty()) {
+                response.getWriter().write("Staff name already exists. Please choose a different name.");
+                return;
+            }
+
+            utx.begin();
+            boolean success = staffService.addStaff(staff);
+            utx.commit();
             List<Staff> staffList = staffService.findAll();
             HttpSession session = request.getSession();
             session.setAttribute("staffList", staffList);
             response.sendRedirect("staffTable.jsp");
+
         } catch (Exception ex) {
-            Logger.getLogger(ViewStaff.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AddStaff.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

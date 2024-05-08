@@ -30,7 +30,7 @@
             </form>
             <%} else {%>
             <h2>Add Customer</h2>
-            <form action="AddCustomer" method="POST" onsubmit="checkValidation()">
+            <form action="AddCustomer" method="POST">
                 Customer Name
                 <input type="text" name="custName" size="80" id="name" required></br>
                 Customer Email

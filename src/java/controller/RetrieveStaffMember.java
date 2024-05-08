@@ -13,9 +13,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import model.Staff;
 import model.StaffService;
 
@@ -23,7 +20,7 @@ import model.StaffService;
  *
  * @author foose
  */
-public class ViewStaff extends HttpServlet {
+public class RetrieveStaffMember extends HttpServlet {
 
     @PersistenceContext
     EntityManager em;
@@ -31,14 +28,14 @@ public class ViewStaff extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try {
-            StaffService staffService = new StaffService(em);
-            List<Staff> staffList = staffService.findAll();
+        try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
-            session.setAttribute("staffList", staffList);
-            response.sendRedirect("staffTable.jsp");
-        } catch (Exception ex) {
-            Logger.getLogger(ViewStaff.class.getName()).log(Level.SEVERE, null, ex);
+            StaffService staffService = new StaffService(em);
+            int staffId = Integer.parseInt(request.getParameter("staffId"));
+            Staff staff = staffService.findStaffByID(staffId);
+
+            session.setAttribute("staff", staff);
+            response.sendRedirect("staffAddEdit.jsp");
         }
     }
 
