@@ -33,6 +33,11 @@ public class ViewReview extends HttpServlet {
             
             Product product = productservice.findItemByID(productID);
             List<ProductReview> reviewList = productReviewService.findReviewByProdId(product);
+            
+            for(ProductReview pr : reviewList){
+                pr.getCustId();
+            }
+            
             HttpSession session = request.getSession();
             
             session.setAttribute("reviewList", reviewList);

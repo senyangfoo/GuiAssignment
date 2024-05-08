@@ -23,10 +23,6 @@ import model.ProductReview;
 import model.ProductReviewService;
 import model.ProductService;
 
-/**
- *
- * @author Abcong
- */
 public class SubmitReviewServlet extends HttpServlet {
     @PersistenceContext
     EntityManager em;
