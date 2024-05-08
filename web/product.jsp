@@ -206,7 +206,7 @@
                 <a href="ProductDetailServlet?productID=<%= p.getProdId()%>" class="cardContainer" data-category='<%= p.getCategory() %>'>
                     <div class="card">
                         <div class="card_imgContainer">
-                            <img src ="images/<%= p.getImage() %>">
+                            <img src ="productImage/<%= p.getImage() %>">
                         </div>
                         <div class="card_textContainer">
                             <p class="prodName"><%= p.getProdName()%></p>

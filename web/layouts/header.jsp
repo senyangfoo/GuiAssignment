@@ -625,7 +625,7 @@
                             %>
                             <div class="itemCard">
                                 <div class="cardImage">
-                                    <img src ="images/<%= cart.getImage() %>" width="100" height="100">
+                                    <img src ="productImage/<%= cart.getImage() %>" width="100" height="100">
                                 </div>
                                 <div class="cardContent">
                                     <p class="cardProdName"><%= cart.getProdName() %></p>

@@ -35,7 +35,7 @@
                         for(Product p : productList){%>
                 <tr>
                     <td><%= p.getProdId()%></td>
-                    <td><img src ="images/<%= p.getImage() %>" style="width: 100px;"></td>
+                    <td><img src ="productImage/<%= p.getImage() %>" style="width: 100px;"></td>
                     <td><%= p.getProdName()%></td>
                     <td><%= p.getDescription() %></td>
                     <td><%= p.getCategory() %></td>

@@ -151,7 +151,7 @@
         <form action="AddCart?productID=<%=p.getProdId()%>" method="post">
             <div class="contentContainer">
                 <div class="prodContainer">
-                    <img src ="images/<%= p.getImage() %>" class="prodImg">
+                    <img src ="productImage/<%= p.getImage() %>" class="prodImg">
                     <div class="detailContainer">
                         <h1 style="margin: 10px auto 0 auto"><%= p.getProdName()%></h1>
                         <div class="ratingSalesContainer">
