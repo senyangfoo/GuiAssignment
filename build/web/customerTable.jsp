@@ -35,7 +35,7 @@
                     <td><%= p.getCustName()%></td>
                     <td><%= p.getCustEmail() %></td>
                     <td><%= p.getCustPassword() %></td>
-                    <td><a href="RetrieveCustomer?custID=<%= p.getCustId()%>">Edit</a> <a href="DeleteCustomer?productID=<%= p.getCustId()%>" onclick="return confirm('Are u sure u want to REMOVE this Customer?')">Delete</a></td>
+                    <td><a href="RetrieveCustomer?custId=<%= p.getCustId()%>">Edit</a> <a href="DeleteCustomer?productID=<%= p.getCustId()%>" onclick="return confirm('Are u sure u want to REMOVE this Customer?')">Delete</a></td>
                 </tr>
                 <%}
             }

@@ -68,6 +68,18 @@
         <servlet-name>ViewCustomer</servlet-name>
         <servlet-class>controller.ViewCustomer</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddCustomer</servlet-name>
+        <servlet-class>controller.AddCustomer</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditCustomer</servlet-name>
+        <servlet-class>controller.EditCustomer</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RetrieveCustomer</servlet-name>
+        <servlet-class>controller.RetrieveCustomer</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProductDetailServlet</servlet-name>
         <url-pattern>/ProductDetailServlet</url-pattern>
@@ -143,6 +155,18 @@
     <servlet-mapping>
         <servlet-name>ViewCustomer</servlet-name>
         <url-pattern>/ViewCustomer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddCustomer</servlet-name>
+        <url-pattern>/AddCustomer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditCustomer</servlet-name>
+        <url-pattern>/EditCustomer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RetrieveCustomer</servlet-name>
+        <url-pattern>/RetrieveCustomer</url-pattern>
     </servlet-mapping>
     <security-constraint>
         <display-name>AdminConstraint</display-name>
