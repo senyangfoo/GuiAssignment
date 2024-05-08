@@ -84,6 +84,10 @@
         <servlet-name>DeleteCustomer</servlet-name>
         <servlet-class>controller.DeleteCustomer</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewStaff</servlet-name>
+        <servlet-class>controller.ViewStaff</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProductDetailServlet</servlet-name>
         <url-pattern>/ProductDetailServlet</url-pattern>
@@ -175,6 +179,10 @@
     <servlet-mapping>
         <servlet-name>DeleteCustomer</servlet-name>
         <url-pattern>/DeleteCustomer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewStaff</servlet-name>
+        <url-pattern>/ViewStaff</url-pattern>
     </servlet-mapping>
     <security-constraint>
         <display-name>AdminConstraint</display-name>
