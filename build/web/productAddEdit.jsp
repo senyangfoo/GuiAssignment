@@ -48,11 +48,11 @@
             </form>
             <%} else {%>
                 <h2>Add Product</h2>
-                <form action="AddProduct" method="POST">
+                <form action="AddProduct" method="POST" enctype="multipart/form-data">
                     Product Name
                     <input type="text" name="prodName" size="80" required></br>
-                    Product Image File Name
-                    <input type="text" name="prodImage" size="100" required></br>
+                    Product Image File
+                    <input type="file" name="prodImage" accept="image/*" required></br>
                     Product Category
                     <select name="prodCategory"">
                         <%
