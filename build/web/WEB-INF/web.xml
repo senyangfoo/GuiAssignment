@@ -48,6 +48,14 @@
         <servlet-name>PaymentServlet</servlet-name>
         <servlet-class>controller.PaymentServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RetrieveProduct</servlet-name>
+        <servlet-class>controller.RetrieveProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditProduct</servlet-name>
+        <servlet-class>controller.EditProduct</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProductDetailServlet</servlet-name>
         <url-pattern>/ProductDetailServlet</url-pattern>
@@ -116,6 +124,14 @@
             <role-name>AdminRole</role-name>
         </auth-constraint>
     </security-constraint>
+    <servlet-mapping>
+        <servlet-name>RetrieveProduct</servlet-name>
+        <url-pattern>/RetrieveProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditProduct</servlet-name>
+        <url-pattern>/EditProduct</url-pattern>
+    </servlet-mapping>
     <login-config>
         <auth-method>FORM</auth-method>
         <realm-name>file</realm-name>
