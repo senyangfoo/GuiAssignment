@@ -100,6 +100,10 @@
         <servlet-name>EditStaffMember</servlet-name>
         <servlet-class>controller.EditStaffMember</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteStaffMember</servlet-name>
+        <servlet-class>controller.DeleteStaffMember</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProductDetailServlet</servlet-name>
         <url-pattern>/ProductDetailServlet</url-pattern>
@@ -207,6 +211,10 @@
     <servlet-mapping>
         <servlet-name>EditStaffMember</servlet-name>
         <url-pattern>/EditStaffMember</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteStaffMember</servlet-name>
+        <url-pattern>/DeleteStaffMember</url-pattern>
     </servlet-mapping>
     <security-constraint>
         <display-name>AdminConstraint</display-name>
