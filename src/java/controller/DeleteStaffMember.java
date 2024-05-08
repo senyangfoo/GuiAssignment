@@ -4,46 +4,49 @@
  */
 package controller;
 
-import jakarta.persistence.*;
-import java.io.*;
+import jakarta.annotation.Resource;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.*;
+import jakarta.transaction.UserTransaction;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Product;
-import model.ProductService;
+import model.Staff;
+import model.StaffService;
+
 /**
  *
- * @author Abcong
+ * @author foose
  */
+public class DeleteStaffMember extends HttpServlet {
 
-public class ViewProduct extends HttpServlet {
     @PersistenceContext
     EntityManager em;
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    @Resource
+    UserTransaction utx;
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            ProductService product = new ProductService(em);
-            List<Product> productList = product.findAll();
+            StaffService staffService = new StaffService(em);
             HttpSession session = request.getSession();
-            session.setAttribute("productList", productList);
-            response.sendRedirect("product.jsp");
+            int staffId = Integer.parseInt(request.getParameter("staffId"));
+
+            utx.begin();
+            boolean success = staffService.deleteStaff(staffId);
+            utx.commit();
+            List<Staff> staffList = staffService.findAll();
+            session.setAttribute("staffList", staffList);
+            response.sendRedirect("staffTable.jsp");
         } catch (Exception ex) {
-            Logger.getLogger(AddProduct.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DeleteStaffMember.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

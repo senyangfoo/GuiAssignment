@@ -60,6 +60,50 @@
         <servlet-name>DeleteProduct</servlet-name>
         <servlet-class>controller.DeleteProduct</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchProduct</servlet-name>
+        <servlet-class>controller.SearchProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewCustomer</servlet-name>
+        <servlet-class>controller.ViewCustomer</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddCustomer</servlet-name>
+        <servlet-class>controller.AddCustomer</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditCustomer</servlet-name>
+        <servlet-class>controller.EditCustomer</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RetrieveCustomer</servlet-name>
+        <servlet-class>controller.RetrieveCustomer</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteCustomer</servlet-name>
+        <servlet-class>controller.DeleteCustomer</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewStaff</servlet-name>
+        <servlet-class>controller.ViewStaff</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddStaff</servlet-name>
+        <servlet-class>controller.AddStaff</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RetrieveStaffMember</servlet-name>
+        <servlet-class>controller.RetrieveStaffMember</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditStaffMember</servlet-name>
+        <servlet-class>controller.EditStaffMember</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteStaffMember</servlet-name>
+        <servlet-class>controller.DeleteStaffMember</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProductDetailServlet</servlet-name>
         <url-pattern>/ProductDetailServlet</url-pattern>
@@ -127,6 +171,50 @@
     <servlet-mapping>
         <servlet-name>DeleteProduct</servlet-name>
         <url-pattern>/DeleteProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchProduct</servlet-name>
+        <url-pattern>/SearchProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewCustomer</servlet-name>
+        <url-pattern>/ViewCustomer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddCustomer</servlet-name>
+        <url-pattern>/AddCustomer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditCustomer</servlet-name>
+        <url-pattern>/EditCustomer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RetrieveCustomer</servlet-name>
+        <url-pattern>/RetrieveCustomer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteCustomer</servlet-name>
+        <url-pattern>/DeleteCustomer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewStaff</servlet-name>
+        <url-pattern>/ViewStaff</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddStaff</servlet-name>
+        <url-pattern>/AddStaff</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RetrieveStaffMember</servlet-name>
+        <url-pattern>/RetrieveStaffMember</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditStaffMember</servlet-name>
+        <url-pattern>/EditStaffMember</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteStaffMember</servlet-name>
+        <url-pattern>/DeleteStaffMember</url-pattern>
     </servlet-mapping>
     <security-constraint>
         <display-name>AdminConstraint</display-name>
