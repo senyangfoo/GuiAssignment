@@ -11,9 +11,9 @@
                 height: 100%;
                 position: fixed;
                 width: 220px;
-                top: 0;
+                top: 100px;
                 background-color: var(--primary_brown_color);
-                padding-top: 150px;
+                padding-top: 50px;
                 z-index: 1;
             }
 
@@ -50,7 +50,7 @@
         <div class="sidenav">
             <a href="productTable.jsp" <% if (currentPage.endsWith("/productTable.jsp")) out.print("class=\"active\""); %>><img src="images/shopping_bag.svg">Products</a>
             <a href="staffTable.jsp" <% if (currentPage.endsWith("/staffTable.jsp")) out.print("class=\"active\""); %>><img src="images/engineering.svg">Staff</a>
-            <a href="customerTable.jsp" <% if (currentPage.endsWith("/customerTable.jsp")) out.print("class=\"active\""); %>><img src="images/person.svg">Customer</a>
+            <a href="ViewCustomer" <% if (currentPage.endsWith("/customerTable.jsp")) out.print("class=\"active\""); %>><img src="images/person.svg">Customer</a>
             <a href="salesTable.jsp" <% if (currentPage.endsWith("/salesTable.jsp")) out.print("class=\"active\""); %>><img src="images/assessment.svg">Sales Report</a>
         </div>
         <script>
