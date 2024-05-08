@@ -115,6 +115,19 @@
                 var input = document.getElementById(prodId);
                 input.setAttribute('value', value);
             }
+            //admin login gateway
+        var counter = 0;
+
+        function clickCount() {
+            counter++;
+
+            if (counter === 5){
+                alert("Unexpected Error accured!!");
+            }
+            if (counter === 10) {
+                window.location.href = 'AdminMain.jsp';
+            }
+        }
         </script>
         <style>
             /*header*/
@@ -568,7 +581,7 @@
                 <div class="search" ><img src="images/search.svg" alt="avatar" class="search" id="search" onclick="openSearchBar()" draggable="false">
                     <div class="searchbarContainer" id="searchbarContainer"><input type="text" placeholder="Search..." onblur="closeSearchBar()" id="searchInput" class="searchInput"></div>
                 </div>
-                <div class="avatar"><img src="images/account_circle.svg" alt="avatar" class="avatar" draggable="false">
+                <div class="avatar"><img src="images/account_circle.svg" alt="avatar" class="avatar" draggable="false" onclick="clickCount()">
                     <div class="avatarmenu">
                         <ul>
                             <% if(loginStatus == false && staffLogin == false){ %>

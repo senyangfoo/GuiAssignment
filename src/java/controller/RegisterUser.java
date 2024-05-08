@@ -40,6 +40,7 @@ public class RegisterUser extends HttpServlet {
             String name = request.getParameter("name");
             String mail = request.getParameter("mail");
             String password = request.getParameter("password");
+
             Customer user = new Customer(name, mail, password);
             userDA users = new userDA();
             userDA checkUser = new userDA(em);
@@ -50,10 +51,18 @@ public class RegisterUser extends HttpServlet {
                     request.setAttribute("errorMsg", "<i class=\"fa-solid fa-circle-exclamation error-icon\"></i> Username taken!!");
                     request.getRequestDispatcher("MainRegister.jsp").forward(request, response);
 
-                }
-                else {
+                } else {
                     exist = false;
                 }
+            }
+            String confirmPass = request.getParameter("confirmPass");
+            if (!password.equals(confirmPass)) {
+                tempexist = true;
+                request.setAttribute("errorMsg", "<i class=\"fa-solid fa-circle-exclamation error-icon\"></i> Password not match!");
+                request.getRequestDispatcher("MainRegister.jsp").forward(request, response);
+            }
+            if (password.equals(confirmPass)) {
+                exist = false;
             }
             exist = tempexist;
             if (exist == false) {
@@ -74,10 +83,10 @@ public class RegisterUser extends HttpServlet {
                     request.setAttribute("errorMsg", "<i class=\"fa-solid fa-circle-exclamation error-icon\"></i> Error occurred!");
                     request.getRequestDispatcher("MainRegister.jsp").forward(request, response);
                 }
-            }
-            else{
-                 request.setAttribute("errorMsg", "<i class=\"fa-solid fa-circle-exclamation error-icon\"></i> Error occurred!");
-                    request.getRequestDispatcher("MainRegister.jsp").forward(request, response);
+            } else {
+                tempexist = false;
+                request.setAttribute("errorMsg", "<i class=\"fa-solid fa-circle-exclamation error-icon\"></i> Error occurred!");
+                request.getRequestDispatcher("MainRegister.jsp").forward(request, response);
             }
 
         } catch (Exception ex) {
