@@ -53,7 +53,6 @@
         
         <input type="radio" name="method" value="debit" onclick="showPaymentForm('debit')"> Debit Card<br>
         <input type="radio" name="method" value="credit" onclick="showPaymentForm('credit')"> Credit Card<br>
-        <input type="radio" name="method" value="ewallet" onclick="showPaymentForm('ewallet')"> E-Wallet<br>
 
         <form action="PaymentServlet?method=debit" method="POST" id="debit-form" class="payment-form" style="display:none;">
             <h2>Debit Card (Visa or MasterCard)</h2>
@@ -76,7 +75,7 @@
         </form>
         
         <form action="PaymentServlet?method=credit" method="POST" id="credit-form" class="payment-form" style="display:none;">
-            <h2>Credit Card</h2>
+            <h2>Credit Card (Visa or MasterCard)</h2>
             <input type="radio" name="cardType" value="visa">Visa<br>
             <input type="radio" name="cardType" value="masterCard">MasterCard<br>
             
@@ -94,11 +93,7 @@
 
             <input type="submit" value="Submit Payment">
         </form>
-        
-        <form action="PaymentServlet/method=ewallet" method="POST" id="ewallet-form" class="payment-form" style="display:none;">
-            <h2>Ewallet</h2>
-        </form>
-       
+
         <% if (cartProduct != null) { %>
         <h2>Product List</h2>
         <%

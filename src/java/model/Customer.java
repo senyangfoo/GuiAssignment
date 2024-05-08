@@ -46,6 +46,8 @@ public class Customer implements Serializable {
     @Column(name = "CUST_PASSWORD")
     private String custPassword;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "custId")
+    private Collection<ProductReview> productReviewCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "custId")
     private Collection<CardInfo> cardInfoCollection;
 
     private static final long serialVersionUID = 1L;
@@ -150,6 +152,15 @@ public class Customer implements Serializable {
 
     public void setCardInfoCollection(Collection<CardInfo> cardInfoCollection) {
         this.cardInfoCollection = cardInfoCollection;
+    }
+
+    @XmlTransient
+    public Collection<ProductReview> getProductReviewCollection() {
+        return productReviewCollection;
+    }
+
+    public void setProductReviewCollection(Collection<ProductReview> productReviewCollection) {
+        this.productReviewCollection = productReviewCollection;
     }
     
 }

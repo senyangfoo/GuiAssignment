@@ -34,8 +34,8 @@ public class StaffService {
         return staffList;
     }
 
-    public List<Customer> findStaffByName(String custName) {
-        List staffList = mgr.createNamedQuery("Staff.findByStaffName").setParameter("staffName", custName).getResultList();
+    public List<Customer> findStaffByName(String stafftName) {
+        List staffList = mgr.createNamedQuery("Staff.findByStaffName").setParameter("staffName", stafftName).getResultList();
         return staffList;
     }
 

@@ -4,6 +4,9 @@
  */
 package controller;
 
+import jakarta.annotation.Resource;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -11,35 +14,71 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-
+import jakarta.transaction.UserTransaction;
+import java.util.List;
+import model.Customer;
+import model.CustomerService;
 import model.Product;
+import model.ProductReview;
+import model.ProductReviewService;
 import model.ProductService;
-import jakarta.persistence.*;
-public class ProductDetailServlet extends HttpServlet {
+
+/**
+ *
+ * @author Abcong
+ */
+public class SubmitReviewServlet extends HttpServlet {
+    @PersistenceContext
+    EntityManager em;
+    @Resource
+    UserTransaction utx;
     
-   @PersistenceContext
-   EntityManager em;
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
+            int Id = Integer.parseInt(String.valueOf(request.getSession().getAttribute("id")));
             int productID = Integer.parseInt(request.getParameter("productID"));
-            ProductService productService = new ProductService(em);
-            Product product = productService.findItemByID(productID);
+            int rating = Integer.parseInt(request.getParameter("rating"));            
+            String comment = request.getParameter("comment");
 
+            CustomerService customerservice = new CustomerService(em);
+            ProductService productservice = new ProductService(em);
+            ProductReviewService prService = new ProductReviewService(em);
+            em.getEntityManagerFactory().getCache().evictAll();
+            
+            Customer customer = customerservice.findByCustId(Id);
+            Product product = productservice.findItemByID(productID);
+            
+            List<ProductReview> allProductdReview = prService.findReviewByProdId(product);
+            boolean reviewExist = false;
+            int existReviewId = 0;
+            for(ProductReview aPR : allProductdReview){
+                if(aPR.getCustId().equals(customer)){
+                    reviewExist = true;
+                    existReviewId = aPR.getProductReviewId();
+                    break;
+                }
+            }
+            
+            if(reviewExist == true){
+                ProductReview updateReview = new ProductReview(existReviewId, rating, comment, customer, product);
+                utx.begin();
+                prService.updateProductReview(updateReview);
+                utx.commit();
+                reviewExist = false;
+            }else{
+                ProductReview newReview = new ProductReview(rating, comment, customer, product);
+                utx.begin();
+                prService.addReview(newReview);
+                utx.commit();
+            }
+            
             session.setAttribute("productID", productID);
-            session.setAttribute("product", product);
             response.sendRedirect("ViewReview");
+        }catch(Exception ex){
+            ex.printStackTrace();
         }
     }
 
