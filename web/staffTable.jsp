@@ -1,7 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.*"%>
 <%@page  import="model.Staff" %>
-<%@include file="layouts/header.jsp" %>
 <%@include file="layouts/adminNavBar.jsp" %>
 <%
    List<Staff> staffList = (List)session.getAttribute("staffList");

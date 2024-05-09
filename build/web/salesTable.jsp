@@ -1,7 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.*"%>
 <%@page  import="model.Product" %>
-<%@include file="layouts/header.jsp" %>
 <%@include file="layouts/adminNavBar.jsp" %>
 
 <!DOCTYPE html>
