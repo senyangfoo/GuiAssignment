@@ -1,10 +1,14 @@
-
 <%@page import="model.Product"%>
+<%@page import="model.ProductReview"%>
+<%@page import="model.Customer"%>
+<%@page import="model.userDA"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="layouts/header.jsp" %>  
 <!DOCTYPE html>
-<%
+<%   
     Product p = (Product) session.getAttribute("product");
+    List<ProductReview> reviewList = (List) session.getAttribute("reviewList");
 %>
 <style>
     .contentContainer {
@@ -154,12 +158,6 @@
                     <img src ="productImage/<%= p.getImage() %>" class="prodImg">
                     <div class="detailContainer">
                         <h1 style="margin: 10px auto 0 auto"><%= p.getProdName()%></h1>
-                        <div class="ratingSalesContainer">
-                            <div class="stars" data-rating="0"></div>
-                            <p>(0)</p>
-                            <p style="padding: 0 10px">|</p>
-                            <p>200 Sold</p>
-                        </div>
                         <p class="prodPrice">RM <%= String.format("%.2f", p.getPrice())%></p>
                         <div class="quantityContainer">
                             <p class="quantityText">Quantity</p>
@@ -171,6 +169,7 @@
                             <p class="stockText"><%= p.getStock()%> item(s) left</p>
                         </div>
                         <div class="addcart"><input type="submit" value="Add To Cart"></div>
+                        <a href="productReview.jsp">Review the Product</a>  
                         <div class="descContainer">
                             <p class="descTitle">Description</p>
                             <p class="desc"><%= p.getDescription() %></p>
@@ -180,9 +179,21 @@
                 <div class="reviewContainer">
                     <p class="reviewTitle">Reviews</p>
                     <div class="reviewContent">
-                        <div class="stars" data-rating="5"></div>
-                        <p class="timeUserName">5/5/2024 Mr Superman</p>
-                        <p class="text">非常好鋼琴 使我琴鍵旋轉</p>
+                        <% if(!reviewList.isEmpty()){ %>
+                            <% for(ProductReview review : reviewList) { %>
+                                <% 
+                                    Customer customer = review.getCustId(); 
+                                    int customerId = customer.getCustId();
+                                    userDA user = new userDA();
+                                    Customer customer1 = user.getCurrentRecordById(customerId);
+                                %>
+                                <p><%= customer1.getCustName() %></p>
+                                <div class="stars" data-rating="<%= review.getStar() %>"></div>
+                                <p><%= review.getComment() %></p>
+                            <% } %>
+                        <% } else { %>
+                            <p>No comment</p>
+                        <% } %>
                         <div class="breakline"></div>
                     </div>
                 </div>

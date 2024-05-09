@@ -6,18 +6,18 @@ package controller;
 
 import model.Staff;
 import model.staffDA;
-import jakarta.annotation.Resource;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import jakarta.annotation.Resource;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.UserTransaction;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import jakarta.transaction.UserTransaction;
 
 /**
  *
@@ -32,15 +32,6 @@ public class RetrieveStaff extends HttpServlet {
     int count = 3;
     String err = "Wrong Username Or Password!";
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();

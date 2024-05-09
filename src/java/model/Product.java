@@ -51,6 +51,8 @@ public class Product implements Serializable {
     @Size(max = 200)
     @Column(name = "DESCRIPTION")
     private String description;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "prodId")
+    private Collection<ProductReview> productReviewCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -180,6 +182,15 @@ public class Product implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @XmlTransient
+    public Collection<ProductReview> getProductReviewCollection() {
+        return productReviewCollection;
+    }
+
+    public void setProductReviewCollection(Collection<ProductReview> productReviewCollection) {
+        this.productReviewCollection = productReviewCollection;
     }
 
 }
