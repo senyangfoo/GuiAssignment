@@ -7,15 +7,15 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
          <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+         <link rel="stylesheet" href="css/style.css">
         <style>
             .sidenav {
                 height: 100%;
                 position: fixed;
                 width: 220px;
-                top: 100px;
                 background-color: var(--primary_brown_color);
-                padding-top: 50px;
                 z-index: 1;
+                top: 0;
             }
 
             .sidenav a {
@@ -46,12 +46,14 @@
              .sidenav a.logout{
                  color: white;
                  display: inline;
-                 padding: auto;
+  
              }
              
              .options{
-                 margin-top: 100%;
-                 margin-bottom: 0;
+                 position: fixed;
+                 bottom: 0;
+                 margin-bottom: 3%;
+                 margin-left: 1%;
              }
 
 
@@ -60,7 +62,7 @@
     <body>
         <div class="sidenav">
              <a href="AdminMain.jsp" <% if (currentPage.endsWith("/AdminMain.jsp")) out.print("class=\"active\""); %>><img src="images/Home-icon.svg">Main</a>
-            <a href="productTable.jsp" <% if (currentPage.endsWith("/productTable.jsp")) out.print("class=\"active\""); %>><img src="images/shopping_bag.svg">Products</a>
+            <a href="AdminViewProduct" <% if (currentPage.endsWith("/productTable.jsp")) out.print("class=\"active\""); %>><img src="images/shopping_bag.svg">Products</a>
             <a href="ViewStaff" <% if (currentPage.endsWith("/staffTable.jsp")) out.print("class=\"active\""); %>><img src="images/engineering.svg">Staff</a>
             <a href="ViewCustomer" <% if (currentPage.endsWith("/customerTable.jsp")) out.print("class=\"active\""); %>><img src="images/person.svg">Customer</a>
             <a href="ViewSales" <% if (currentPage.endsWith("/salesTable.jsp")) out.print("class=\"active\""); %>><img src="images/assessment.svg">Sales Report</a>

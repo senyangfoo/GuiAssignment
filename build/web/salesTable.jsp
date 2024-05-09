@@ -1,9 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="java.util.List"%>
-<%@page import="model.Orders" %>
-<%@page import="model.Product" %>
-<%@page import="model.ProductService" %>
-<%@page import="model.OrderDetail" %>
+<%@page import="java.util.*"%>
+<%@page  import="model.Product" %>
 <%@include file="layouts/header.jsp" %>
 <%@include file="layouts/adminNavBar.jsp" %>
 <%
