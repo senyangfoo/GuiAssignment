@@ -6,7 +6,19 @@
  
 %> 
 <%@include file="layouts/header.jsp" %>
+<%
+if (loginStatus == false){
+%>
+<script>
 
+    function run() {
+        window.location.href = 'Login.jsp';
+    }
+    run();
+</script>
+
+<% }
+%>
 
 <!DOCTYPE html>
 <html>

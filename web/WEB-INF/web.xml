@@ -238,6 +238,14 @@
             <web-resource-name>Admin</web-resource-name>
             <description/>
             <url-pattern>/AdminMain.jsp</url-pattern>
+            <url-pattern>/AddStaff.jsp</url-pattern>
+            <url-pattern>/customerAddEdit.jsp</url-pattern>
+            <url-pattern>/customerTable.jsp</url-pattern>
+            <url-pattern>/productAddEdit.jsp</url-pattern>
+            <url-pattern>/productTable.jsp</url-pattern>
+            <url-pattern>/salesTable.jsp</url-pattern>
+            <url-pattern>/staffAddEdit.jsp</url-pattern>
+            <url-pattern>/staffTable.jsp</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <description/>
