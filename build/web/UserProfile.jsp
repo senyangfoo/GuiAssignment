@@ -7,6 +7,19 @@
  
 %> 
 <%@include file="layouts/header.jsp" %>
+<%
+if (loginStatus == false){
+%>
+<script>
+
+    function run() {
+        window.location.href = 'Login.jsp';
+    }
+    run();
+</script>
+
+<% }
+%>
 
 
 <!DOCTYPE html>
@@ -39,7 +52,7 @@
                 height: 500px;
                 border-radius: 20px;
                 padding: 30px 20px;
-                
+
                 .button {
                     margin: 10px 0 0 0;
                     width: 100%;
