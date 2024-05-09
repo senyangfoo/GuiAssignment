@@ -1,5 +1,4 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@include file="layouts/header.jsp" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -65,13 +64,13 @@
                 <table>
                     <tr>
                         <td>
-                            <a href="staffTable.jsp"><img class="staff" src="images/StaffTableIcon.png" alt="Staff Table"/></a>
+                            <a href="ViewStaff"><img class="staff" src="images/StaffTableIcon.png" alt="Staff Table"/></a>
                         </td>
                         <td>
-                            <a href="productTable.jsp"><img class="stock" src="images/StockTableIcon.png" alt="Stock Table"/></a>
+                            <a href="AdminViewProduct"><img class="stock" src="images/StockTableIcon.png" alt="Stock Table"/></a>
                         </td>
                         <td>
-                            <a href="customerTable.jsp"><img class="customer" src="images/CustomerTableIcon.png" alt="Customer Table"/></a>
+                            <a href="ViewCustomer"><img class="customer" src="images/CustomerTableIcon.png" alt="Customer Table"/></a>
                         </td>
                     </tr>
                     <tr>
