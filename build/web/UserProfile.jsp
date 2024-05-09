@@ -4,9 +4,6 @@
     String name = (String)request.getSession().getAttribute("name");
      String mail = (String)request.getSession().getAttribute("mail");
      String password = (String)request.getSession().getAttribute("password");
-     if (loginStatus == false){
-        response.sendRedirect("Logout.jsp"); 
-     }
 %> 
 <%@include file="layouts/header.jsp" %>
 <%

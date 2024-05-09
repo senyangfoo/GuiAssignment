@@ -4,34 +4,37 @@
  */
 package controller;
 
-import jakarta.persistence.*;
-import java.io.*;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import model.Product;
-import model.ProductService;
+import model.OrderDetail;
+import model.OrderService;
+import model.Orders;
 
-public class ViewProduct extends HttpServlet {
+
+public class ViewSales extends HttpServlet {
     @PersistenceContext
     EntityManager em;
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try {
-            ProductService product = new ProductService(em);
-            List<Product> productList = product.findAll();
+        try (PrintWriter out = response.getWriter()) {
+            OrderService orderService = new OrderService(em);
+            List <Orders> orderList = orderService.findAll();
+            List <OrderDetail> orderDetailList = orderService.findAllOrderDetail();
             HttpSession session = request.getSession();
-            session.setAttribute("productList", productList);
-            response.sendRedirect("product.jsp");
-        } catch (Exception ex) {
-            Logger.getLogger(AddProduct.class.getName()).log(Level.SEVERE, null, ex);
+            
+            session.setAttribute("orderList", orderList);
+            session.setAttribute("orderDetailList", orderDetailList);
+            response.sendRedirect("salesTable.jsp");
         }
     }
 

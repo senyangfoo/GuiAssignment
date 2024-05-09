@@ -72,7 +72,7 @@ public class OrderService {
     }
     
     public List<OrderDetail> findAllOrderDetail() {
-        List orderDetailList = em.createNamedQuery("orderDetail.findAll").getResultList();
+        List orderDetailList = em.createNamedQuery("OrderDetail.findAll").getResultList();
         return orderDetailList;
     }
 }

@@ -7,9 +7,22 @@ package model;
 import java.util.List;
 import jakarta.annotation.Resource;
 import jakarta.persistence.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class ProductService {
-
+private String host = "jdbc:derby://localhost:1527/music";
+    private String user = "nbuser";
+    private String password = "nbuser";
+    private String tableName = "PRODUCT";
+    private Connection conn;
+    private PreparedStatement stmt;
+    private String sqlQueryByIdStr = "SELECT * from " + tableName + " WHERE PROD_ID = ?"; 
+    private ResultSet rs;
+    
     @PersistenceContext
     EntityManager mgr;
     @Resource
@@ -17,6 +30,15 @@ public class ProductService {
 
     public ProductService(EntityManager mgr) {
         this.mgr = mgr;
+    }
+
+    public ProductService() {
+        try {
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+            conn = DriverManager.getConnection(host, user, password);
+        } catch (Exception ex) {
+            ex.getMessage();
+        }
     }
 
     public boolean addItem(Product product) {
@@ -55,5 +77,21 @@ public class ProductService {
             return true;
         }
         return false;
+    }
+    
+    public Product getCurrentProductById(int id) {
+    Product product = null;
+        try {
+            stmt = conn.prepareStatement(sqlQueryByIdStr);
+            stmt.setInt(1, id); // Set the customer ID parameter
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                product = new Product(id, rs.getString("IMAGE"), rs.getString("PROD_NAME"), rs.getString("CATEGORY"), 
+                        rs.getString("DESCRIPTION"), Double.parseDouble(rs.getString("PRICE")), Integer.parseInt(rs.getString("STOCK")));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return product;
     }
 }

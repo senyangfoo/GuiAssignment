@@ -112,6 +112,10 @@
         <servlet-name>ViewReview</servlet-name>
         <servlet-class>controller.ViewReview</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewSales</servlet-name>
+        <servlet-class>controller.ViewSales</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProductDetailServlet</servlet-name>
         <url-pattern>/ProductDetailServlet</url-pattern>
@@ -231,6 +235,10 @@
     <servlet-mapping>
         <servlet-name>ViewReview</servlet-name>
         <url-pattern>/ViewReview</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewSales</servlet-name>
+        <url-pattern>/ViewSales</url-pattern>
     </servlet-mapping>
     <security-constraint>
         <display-name>AdminConstraint</display-name>
