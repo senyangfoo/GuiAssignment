@@ -45,7 +45,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-        <form action="SubmitReviewServlet?productID=<%=p.getProdId()%>" method="post">
+        <form action="SubmitReviewServlet?productID=<%= p.getProdId()%>" method="post">
             <img src ="images/<%= p.getImage() %>" width="200px" height="200px"><br/>
             <fieldset class="rating">
                 <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="5 star"></label>
