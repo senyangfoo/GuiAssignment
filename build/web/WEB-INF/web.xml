@@ -104,6 +104,14 @@
         <servlet-name>DeleteStaffMember</servlet-name>
         <servlet-class>controller.DeleteStaffMember</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SubmitReviewServlet</servlet-name>
+        <servlet-class>controller.SubmitReviewServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewReview</servlet-name>
+        <servlet-class>controller.ViewReview</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProductDetailServlet</servlet-name>
         <url-pattern>/ProductDetailServlet</url-pattern>
@@ -215,6 +223,14 @@
     <servlet-mapping>
         <servlet-name>DeleteStaffMember</servlet-name>
         <url-pattern>/DeleteStaffMember</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SubmitReviewServlet</servlet-name>
+        <url-pattern>/SubmitReviewServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewReview</servlet-name>
+        <url-pattern>/ViewReview</url-pattern>
     </servlet-mapping>
     <security-constraint>
         <display-name>AdminConstraint</display-name>

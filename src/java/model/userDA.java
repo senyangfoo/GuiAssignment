@@ -20,6 +20,7 @@ public class userDA implements Serializable {
     private Connection conn;
     private PreparedStatement stmt;
     private String sqlQueryStr = "SELECT * from " + tableName;
+    private String sqlQueryByIdStr = "SELECT * from " + tableName + " WHERE CUST_ID = ?"; 
     private String sqlInsertStr = "INSERT INTO " + tableName + " (\"CUST_NAME\", \"CUST_EMAIL\", \"CUST_PASSWORD\")" + " VALUES(?, ?,?)";
     private String sqlUpdateStr = "UPDATE " + tableName + " SET CUST_EMAIL = ? , CUST_PASSWORD = ?" + " WHERE CUST_NAME = ?";
     private ResultSet rs;
@@ -50,7 +51,22 @@ public class userDA implements Serializable {
         }
         return customer;
     }
-
+    
+    public Customer getCurrentRecordById(int id) {
+    Customer customer = null;
+        try {
+            stmt = conn.prepareStatement(sqlQueryByIdStr);
+            stmt.setInt(1, id); // Set the customer ID parameter
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                customer = new Customer(id,rs.getString("CUST_NAME"),rs.getString("CUST_EMAIL"),rs.getString("CUST_PASSWORD"));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return customer;
+    }
+    
     public int getQuantity() {
 
         String queryStr = "SELECT COUNT(*) FROM CUSTOMER";
@@ -82,7 +98,8 @@ public class userDA implements Serializable {
             return false;
         }
     }
-     public boolean editRecord(Customer user) {
+    
+    public boolean editRecord(Customer user) {
         try {
             stmt = conn.prepareStatement(sqlUpdateStr);
             stmt.setString(1, user.getCustEmail());

@@ -7,49 +7,43 @@ package controller;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import model.Product;
+import model.ProductReview;
+import model.ProductReviewService;
 import model.ProductService;
 
-/**
- *
- * @author foose
- */
-public class SearchProduct extends HttpServlet {
-
+public class ViewReview extends HttpServlet {
     @PersistenceContext
     EntityManager em;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try {
-            String searchInput = request.getParameter("searchInput");
-            ProductService product = new ProductService(em);
-
-            List<Product> productList = product.findAll();
-
-            List<Product> filteredList = new ArrayList<>();
-            for (Product p : productList) {
-                if (p.getProdName().toLowerCase().contains(searchInput.toLowerCase()) || p.getCategory().toLowerCase().contains(searchInput.toLowerCase()) ||  p.getProdId().toString().toLowerCase().contains(searchInput.toLowerCase())) {
-                    filteredList.add(p);
-                }
+        try (PrintWriter out = response.getWriter()) {
+            int productID = (int) request.getSession().getAttribute("productID");
+            ProductReviewService productReviewService  = new ProductReviewService(em);
+            ProductService productservice = new ProductService(em);
+            
+            Product product = productservice.findItemByID(productID);
+            List<ProductReview> reviewList = productReviewService.findReviewByProdId(product);
+            
+            for(ProductReview pr : reviewList){
+                pr.getCustId();
             }
             
             HttpSession session = request.getSession();
-            session.setAttribute("productList", filteredList);
-            response.sendRedirect("product.jsp");
-
-        } catch (Exception ex) {
-            Logger.getLogger(AddProduct.class.getName()).log(Level.SEVERE, null, ex);
+            
+            session.setAttribute("reviewList", reviewList);
+            response.sendRedirect("productdetail.jsp");
+        }catch(Exception ex){
+            ex.printStackTrace();
         }
     }
 
