@@ -4,7 +4,6 @@
 <%@page  import="model.Orders" %>
 <%@page  import="model.OrderDetail" %>
 <%@page  import="model.ProductService" %>
-<%@include file="layouts/header.jsp" %>
 <%@include file="layouts/adminNavBar.jsp" %>
 <%
    List<Orders> orderList = (List)session.getAttribute("orderList");
