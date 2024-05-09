@@ -124,6 +124,14 @@
         <servlet-name>RetrieveUser</servlet-name>
         <servlet-class>controller.RetrieveUser</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewSales</servlet-name>
+        <servlet-class>controller.ViewSales</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ViewSales</servlet-name>
+        <url-pattern>/ViewSales</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>RetrieveUser</servlet-name>
         <url-pattern>/RetrieveUser</url-pattern>
