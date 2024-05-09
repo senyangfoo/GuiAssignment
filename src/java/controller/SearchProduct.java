@@ -39,7 +39,7 @@ public class SearchProduct extends HttpServlet {
 
             List<Product> filteredList = new ArrayList<>();
             for (Product p : productList) {
-                if (p.getProdName().toLowerCase().contains(searchInput.toLowerCase()) || p.getCategory().toLowerCase().contains(searchInput.toLowerCase())) {
+                if (p.getProdName().toLowerCase().contains(searchInput.toLowerCase()) || p.getCategory().toLowerCase().contains(searchInput.toLowerCase()) ||  p.getProdId().toString().toLowerCase().contains(searchInput.toLowerCase())) {
                     filteredList.add(p);
                 }
             }
