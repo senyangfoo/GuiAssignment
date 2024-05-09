@@ -60,7 +60,7 @@ public class RetrieveUser extends HttpServlet {
                     session.setAttribute("login", true);
                     session = request.getSession(true);
                     
-                    session.setAttribute("id", c.getCustId());
+                    session.setAttribute("customerId", c.getCustId());
                     session.setAttribute("name", c.getCustName());
                     session.setAttribute("password", c.getCustPassword());
                     session.setAttribute("mail", c.getCustEmail());
