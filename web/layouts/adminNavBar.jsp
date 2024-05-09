@@ -6,6 +6,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <style>
             .sidenav {
                 height: 100%;
@@ -42,16 +43,30 @@
                     filter: invert(14%) sepia(5%) saturate(770%) hue-rotate(341deg) brightness(105%) contrast(87%);
                 }
             }
+             .sidenav a.logout{
+                 color: white;
+                 display: inline;
+                 padding: auto;
+             }
+             
+             .options{
+                 margin-top: 100%;
+                 margin-bottom: 0;
+             }
 
 
         </style>
     </head>
     <body>
         <div class="sidenav">
+             <a href="AdminMain.jsp" <% if (currentPage.endsWith("/AdminMain.jsp")) out.print("class=\"active\""); %>><img src="images/Home-icon.svg">Main</a>
             <a href="productTable.jsp" <% if (currentPage.endsWith("/productTable.jsp")) out.print("class=\"active\""); %>><img src="images/shopping_bag.svg">Products</a>
             <a href="ViewStaff" <% if (currentPage.endsWith("/staffTable.jsp")) out.print("class=\"active\""); %>><img src="images/engineering.svg">Staff</a>
             <a href="ViewCustomer" <% if (currentPage.endsWith("/customerTable.jsp")) out.print("class=\"active\""); %>><img src="images/person.svg">Customer</a>
             <a href="salesTable.jsp" <% if (currentPage.endsWith("/salesTable.jsp")) out.print("class=\"active\""); %>><img src="images/assessment.svg">Sales Report</a>
+            <div class="options">
+                <a class="logout" href="logout.jsp"><img src="images/Logout.svg" alt="Logout"/></a>
+            </div>
         </div>
         <script>
             // Get the current page URI
