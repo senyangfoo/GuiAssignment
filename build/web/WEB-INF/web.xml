@@ -156,6 +156,10 @@
         <servlet-name>StaffViewSales</servlet-name>
         <servlet-class>controller.StaffViewSales</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditCart</servlet-name>
+        <servlet-class>controller.EditCart</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProductDetailServlet</servlet-name>
         <url-pattern>/ProductDetailServlet</url-pattern>
@@ -335,6 +339,10 @@
     <servlet-mapping>
         <servlet-name>StaffViewSales</servlet-name>
         <url-pattern>/StaffViewSales</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditCart</servlet-name>
+        <url-pattern>/EditCart</url-pattern>
     </servlet-mapping>
     <security-constraint>
         <display-name>AdminConstraint</display-name>
