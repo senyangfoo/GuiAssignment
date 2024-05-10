@@ -10,7 +10,27 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <style>
             .contentContainer {
-
+                margin-top: 10%;
+                position: fixed;
+                display: grid;
+                border: 3px solid black;
+                margin-left: 25%;
+                height: 300px;
+                width: 700px;
+                justify-content: center;
+                text-align: center;
+                h2{
+                    text-align: center;
+                }
+                input.input{
+                    float: right;
+                    width: 35em;
+                }
+                label{
+                    float: left;
+                }
+               
+  
             }
         </style>
     </head>
@@ -20,11 +40,11 @@
                 if(p != null){%>
             <h2>Edit Product</h2>
             <form action="EditProduct?prodId=<%= p.getProdId()%>" method="POST">
-                Product Name
-                <input type="text" name="prodName" size="80" value="<%= p.getProdName()%>" required></br>
-                Product Image File Name
-                <input type="text" name="prodImage" size="100" value="<%=  p.getImage() %>" required></br>
-                Product Category
+                <label>Product Name</label>
+                <input class="input" type="text" name="prodName" size="70" value="<%= p.getProdName()%>" required></br>
+                <label>Product Image File Name</label>
+                <input class="input" type="text" name="prodImage" size="100" value="<%=  p.getImage() %>" required></br>
+                <label>Product Category</label>
                 <select name="prodCategory">
                     <%
                        int count = 0;
@@ -38,22 +58,22 @@
                      }
                     %>
                 </select></br>
-                Product Description
-                <input type="text" name="prodDesc" size="200" value="<%= p.getDescription() %>"></br>
-                Product Price
-                <input type="number" name="prodPrice" min="0" value="<%= String.format("%.2f", p.getPrice())%>" required></br>
-                Product Stock
-                <input type="number" name="prodStock" min="0" value="<%= p.getStock()%>" required></br>
+                <label>Product Description</label>
+                <input class="input" type="text" style="height: 80px;" name="prodDesc" size="70" value="<%= p.getDescription() %>"></br></br></br></br>
+                <label>Product Price</label>
+                <input class="input" type="number" name="prodPrice" min="0" value="<%= String.format("%.2f", p.getPrice())%>" required></br>
+                <label>Product Stock</label>
+                <input class="input" type="number" name="prodStock" min="0" value="<%= p.getStock()%>" required></br></br>
                 <input type="submit" value="Edit" >
             </form>
             <%} else {%>
                 <h2>Add Product</h2>
                 <form action="AddProduct" method="POST" enctype="multipart/form-data">
-                    Product Name
-                    <input type="text" name="prodName" size="80" required></br>
-                    Product Image File
+                    <label>Product Name</label>
+                    <input class="input" type="text" name="prodName" size="70" required></br>
+                    <label>Product Image File</label>
                     <input type="file" name="prodImage" accept="image/*" required></br>
-                    Product Category
+                    <label>Product Category</label>
                     <select name="prodCategory"">
                         <%
                            int count = 0;
@@ -67,12 +87,12 @@
                          }
                         %>
                     </select></br>
-                    Product Description
-                    <input type="text" name="prodDesc" size="200"></br>
-                    Product Price
-                    <input type="number" name="prodPrice" min="0" size="52" required></br>
-                    Product Stock
-                    <input type="number" name="prodStock" min="0" size="10" required></br>
+                    <label>Product Description</label>
+                    <input class="input" style="height: 80px;" type="text" name="prodDesc" size="70"></br></br></br></br>
+                    <label>Product Price</label>
+                    <input class="input" type="number" name="prodPrice" min="0" size="0" required></br>
+                    <label>Product Stock</label>
+                    <input class="input" type="number" name="prodStock" min="0" size="0" required></br></br>
                     <input type="submit" value="Add" >
                  </form>
             <%}%>
