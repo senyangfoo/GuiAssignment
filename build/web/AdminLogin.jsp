@@ -29,7 +29,7 @@
 
                 .formContainer {
                     position: absolute;
-                    top: 50%;
+                    top: 35%;
                     left: 50%;
                     transform: translate(-50%, -50%);
                     margin: 0;
@@ -48,23 +48,51 @@
                 }
             }
         </style>
+        <style>
+            .adminLogin{
+                margin-top: 10%;
+                display: grid;
+                border: 3px solid black;
+                margin-left: 40%;
+                height: 300px;
+                width: 280px;
+                justify-content: center;
+                input.input{
+                    float: right;
+                }
+                h1{
+                    text-align: center;
+                    padding-top: 5%;
+                    padding-bottom: 5%;
+                }
+                .button{
+                    text-align: center;
+                }
+                label{
+                    float:left;
+                }
+            }
+        </style>
+
     </head>
     <body class="contentContainer">
         <video autoplay muted loop id="bgVideo" class="bgVideo" draggable="false">
             <source src="images/fellas.mp4" type="video/mp4">
         </video>
+        <div class="adminLogin">
         <div class="formContainer">
             <h1>Admin Login</h1>
             <form action="j_security_check" method="POST">
                 <div class="inputContainer">
                     <label>ID:</label>
-                    <input type="text" name="j_username"/>
+                    <input class="input" type="text" name="j_username"/>
                     <label>Password:</label>
-                    <input type="password" name="j_password"/>
+                    <input class="input" type="password" name="j_password"/>
                 </div>
                 <input type="submit" value="Login"/>
                 <a href="MainRegister.jsp"><button>Back</button></a>
             </form>
+        </div>
         </div>
     </body>
 </html>
