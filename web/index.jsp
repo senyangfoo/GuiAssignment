@@ -43,9 +43,12 @@
     if (!refreshFlag) {
         setTimeout(function () {
             location.reload(true);
-        }, 10);
+        }, 100);
         sessionStorage.setItem('refreshFlag', 'true');
     }
+    setTimeout(function () {
+        sessionStorage.removeItem('refreshFlag');
+    }, 1000);
 </script>
 <script src="javascripts/slideEventHandler.js"></script>
 <script>window.onload = auto();</script>
