@@ -3,9 +3,26 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/foose/Desktop/gui_git/GuiAssignment/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/foose/Desktop/gui_git/GuiAssignment/src/java/controller/ViewTopSalesIndex.java</file>
-            <file>file:/C:/Users/foose/Desktop/gui_git/GuiAssignment/web/index.jsp</file>
+            <file>file:/C:/Users/khtee/Documents/NetBeansProjects/GUI_Heng/GuiAssignment-1/src/java/controller/ViewCustomer.java</file>
+            <file>file:/C:/Users/khtee/Documents/NetBeansProjects/GUI_Heng/GuiAssignment-1/src/java/model/Orders.java</file>
+            <file>file:/C:/Users/khtee/Documents/NetBeansProjects/GUI_Heng/GuiAssignment-1/web/StaffproductTable.jsp</file>
+            <file>file:/C:/Users/khtee/Documents/NetBeansProjects/GUI_Heng/GuiAssignment-1/web/StaffsalesTable.jsp</file>
+            <file>file:/C:/Users/khtee/Documents/NetBeansProjects/GUI_Heng/GuiAssignment-1/src/java/controller/ViewSales.java</file>
+            <file>file:/C:/Users/khtee/Documents/NetBeansProjects/GUI_Heng/GuiAssignment-1/web/salesTable.jsp</file>
+            <file>file:/C:/Users/khtee/Documents/NetBeansProjects/GUI_Heng/GuiAssignment-1/src/java/controller/StaffViewSales.java</file>
+            <file>file:/C:/Users/khtee/Documents/NetBeansProjects/GUI_Heng/GuiAssignment-1/src/java/controller/StaffViewProduct.java</file>
+            <file>file:/C:/Users/khtee/Documents/NetBeansProjects/GUI_Heng/GuiAssignment-1/web/StaffproductAddEdit.jsp</file>
+            <file>file:/C:/Users/khtee/Documents/NetBeansProjects/GUI_Heng/GuiAssignment-1/web/StaffMain.jsp</file>
+            <file>file:/C:/Users/khtee/Documents/NetBeansProjects/GUI_Heng/GuiAssignment-1/src/java/model/Staff.java</file>
+            <file>file:/C:/Users/khtee/Documents/NetBeansProjects/GUI_Heng/GuiAssignment-1/web/StaffcustomerAddEdit.jsp</file>
+            <file>file:/C:/Users/khtee/Documents/NetBeansProjects/GUI_Heng/GuiAssignment-1/web/StaffcustomerTable.jsp</file>
+            <file>file:/C:/Users/khtee/Documents/NetBeansProjects/GUI_Heng/GuiAssignment-1/src/java/controller/ViewOrder.java</file>
+            <file>file:/C:/Users/khtee/Documents/NetBeansProjects/GUI_Heng/GuiAssignment-1/src/java/model/OrderDetail.java</file>
+            <file>file:/C:/Users/khtee/Documents/NetBeansProjects/GUI_Heng/GuiAssignment-1/web/productdetail.jsp</file>
+            <file>file:/C:/Users/khtee/Documents/NetBeansProjects/GUI_Heng/GuiAssignment-1/web/layouts/header.jsp</file>
+            <file>file:/C:/Users/khtee/Documents/NetBeansProjects/GUI_Heng/GuiAssignment-1/web/layouts/staffNavBar.jsp</file>
+            <file>file:/C:/Users/khtee/Documents/NetBeansProjects/GUI_Heng/GuiAssignment-1/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/khtee/Documents/NetBeansProjects/GUI_Heng/GuiAssignment-1/src/java/controller/StaffViewCustomer.java</file>
         </group>
     </open-files>
 </project-private>

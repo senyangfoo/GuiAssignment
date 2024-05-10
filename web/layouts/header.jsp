@@ -610,13 +610,16 @@
                                  <% if(staffLogin == true){ %>
                             <li><a href="StaffMain.jsp">Console</a></li>
                                 <% } %>
+                                 <% if(loginStatus == true){ %>
                             <li><a href="<%= viewOrderLink %>">Order History</a></li>
+                            <% } %>
                                 <% if(loginStatus == true || staffLogin == true){ %>
                             <li><a href="logout.jsp">Logout</a></li>
                                 <% } %>
                         </ul>
                     </div>
                 </div>
+                        <% if(staffLogin == false){ %>
                 <div><img src="images/shopping_cart.svg" alt="cart" class="cart" onclick="checkLoginStatus()" draggable="false"></div>
             </div>
             <div id="cart_drawer" class="cart_drawer">
@@ -671,5 +674,6 @@
                     </div>
                 </div>
             </div>
+                    <% } %>
     </header>  
 </html>

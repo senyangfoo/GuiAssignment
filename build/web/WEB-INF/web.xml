@@ -168,14 +168,6 @@
         <servlet-name>ViewSales</servlet-name>
         <servlet-class>controller.ViewSales</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>ViewTopSalesIndex</servlet-name>
-        <servlet-class>controller.ViewTopSalesIndex</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ViewTopSalesIndex</servlet-name>
-        <url-pattern>/ViewTopSalesIndex</url-pattern>
-    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ViewSales</servlet-name>
         <url-pattern>/ViewSales</url-pattern>

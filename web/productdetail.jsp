@@ -171,6 +171,7 @@
                         <h1 style="margin: 10px auto 0 auto"><%= p.getProdName()%></h1>
                         <p class="prodPrice">RM <%= String.format("%.2f", p.getPrice())%></p>
                         <div class="quantityContainer">
+                            <% if (staffLogin == false){ %>
                             <p class="quantityText">Quantity</p>
                             <div class="quantitySelector">
                                 <button type="button" id="decrement">-</button>
@@ -178,9 +179,17 @@
                                 <button type="button" id="increment">+</button>
                             </div>
                             <p class="stockText"><%= p.getStock()%> item(s) left</p>
+                            <% } %>
+                            <% if (staffLogin == true){ %>
+                            <p class="staffStockView""><%= p.getStock()%> item(s) left</p>
+
+                            <% } %>
                         </div>
+                        <% if (staffLogin == false){ %>
+
                         <div class="addcart"><input type="submit" value="Add To Cart"></div>
                         <a href="<%= reviewLink %>">Review the Product</a>  
+                        <% } %>
                         <div class="descContainer">
                             <p class="descTitle">Description</p>
                             <p class="desc"><%= p.getDescription() %></p>
@@ -191,19 +200,19 @@
                     <p class="reviewTitle">Reviews</p>
                     <div class="reviewContent">
                         <% if(!reviewList.isEmpty()){ %>
-                            <% for(ProductReview review : reviewList) { %>
-                                <% 
-                                    Customer customer = review.getCustId(); 
-                                    int customerId = customer.getCustId();
-                                    userDA user = new userDA();
-                                    Customer customer1 = user.getCurrentRecordById(customerId);
-                                %>
-                                <p><%= customer1.getCustName() %></p>
-                                <div class="stars" data-rating="<%= review.getStar() %>"></div>
-                                <p><%= review.getComment() %></p>
-                            <% } %>
+                        <% for(ProductReview review : reviewList) { %>
+                        <% 
+                            Customer customer = review.getCustId(); 
+                            int customerId = customer.getCustId();
+                            userDA user = new userDA();
+                            Customer customer1 = user.getCurrentRecordById(customerId);
+                        %>
+                        <p><%= customer1.getCustName() %></p>
+                        <div class="stars" data-rating="<%= review.getStar() %>"></div>
+                        <p><%= review.getComment() %></p>
+                        <% } %>
                         <% } else { %>
-                            <p>No comment</p>
+                        <p>No comment</p>
                         <% } %>
                         <div class="breakline"></div>
                     </div>
