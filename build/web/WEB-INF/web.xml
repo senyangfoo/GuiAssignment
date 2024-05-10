@@ -148,6 +148,18 @@
         <servlet-name>StaffViewSales</servlet-name>
         <servlet-class>controller.StaffViewSales</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchAdminStaffProduct</servlet-name>
+        <servlet-class>controller.SearchAdminStaffProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchAdminMemberStaff</servlet-name>
+        <servlet-class>controller.SearchAdminMemberStaff</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchAdminStaffCustomer</servlet-name>
+        <servlet-class>controller.SearchAdminStaffCustomer</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProductDetailServlet</servlet-name>
         <url-pattern>/ProductDetailServlet</url-pattern>
@@ -323,6 +335,18 @@
     <servlet-mapping>
         <servlet-name>StaffViewSales</servlet-name>
         <url-pattern>/StaffViewSales</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchAdminStaffProduct</servlet-name>
+        <url-pattern>/SearchAdminStaffProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchAdminMemberStaff</servlet-name>
+        <url-pattern>/SearchAdminMemberStaff</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchAdminStaffCustomer</servlet-name>
+        <url-pattern>/SearchAdminStaffCustomer</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>EditCart</servlet-name>
