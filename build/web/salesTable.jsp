@@ -1,28 +1,29 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.*"%>
-<%@page  import="model.Product" %>
-<%@page  import="model.Orders" %>
-<%@page  import="model.OrderDetail" %>
-<%@page  import="model.ProductService" %>
+<%@page import="model.Product"%>
+<%@page import="model.Orders"%>
+<%@page import="model.OrderDetail"%>
+<%@page import="model.ProductService"%>
 <%@include file="layouts/adminNavBar.jsp" %>
 <%
-   List<Orders> orderList = (List)session.getAttribute("orderList");
-   List<OrderDetail> orderDetailList = (List)session.getAttribute("orderDetailList");
+   List<Orders> orderList = (List<Orders>) session.getAttribute("orderList");
+   List<OrderDetail> orderDetailList = (List<OrderDetail>) session.getAttribute("orderDetailList");
    ProductService productService = new ProductService();
    
-    // Sort orderDetailList based on quantity sold
-    for (int i = 0; i < orderDetailList.size(); i++) {
-        for (int j = i + 1; j < orderDetailList.size(); j++) {
-            int quantityI = orderDetailList.get(i).getQuantity();
-            int quantityJ = orderDetailList.get(j).getQuantity();
-                if (quantityI < quantityJ) {
-                    // Swap elements if quantityI is less than quantityJ
-                    OrderDetail temp = orderDetailList.get(i);
-                    orderDetailList.set(i, orderDetailList.get(j));
-                    orderDetailList.set(j, temp);
-                }
-        }
-    }
+   // Map to store merged order details by product ID
+   Map<Integer, OrderDetail> mergedOrderDetails = new LinkedHashMap<>();
+
+   // Merge order details by product ID
+   for (OrderDetail od : orderDetailList) {
+       int productId = od.getProdId().getProdId();
+       if (mergedOrderDetails.containsKey(productId)) {
+           OrderDetail mergedDetail = mergedOrderDetails.get(productId);
+           mergedDetail.setQuantity(mergedDetail.getQuantity() + od.getQuantity());
+           // You may need to update other fields as well if needed
+       } else {
+           mergedOrderDetails.put(productId, od);
+       }
+   }
 %>
 <style>
     .contentContainer {
@@ -36,35 +37,35 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-    <div class="contentContainer">
-        <h2>Top 10 Sold Product</h2>
+        <div class="contentContainer">
+            <h2>Top 10 Sold Product</h2>
             <table>
                 <tr class="header">
                     <td>Product Name</td>
-                     <td>Price</td>
+                    <td>Price</td>
                     <td>Quantity Sold</td>
                     <td>Subtotal(RM)</td>
                 </tr>
                 <%
-                   if(!orderList.isEmpty()){
+                   if (!mergedOrderDetails.isEmpty()) {
                     // Display top 10 sold products
                     int count = 0;
                     double totalAmount = 0.0;
-                    for (OrderDetail od : orderDetailList) {
+                    for (Map.Entry<Integer, OrderDetail> entry : mergedOrderDetails.entrySet()) {
                         if (count >= 10) {
                             break;
                         }
 
-                        int productId = od.getProdId().getProdId();
-                        int quantitySold = od.getQuantity();
-                        Product prod = productService.getCurrentProductById(productId);
+                        OrderDetail od = entry.getValue();
+                        Product prod = productService.getCurrentProductById(od.getProdId().getProdId());
                 %>
                 <tr>
                     <td><%= prod.getProdName() %></td>
                     <td><%= prod.getPrice() %></td>
-                    <td><%= quantitySold %></td>
+                    <td><%= od.getQuantity() %></td>
                     <% 
-                        double subtotal= prod.getPrice() * quantitySold;
+                        // Calculate subtotal by multiplying price and quantity
+                        double subtotal = prod.getPrice() * od.getQuantity();
                         totalAmount += subtotal;                        
                     %>
                     <td><%= subtotal %></td>
