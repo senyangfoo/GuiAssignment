@@ -77,8 +77,8 @@
                     <h3>Services</h3>
                     <ul>
                         <li><a href="">News & Events</a></li>
-                        <li><a href="">Supports</a></li>
-                        <li><a href="">About Us</a></li>
+                        <li><a href="supports.jsp">Supports</a></li>
+                        <li><a href="aboutUs.jsp">About Us</a></li>
                     </ul>
                 </div>
                 <div class="footer4">

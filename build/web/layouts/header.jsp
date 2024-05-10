@@ -576,7 +576,7 @@
                             </div>
                         </li>
                         <li><a href="https://www.youtube.com/watch?v=117SgWVAdWk">News & Events</a></li>
-                        <li><a href="https://www.youtube.com/watch?v=qzKaTmjNalY">Supports</a></li>
+                        <li><a href="supports.jsp">Supports</a></li>
                         <li><a href="aboutUs.jsp">About Us</a></li>
                     </ul>
                 </nav>
