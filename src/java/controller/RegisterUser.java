@@ -18,6 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.UserTransaction;
 import java.util.List;
+import model.CustomerService;
 
 /**
  *
@@ -29,7 +30,7 @@ public class RegisterUser extends HttpServlet {
     EntityManager em;
     @Resource
     UserTransaction utx;
-    private boolean exist;
+    private boolean exist = false;
     private boolean tempexist = false;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -44,6 +45,7 @@ public class RegisterUser extends HttpServlet {
             Customer user = new Customer(name, mail, password);
             userDA users = new userDA();
             userDA checkUser = new userDA(em);
+            CustomerService customerService = new CustomerService(em);
             List<Customer> existCust = checkUser.findAll();
             for (Customer c : existCust) {
                 if (c.getCustName().equals(name)) {
@@ -69,11 +71,21 @@ public class RegisterUser extends HttpServlet {
                 utx.begin();
                 boolean success = users.addRecord(user);
                 utx.commit();
-
-                if (success = true) {
+                
+                if (success == true) {
+                    List<Customer> customerList = customerService.findByCustName(name);
+                    int custId = 0;
+                    for(Customer c : customerList){
+                        if(c.getCustName().equals(name)){
+                           custId = c.getCustId();
+                           break;
+                        }
+                    }
+                    
                     session.setAttribute("login", true);
                     session = request.getSession(true);
-
+                    
+                    session.setAttribute("customerId", custId);
                     session.setAttribute("name", name);
                     session.setAttribute("password", password);
                     session.setAttribute("mail", mail);
