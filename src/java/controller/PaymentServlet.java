@@ -59,7 +59,7 @@ public class PaymentServlet extends HttpServlet {
                    total = subtotalPrice + deliveryFee;
                 }
             }
-            int Id = Integer.parseInt(String.valueOf(request.getSession().getAttribute("id")));
+            int Id = Integer.parseInt(String.valueOf(request.getSession().getAttribute("customerId")));
             String method = request.getParameter("method");
             String address= (String) request.getSession().getAttribute("fullAddress");
             String phoneNumber= (String) request.getSession().getAttribute("phoneNumber");

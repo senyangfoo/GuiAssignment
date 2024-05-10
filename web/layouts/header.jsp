@@ -16,7 +16,6 @@
    }
    if(session.getAttribute("staffLogin")!=null){
         staffLogin = (Boolean) session.getAttribute("staffLogin");
-        sId = (Integer) session.getAttribute("staffId");
    }
     
     //Cart Status
@@ -602,9 +601,7 @@
                                 %>
                             <li><a href="UserProfile.jsp">My Profile</a></li>
                                 <% } %>
-                                <% if(staffLogin == true){ 
-                                   viewOrderLink = "ViewOrder?staffId=" + sId;
-                                %>
+                                <% if(staffLogin == true) { %>
                             <li><a href="StaffProfile.jsp">My Profile</a></li>
                                 <% } %>
                                  <% if(staffLogin == true){ %>
