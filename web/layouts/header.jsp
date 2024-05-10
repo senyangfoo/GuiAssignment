@@ -594,6 +594,9 @@
                             <% if(loginStatus == false && staffLogin == false){ %>
                             <li><a href="Login.jsp">Log In</a></li>
                                 <% }  %>
+                            <% if(loginStatus == false && staffLogin == false){ %>
+                            <li><a href="MainRegister.jsp">Register</a></li>
+                                <% }  %>
                                 <% 
                                    String viewOrderLink = "";
                                    if(loginStatus == true){ 
