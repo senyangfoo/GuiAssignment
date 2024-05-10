@@ -25,14 +25,14 @@
                 width: 200px;
                 height: 50px;
                 -webkit-text-stroke: 1px black; /* width and color */
-                  transition-duration: 1s;
+                transition-duration: 1s;
                 transition-property: background-color;
             }
             button.addButton:hover{
                 color: white;
                 background-color: black;
                 -webkit-text-stroke: 1px white; /* width and color */
-                  transition-duration: 0.5s;
+                transition-duration: 0.5s;
                 transition-property: background-color;
             }
             table.staffTable{
@@ -42,7 +42,7 @@
                 margin-top: 20px;
             }
             td,th{
-                
+
                 border: 1px solid black;
             }
             td.id{
@@ -76,6 +76,9 @@
 
     <body>
         <div class="contentContainer">
+            <form action="SearchAdminMemberStaff" method="GET">
+                <input type="text" placeholder="Search..." onblur="closeSearchBar()" id="searchInput" class="searchInput" name="searchInput">
+            </form>
             <button onclick="window.location.href = 'staffAddEdit.jsp'" class="addButton">Add Staff</button>
             <table class="staffTable">
                 <tr class="header">

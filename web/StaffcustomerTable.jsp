@@ -24,7 +24,7 @@
                 width: 200px;
                 height: 50px;
                 -webkit-text-stroke: 1px black; /* width and color */
-                 transition-duration: 1s;
+                transition-duration: 1s;
                 transition-property: background-color;
             }
             button.addButton:hover{
@@ -41,7 +41,7 @@
                 margin-top: 20px;
             }
             td,th{
-                
+
                 border: 1px solid black;
             }
             td.id{
@@ -74,6 +74,10 @@
     </head>
     <body>
         <div class="contentContainer">
+            <form action="SearchAdminStaffCustomer" method="GET">
+                <input type="hidden" name="who" value="staff">
+                <input type="text" placeholder="Search..." onblur="closeSearchBar()" id="searchInput" class="searchInput" name="searchInput">
+            </form>
             <table class="custTable">
                 <tr class="header">
                     <td class="id">ID</td>
