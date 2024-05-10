@@ -40,6 +40,7 @@ import java.util.Date;
     @NamedQuery(name = "Orders.findByAddress", query = "SELECT o FROM Orders o WHERE o.address = :address"),
     @NamedQuery(name = "Orders.findByPhoneNum", query = "SELECT o FROM Orders o WHERE o.phoneNum = :phoneNum"),
     @NamedQuery(name = "Orders.findByPaymenttype", query = "SELECT o FROM Orders o WHERE o.paymenttype = :paymenttype"),
+    @NamedQuery(name = "Orders.findByCustId", query = "SELECT o FROM Orders o WHERE o.custId = :custId"),
     @NamedQuery(name = "Orders.findByTotalAmount", query = "SELECT o FROM Orders o WHERE o.totalAmount = :totalAmount")})
 public class Orders implements Serializable {
 
@@ -80,6 +81,10 @@ public class Orders implements Serializable {
         this.paymenttype = paymenttype;
         this.totalAmount = totalAmount;
         this.custId = custId;
+    }
+
+    public Orders(Integer orderId) {
+        this.orderId = orderId;
     }
 
     public Integer getOrderId() {

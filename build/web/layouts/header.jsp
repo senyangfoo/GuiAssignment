@@ -8,11 +8,15 @@
     //Login Status
     boolean loginStatus = false;
     boolean staffLogin = false;
+    int cId = 0;
+    int sId = 0;
     if(session.getAttribute("login")!=null){
        loginStatus = (Boolean) session.getAttribute("login");
+       cId = (Integer) session.getAttribute("customerId");
    }
    if(session.getAttribute("staffLogin")!=null){
         staffLogin = (Boolean) session.getAttribute("staffLogin");
+        sId = (Integer) session.getAttribute("staffId");
    }
     
     //Cart Status
@@ -590,15 +594,20 @@
                         <ul>
                             <% if(loginStatus == false && staffLogin == false){ %>
                             <li><a href="Login.jsp">Log In</a></li>
-                                <% } %>
-                                <% if(loginStatus == true){ %>
+                                <% }  %>
+                                <% 
+                                   String viewOrderLink = "";
+                                   if(loginStatus == true){ 
+                                   viewOrderLink = "ViewOrder?customerId=" + cId;
+                                %>
                             <li><a href="UserProfile.jsp">My Profile</a></li>
                                 <% } %>
-                                <% if(staffLogin == true){ %>
+                                <% if(staffLogin == true){ 
+                                   viewOrderLink = "ViewOrder?staffId=" + sId;
+                                %>
                             <li><a href="StaffProfile.jsp">My Profile</a></li>
                                 <% } %>
-                            <li><a href="">Order History</a></li>
-                            <li><a href="">Track Order</a></li>
+                            <li><a href="<%= viewOrderLink %>">Order History</a></li>
                                 <% if(loginStatus == true || staffLogin == true){ %>
                             <li><a href="logout.jsp">Logout</a></li>
                                 <% } %>

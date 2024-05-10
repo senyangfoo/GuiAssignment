@@ -4,68 +4,46 @@
  */
 package controller;
 
-import model.Staff;
-import model.staffDA;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
-import jakarta.annotation.Resource;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.transaction.UserTransaction;
+import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
+import model.Customer;
+import model.OrderDetail;
+import model.OrderService;
+import model.Orders;
 
-/**
- *
- * @author khtee
- */
-public class RetrieveStaff extends HttpServlet {
-
+public class ViewOrder extends HttpServlet {
     @PersistenceContext
     EntityManager em;
-    @Resource
-    UserTransaction utx;
-    int count = 3;
-    String err = "Wrong Username Or Password!";
-
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-        try {
-
-            HttpSession session = request.getSession();
-            String name = request.getParameter("name");
-            String password = request.getParameter("password");
-
-            em.getEntityManagerFactory().getCache().evictAll();
-            staffDA user = new staffDA(em);
-            List<Staff> staff = user.findAll();
-
-            for (Staff c : staff) {
-                if (c.getStaffName().equals(name) && c.getStaffPassword().equals(password)) {
-                    session.setAttribute("staffLogin", true);
-                    session = request.getSession(true);
-
-                    session.setAttribute("staffId", c.getStaffId());
-                    session.setAttribute("name", c.getStaffName());
-                    session.setAttribute("password", c.getStaffPassword());
-                    session.setAttribute("mail", c.getStaffEmail());
-
-                    response.sendRedirect("index.jsp"); //homepage
-                }
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            Customer customer = null;            
+            customer = new Customer(Integer.parseInt(request.getParameter("customerId")));
+            OrderService orderService = new OrderService(em);
+            
+            List <Orders> orderList = orderService.findOrderByUserId(customer);
+            List<OrderDetail> orderDetailList = new ArrayList<>();
+            for(Orders o : orderList){
+                Orders order = new Orders(o.getOrderId());
+                List <OrderDetail> temp = orderService.findAllOrderDetailbyId(order);
+                orderDetailList.addAll(temp);
             }
-
-            request.setAttribute("errorMsg", "<i class=\"fa-solid fa-circle-exclamation error-icon\"></i> Username Or Password is wrong");
-            request.getRequestDispatcher("StaffLogin.jsp").forward(request, response);
-
-        } catch (Exception ex) {
-
-            out.println("<h1 style='color: red'>Error accure at " + ex + " </h1>");
-
+            HttpSession session = request.getSession();
+            
+            session.setAttribute("custorderList", orderList);
+            session.setAttribute("custorderDetailList", orderDetailList);
+            response.sendRedirect("orderHistory.jsp");
         }
     }
 

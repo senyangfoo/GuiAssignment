@@ -152,7 +152,18 @@
         <title>Product Detail Page</title>
     </head>
     <body>
-        <form action="AddCart?productID=<%=p.getProdId()%>" method="post">
+        <%
+            String link = null;
+            String reviewLink = null;
+            if(loginStatus == false && staffLogin == false){
+                link = "Login.jsp";
+                reviewLink = "Login.jsp";
+            }else{
+                link="AddCart?productID="+ p.getProdId();
+                reviewLink = "productReview.jsp";
+            }
+        %>
+        <form action="<%= link%>" method="post">
             <div class="contentContainer">
                 <div class="prodContainer">
                     <img src ="productImage/<%= p.getImage() %>" class="prodImg">
@@ -169,7 +180,7 @@
                             <p class="stockText"><%= p.getStock()%> item(s) left</p>
                         </div>
                         <div class="addcart"><input type="submit" value="Add To Cart"></div>
-                        <a href="productReview.jsp">Review the Product</a>  
+                        <a href="<%= reviewLink %>">Review the Product</a>  
                         <div class="descContainer">
                             <p class="descTitle">Description</p>
                             <p class="desc"><%= p.getDescription() %></p>

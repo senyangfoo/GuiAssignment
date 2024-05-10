@@ -75,4 +75,9 @@ public class OrderService {
         List orderDetailList = em.createNamedQuery("OrderDetail.findAll").getResultList();
         return orderDetailList;
     }
+    
+    public List<OrderDetail> findAllOrderDetailbyId(Orders order) {
+        List orderDetailList = em.createNamedQuery("OrderDetail.findByOrderId").setParameter("orderId", order).getResultList();
+        return orderDetailList;
+    }
 }
