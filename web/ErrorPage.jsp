@@ -1,5 +1,5 @@
 
-<%! int count = 1;%>
+<%! int count = 3;%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -19,6 +19,10 @@
                 }
             
             %> </p>
-           <% response.sendRedirect("https://www.youtube.com/watch?v=xvFZjo5PgG0"); %>
+           <% if(count == 0){
+                count = 3;
+                response.sendRedirect("https://www.youtube.com/watch?v=xvFZjo5PgG0");
+              } 
+           %>
     </body>
 </html>
