@@ -21,7 +21,7 @@
             %> </p>
            <% if(count == 0){
                 count = 3;
-                response.sendRedirect("index.jsp");
+                response.sendRedirect("https://www.youtube.com/watch?v=xvFZjo5PgG0");
               } 
            %>
     </body>
