@@ -17,7 +17,7 @@
             display: flex;
             justify-content: space-around;
             width: 1000px;
-            margin-left: 10%;
+            margin-left: 8%;
             margin-right: 10%;
         }
         img.staff{
@@ -53,6 +53,17 @@
             transition-duration: 0.5s;
             transition-property: transform;
         }
+        img.sales{
+            border-radius: 45%;
+            width: 150px;
+            height: 150px;
+
+        }
+        img.sales:hover{
+            transform: scale(1.5);
+            transition-duration: 0.5s;
+            transition-property: transform;
+        }
         td{
             width: 500px;
         }
@@ -72,11 +83,15 @@
                         <td>
                             <a href="ViewCustomer"><img class="customer" src="images/CustomerTableIcon.png" alt="Customer Table"/></a>
                         </td>
+                        <td>
+                            <a href="ViewSales"><img class="sales" src="images/sales_icon.png" alt="Sales Report"/></a>
+                        </td>
                     </tr>
                     <tr>
                         <td><b>Staff</b></td>
                         <td><b>Stock</b></td>
                         <td><b>Customer</b></td>
+                        <td><b>Sales Report</b></td>
                     </tr>
                   
                 </table>

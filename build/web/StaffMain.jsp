@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Admin Console</title>
+        <title>Staff Console</title>
     </head>
     <style>
         .contentContainer {
@@ -13,23 +13,12 @@
             text-align: center;
         }
         .tableOption{
+            position: relative;
             margin-top: 8%;
             display: flex;
             justify-content: space-around;
-            width: 1000px;
-            margin-left: 8%;
-            margin-right: 10%;
-        }
-        img.staff{
-            border-radius: 45%;
-            width: 150px;
-            height: 150px;
-
-        }
-        img.staff:hover{
-            transform: scale(1.5);
-            transition-duration: 0.5s;
-            transition-property: transform;
+            width: 500px;
+            left: 29%;
         }
         img.stock{
             border-radius: 45%;
@@ -70,25 +59,21 @@
     </style>
     <body>
         <div class="contentContainer">
-            <h1>Admin Console</h1>
+            <h1>Staff Console</h1>
             <div class="tableOption">
                 <table>
                     <tr>
                         <td>
-                            <a href="ViewStaff"><img class="staff" src="images/StaffTableIcon.png" alt="Staff Table"/></a>
+                            <a href="StaffViewProduct"><img class="stock" src="images/StockTableIcon.png" alt="Stock Table"/></a>
                         </td>
                         <td>
-                            <a href="AdminViewProduct"><img class="stock" src="images/StockTableIcon.png" alt="Stock Table"/></a>
+                            <a href="StaffViewCustomer"><img class="customer" src="images/CustomerTableIcon.png" alt="Customer Table"/></a>
                         </td>
                         <td>
-                            <a href="ViewCustomer"><img class="customer" src="images/CustomerTableIcon.png" alt="Customer Table"/></a>
-                        </td>
-                        <td>
-                            <a href="ViewSales"><img class="sales" src="images/sales_icon.png" alt="Sales Report"/></a>
+                            <a href="StaffViewSales"><img class="sales" src="images/sales_icon.png" alt="Sales Report"/></a>
                         </td>
                     </tr>
                     <tr>
-                        <td><b>Staff</b></td>
                         <td><b>Stock</b></td>
                         <td><b>Customer</b></td>
                         <td><b>Sales Report</b></td>
@@ -99,5 +84,5 @@
 
         </div>
     </body>
-    <%@include file="layouts/adminNavBar.jsp" %>
+    <%@include file="layouts/staffNavBar.jsp" %>
 </html>
