@@ -626,7 +626,7 @@
                         <h3>My Cart</h3>
                     </div>
                     <% if(loginStatus == true){ %>
-                    <% if (cartProduct != null && cart_list.isEmpty() != true) { %>
+                    <% if (cartProduct != null && !cartProduct.isEmpty()) { %>
                     <div>
                     </div>
                     <div class="item_details">
@@ -663,9 +663,6 @@
                             </div>
                             <button onclick="location.href = 'Checkout.jsp';">Checkout</button>
                         </div>
-                        <% } else if(cart_list.isEmpty()) {
-                        %>
-                        <div class="cart_empty">Your cart is empty</div>
                         <% } else {
                         %>
                         <div class="cart_empty">Your cart is empty</div>
