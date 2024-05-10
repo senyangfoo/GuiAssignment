@@ -55,9 +55,14 @@ public class EditCart extends HttpServlet {
             }
             
             cartList = cart_list;
+            if(quantity <= 0){
+                  response.sendRedirect("ViewCart");
+            }
+            else{
 
             cartList.add(cm);
             response.sendRedirect("ViewCart");
+            }
 
         }catch(Exception ex){
             

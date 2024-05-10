@@ -74,14 +74,12 @@
     </head>
     <body>
         <div class="contentContainer">
-            <button onclick="window.location.href = 'StaffcustomerAddEdit.jsp'" class="addButton">Add Customer</button>
             <table class="custTable">
                 <tr class="header">
                     <td class="id">ID</td>
                     <td class="name">Name</td>
                     <td class="email">Email</td>
                     <td class="pass">Password</td>
-                    <td class="action">Action</td>
                 </tr>
                 <%
                     if(!customerList.isEmpty()){
@@ -91,7 +89,6 @@
                     <td class="name"><%= p.getCustName()%></td>
                     <td class="email"><%= p.getCustEmail() %></td>
                     <td class="pass"><%= p.getCustPassword() %></td>
-                    <td class="action"><a href="StaffRetrieveCustomer?custId=<%= p.getCustId()%>"><i class="material-icons" style="color: black;">&#xe254;</i></a></td>
                 </tr>
                 <%}
             }
