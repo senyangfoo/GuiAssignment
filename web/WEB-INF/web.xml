@@ -129,10 +129,6 @@
         <servlet-class>controller.StaffViewCustomer</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>StaffAddCustomer</servlet-name>
-        <servlet-class>controller.StaffAddCustomer</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>StaffRetrieveCustomer</servlet-name>
         <servlet-class>controller.StaffRetrieveCustomer</servlet-class>
     </servlet>
@@ -147,10 +143,6 @@
     <servlet>
         <servlet-name>StaffRetrieveProduct</servlet-name>
         <servlet-class>controller.StaffRetrieveProduct</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>StaffEditCustomer</servlet-name>
-        <servlet-class>controller.StaffEditCustomer</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>StaffViewSales</servlet-name>
@@ -313,10 +305,6 @@
         <url-pattern>/StaffViewCustomer</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>StaffAddCustomer</servlet-name>
-        <url-pattern>/StaffAddCustomer</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>StaffRetrieveCustomer</servlet-name>
         <url-pattern>/StaffRetrieveCustomer</url-pattern>
     </servlet-mapping>
@@ -333,14 +321,10 @@
         <url-pattern>/StaffRetrieveProduct</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>StaffEditCustomer</servlet-name>
-        <url-pattern>/StaffEditCustomer</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>StaffViewSales</servlet-name>
         <url-pattern>/StaffViewSales</url-pattern>
     </servlet-mapping>
-     <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>EditCart</servlet-name>
         <url-pattern>/EditCart</url-pattern>
     </servlet-mapping>
