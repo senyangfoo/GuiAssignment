@@ -122,7 +122,7 @@ if (loginStatus == false){
             </c:if>
             <form action="EditUser" method="POST">
                 <label class="labelField">Username</label>
-                <input type="text" name="name" value="<%= name %>" class="inputField" required>
+                <input type="text" name="name" value="<%= name %>" class="inputField" required readonly="readonly">
                 <label class="labelField">Email</label>
                 <input type="text" name="mail" value="<%= mail %>" class="inputField" required>
                 <label class="labelField">Password</label>
