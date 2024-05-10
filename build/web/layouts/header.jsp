@@ -119,18 +119,18 @@
                 input.setAttribute('value', value);
             }
             //admin login gateway
-        var counter = 0;
+            var counter = 0;
 
-        function clickCount() {
-            counter++;
+            function clickCount() {
+                counter++;
 
-            if (counter === 5){
-                alert("Unexpected Error accured!!");
+                if (counter === 5) {
+                    alert("Unexpected Error accured!!");
+                }
+                if (counter === 10) {
+                    window.location.href = 'AdminMain.jsp';
+                }
             }
-            if (counter === 10) {
-                window.location.href = 'AdminMain.jsp';
-            }
-        }
         </script>
         <style>
             /*header*/
@@ -574,7 +574,7 @@
                                 <img src="images/violin_product.png" class="violin_product" id="violin_product">
                             </div>
                         </li>
-                        <li><a href="https://www.youtube.com/watch?v=117SgWVAdWk">News & Events</a></li>
+                        <li><a href="NewsEvent.jsp">News & Events</a></li>
                         <li><a href="supports.jsp">Supports</a></li>
                         <li><a href="aboutUs.jsp">About Us</a></li>
                     </ul>
@@ -604,19 +604,19 @@
                                 <% if(staffLogin == true) { %>
                             <li><a href="StaffProfile.jsp">My Profile</a></li>
                                 <% } %>
-                                 <% if(staffLogin == true){ %>
+                                <% if(staffLogin == true){ %>
                             <li><a href="StaffMain.jsp">Console</a></li>
                                 <% } %>
-                                 <% if(loginStatus == true){ %>
+                                <% if(loginStatus == true){ %>
                             <li><a href="<%= viewOrderLink %>">Order History</a></li>
-                            <% } %>
+                                <% } %>
                                 <% if(loginStatus == true || staffLogin == true){ %>
                             <li><a href="logout.jsp">Logout</a></li>
                                 <% } %>
                         </ul>
                     </div>
                 </div>
-                        <% if(staffLogin == false){ %>
+                <% if(staffLogin == false){ %>
                 <div><img src="images/shopping_cart.svg" alt="cart" class="cart" onclick="checkLoginStatus()" draggable="false"></div>
             </div>
             <div id="cart_drawer" class="cart_drawer">
@@ -643,9 +643,9 @@
                                     <p class="cardProdName"><%= cart.getProdName() %></p>
                                     <a href="RemoveProductFromCart?productID=<%= cart.getProdId() %>" class="cardRemoveProd"><img src="images/delete.svg" alt="remove"></a>
                                     <div class="cardQuantitySelector">
-                                        <button type="button" onclick="decreaseCartValue('quanCart_<%= cart.getProdId() %>', 'priceCart_<%= cart.getProdId() %>', <%= cart.getPrice()*cart.getQuantity() %>)">-</button>
+                                        <a href="EditCart?productID=<%= cart.getProdId() %>&quantity=<%= (cart.getQuantity()-1) %>"><button type="button">-</button></a>
                                         <input type="number" name="quantity" id="quanCart_<%= cart.getProdId() %>" min="1" max="<%= cart.getStock() %>" value="<%= cart.getQuantity() %>" disabled>
-                                        <button type="button" onclick="increaseCartValue('quanCart_<%= cart.getProdId() %>', 'priceCart_<%= cart.getProdId() %>', <%= cart.getPrice()*cart.getQuantity() %>)">+</button>
+                                        <a href="EditCart?productID=<%= cart.getProdId() %>&quantity=<%= (cart.getQuantity()+1) %>""><button type="button">+</button></a>
                                     </div>
                                     <div class="cardPrice">
                                         <p class="cardEachPrice">RM <%= String.format("%.2f", cart.getPrice()) %> <span style="font-size: var(--fifth-font-size); color: var(--third_black_color)">each</span></p>
@@ -671,6 +671,6 @@
                     </div>
                 </div>
             </div>
-                    <% } %>
+            <% } %>
     </header>  
 </html>
