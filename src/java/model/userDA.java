@@ -134,7 +134,7 @@ public class userDA implements Serializable {
            List<Customer> customers = em.createNamedQuery("Customer.findAll").getResultList();
         return customers;
     }
-
+    
     public int getCount() {
         return count;
     }
