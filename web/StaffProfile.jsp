@@ -25,13 +25,56 @@ if (staffLogin == false){
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Staff Profile</title>
-    </head>
-    <body>
-        <h1>Staff Profile</h1>
-         <p>Name: <%= name %></p>
-          <p>Mail: <%= mail %></p>
+        <style>
+            .contentContainer {
+                width: 100%;
+                padding: 0;
+            }
 
-        <p>Password : <%= password %></p>
-        <a href="StaffEdit.jsp"><button>Edit Profile</button></a>
+            .bgVideo {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                object-fit: cover;
+            }
+
+            .detailContainer {
+                position: absolute;
+                top: 25%;
+                left: 37%;
+                background-color: var(--secondary_white_color);
+                backdrop-filter: blur(15px);
+                -webkit-backdrop-filter: blur(10px);
+                width: 400px;
+                height: 500px;
+                border-radius: 20px;
+                padding: 30px 20px;
+
+                .button {
+                    margin: 10px 0 0 0;
+                    width: 100%;
+                    height: 40px;
+                    background-color: var(--primary_brown_color);
+                    color: var(--primary_white_color);
+                    font-size: var(--secondary-font-size);
+                    cursor: pointer;
+                }
+            }
+        </style>
+    </head>
+    <body class="contentContainer">        
+        <video autoplay muted loop id="bgVideo" class="bgVideo" draggable="false">
+            <source src="images/background.mp4" type="video/mp4">
+            <img src="images/background.png" style="width:100%" draggable="false">
+        </video>
+        <div class="detailContainer">
+            <h2>Staff Profile</h2>
+            <p>Name: <%= name %></p>
+            <p>Mail: <%= mail %></p>
+
+            <p>Password : <%= password %></p>
+            <a href="StaffEdit.jsp"><button class="button">Edit Profile</button></a>
+        </div>
     </body>
 </html>
