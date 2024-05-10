@@ -626,7 +626,7 @@
                         <h3>My Cart</h3>
                     </div>
                     <% if(loginStatus == true){ %>
-                    <% if (cartProduct != null) { %>
+                    <% if (cartProduct != null && !cartProduct.isEmpty()) { %>
                     <div>
                     </div>
                     <div class="item_details">
