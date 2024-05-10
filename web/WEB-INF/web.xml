@@ -120,6 +120,42 @@
         <servlet-name>ViewOrder</servlet-name>
         <servlet-class>controller.ViewOrder</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>StaffViewProduct</servlet-name>
+        <servlet-class>controller.StaffViewProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StaffViewCustomer</servlet-name>
+        <servlet-class>controller.StaffViewCustomer</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StaffAddCustomer</servlet-name>
+        <servlet-class>controller.StaffAddCustomer</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StaffRetrieveCustomer</servlet-name>
+        <servlet-class>controller.StaffRetrieveCustomer</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StaffEditProduct</servlet-name>
+        <servlet-class>controller.StaffEditProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StaffAddProduct</servlet-name>
+        <servlet-class>controller.StaffAddProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StaffRetrieveProduct</servlet-name>
+        <servlet-class>controller.StaffRetrieveProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StaffEditCustomer</servlet-name>
+        <servlet-class>controller.StaffEditCustomer</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StaffViewSales</servlet-name>
+        <servlet-class>controller.StaffViewSales</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProductDetailServlet</servlet-name>
         <url-pattern>/ProductDetailServlet</url-pattern>
@@ -255,6 +291,42 @@
     <servlet-mapping>
         <servlet-name>ViewOrder</servlet-name>
         <url-pattern>/ViewOrder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StaffViewProduct</servlet-name>
+        <url-pattern>/StaffViewProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StaffViewCustomer</servlet-name>
+        <url-pattern>/StaffViewCustomer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StaffAddCustomer</servlet-name>
+        <url-pattern>/StaffAddCustomer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StaffRetrieveCustomer</servlet-name>
+        <url-pattern>/StaffRetrieveCustomer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StaffEditProduct</servlet-name>
+        <url-pattern>/StaffEditProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StaffAddProduct</servlet-name>
+        <url-pattern>/StaffAddProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StaffRetrieveProduct</servlet-name>
+        <url-pattern>/StaffRetrieveProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StaffEditCustomer</servlet-name>
+        <url-pattern>/StaffEditCustomer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StaffViewSales</servlet-name>
+        <url-pattern>/StaffViewSales</url-pattern>
     </servlet-mapping>
     <security-constraint>
         <display-name>AdminConstraint</display-name>

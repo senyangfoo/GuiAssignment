@@ -607,6 +607,9 @@
                                 %>
                             <li><a href="StaffProfile.jsp">My Profile</a></li>
                                 <% } %>
+                                 <% if(staffLogin == true){ %>
+                            <li><a href="StaffMain.jsp">Console</a></li>
+                                <% } %>
                             <li><a href="<%= viewOrderLink %>">Order History</a></li>
                                 <% if(loginStatus == true || staffLogin == true){ %>
                             <li><a href="logout.jsp">Logout</a></li>
