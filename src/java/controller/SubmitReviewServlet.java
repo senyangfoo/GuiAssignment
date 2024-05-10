@@ -34,7 +34,7 @@ public class SubmitReviewServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
-            int Id = Integer.parseInt(String.valueOf(request.getSession().getAttribute("id")));
+            int Id = Integer.parseInt(String.valueOf(request.getSession().getAttribute("customerId")));
             int productID = Integer.parseInt(request.getParameter("productID"));
             int rating = Integer.parseInt(request.getParameter("rating"));            
             String comment = request.getParameter("comment");
