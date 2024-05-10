@@ -1,5 +1,5 @@
 
-<%! int count = 3;%>
+<%! int count = 1;%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -9,7 +9,7 @@
     </head>
     <body>
         <h1 style="color: red;"><b>You Have No Access!</b></h1>
-       <p>You will be redirect to the main page in 
+       <p>You will be redirect to the rick roll in 
             <%= count +" seconds."%>
             <%
             if(count>0){
@@ -19,6 +19,6 @@
                 }
             
             %> </p>
-           <% response.sendRedirect("index.jsp"); %>
+           <% response.sendRedirect("https://www.youtube.com/watch?v=xvFZjo5PgG0"); %>
     </body>
 </html>
