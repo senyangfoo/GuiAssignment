@@ -15,14 +15,66 @@
 
         observer.observe(document.querySelector('.productAnim'));
         observer.observe(document.querySelector('.salesAnim'));
-        observer.observe(document.querySelector('.eventsAnim'));
+//        observer.observe(document.querySelector('.eventsAnim'));
     }, 1);
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Function to call the servlet
+        function callServlet() {
+            $.ajax({
+                url: 'ViewTopSalesIndex',
+                success: function (data) {
+                    console.log("success");
+                },
+                error: function () {
+                    // Handle error
+                    console.error('Failed to call servlet');
+                }
+            });
+        }
+
+        callServlet();
+    });
+</script>
+<script>
+    var refreshFlag = sessionStorage.getItem('refreshFlag');
+    if (!refreshFlag) {
+        setTimeout(function () {
+            location.reload(true);
+        }, 10);
+        sessionStorage.setItem('refreshFlag', 'true');
+    }
 </script>
 <script src="javascripts/slideEventHandler.js"></script>
 <script>window.onload = auto();</script>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="layouts/header.jsp" %>  
 <%@page  import="enums.prodCategory" %>
+<%@page  import="model.Product" %>
+<%@page  import="model.Orders" %>
+<%@page  import="model.OrderDetail" %>
+<%@page  import="model.ProductService" %>
+<%   
+   List<Orders> orderList = (List)session.getAttribute("orderList");
+   List<OrderDetail> orderDetailList = (List)session.getAttribute("orderDetailList");
+   ProductService productService = new ProductService();
+   
+    // Sort orderDetailList based on quantity sold
+    for (int i = 0; i < orderDetailList.size(); i++) {
+        for (int j = i + 1; j < orderDetailList.size(); j++) {
+            int quantityI = orderDetailList.get(i).getQuantity();
+            int quantityJ = orderDetailList.get(j).getQuantity();
+                if (quantityI < quantityJ) {
+                    // Swap elements if quantityI is less than quantityJ
+                    OrderDetail temp = orderDetailList.get(i);
+                    orderDetailList.set(i, orderDetailList.get(j));
+                    orderDetailList.set(j, temp);
+                }
+        }
+    }
+%>
 <!DOCTYPE html>
 <html>
     <style>
@@ -201,7 +253,7 @@
             }
         }
     </style>
-    <body>
+    <body onload="refreshPage()">
         <div class="slideContainer">
             <div class="fadeAnimation imgSlide" onmouseover="pause()" onmouseout="resume()"><img src="images/piano.png" alt="piano"/><button class="buttonLeft" onclick="scrollToContainer()">View Products</button></div>
             <div class="fadeAnimation imgSlide" onmouseover="pause()" onmouseout="resume()" style="display: none"><img src="images/guitar.png" alt="guitar"/><button class="buttonRight" onclick="scrollToContainer()">View Products</button></div>
@@ -230,24 +282,44 @@
             </div>
             <div class="salesAnim">
                 <h2 class="Anim1">Top Sales</h2>
+                <% 
+                    if(!orderList.isEmpty()){
+                    
+                    int count = 0;
+                    double totalAmount = 0.0;
+                    for (OrderDetail od : orderDetailList) {
+                        if (count >= 1) {
+                            break;
+                        }
+
+                        int productId = od.getProdId().getProdId();
+                        Product prod = productService.getCurrentProductById(productId);
+                %>
                 <div class="topSalesContainer Anim1">
-                    <img src="images/null_icon.png" width="100%"/>
+                    <img src="productImage/<%= prod.getImage() %>" style="width:100%;"/>
                     <div>
-                        <h3>Item Name</h3>
-                        <p>Description</p>
+                        <h3><%= prod.getProdName() %></h3>
+                        <p><%= prod.getDescription() %></p>
                     </div>
                 </div>
+                <%
+                        count++;
+                    }
+                %>
+                <% } else { %>
+                <h3>No One Order Yet :C</h3>
+                <% } %>
             </div>
-            <div class="eventsAnim">
-                <h2 class="Anim1">News & Upcoming Events</h2>
-                <div class="NewsEvenstContainer Anim1">
-                    <img src="images/null_icon.png" width="100%"/>
-                    <div>
-                        <h3>Item Name</h3>
-                        <p>Description</p>
-                    </div>
-                </div>
-            </div>
+            <!--                <div class="eventsAnim">
+                                <h2 class="Anim1">News & Upcoming Events</h2>
+                                <div class="NewsEvenstContainer Anim1">
+                                    <img src="images/null_icon.png" width="100%"/>
+                                    <div>
+                                        <h3>Item Name</h3>
+                                        <p>Description</p>
+                                    </div>
+                                </div>
+                            </div>-->
         </div>
     </body>
 </html>
