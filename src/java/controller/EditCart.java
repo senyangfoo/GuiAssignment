@@ -47,37 +47,34 @@ public class EditCart extends HttpServlet {
             cm.setQuantity(quantity);
             HttpSession session = request.getSession();
             ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart-list");
-            for (Cart c : cart_list) {
-                if (c.getProdId() == id) {
-                    cart_list.remove(cart_list.indexOf(c));
-                    break;
+            for(Cart c: cart_list){
+                if(c.getProdId() == id){
+                        cart_list.remove(cart_list.indexOf(c));
+                        break;
                 }
             }
+            
             cartList = cart_list;
-            if (quantity <= 0) {
-                response.sendRedirect("ViewCart");
-            } else {
 
-                cartList.add(cm);
-                response.sendRedirect("ViewCart");
-            }
+            cartList.add(cm);
+            response.sendRedirect("ViewCart");
 
-        } catch (Exception ex) {
-
-        }
+        }catch(Exception ex){
+            
     }
+}
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+/**
+ * Handles the HTTP <code>GET</code> method.
+ *
+ * @param request servlet request
+ * @param response servlet response
+ * @throws ServletException if a servlet-specific error occurs
+ * @throws IOException if an I/O error occurs
+ */
+@Override
+protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -91,7 +88,7 @@ public class EditCart extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -102,7 +99,7 @@ public class EditCart extends HttpServlet {
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo() {
+public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 
