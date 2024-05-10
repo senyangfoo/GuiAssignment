@@ -348,7 +348,7 @@
         <servlet-name>SearchAdminStaffCustomer</servlet-name>
         <url-pattern>/SearchAdminStaffCustomer</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
+        <servlet-mapping>
         <servlet-name>EditCart</servlet-name>
         <url-pattern>/EditCart</url-pattern>
     </servlet-mapping>
