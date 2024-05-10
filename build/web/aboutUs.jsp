@@ -173,7 +173,8 @@
             <div class="detail">
                 <section>
                     <h2>Our Mission</h2>
-                    <p>Welcome to Your Music Instrument Store. We're dedicated to helping musicians of all levels find their perfect instrument.</p>
+                    <p>Welcome to Rhythm & Muse. We claim to be the best online music instrument store in the Country. At Rhythm & Muse, we harmonize the worlds of rhythm and inspiration, we provide you with a seamless shopping experience and a wide range of instruments to suit your passion for music, such as pianos, guitars, drums, violins and more. Besides giving consumers an easier way to consume musical instruments on our website, we also host many exciting activities and events from time to time. Plus, with our secure online payment methods, you can shop with a peace of mind, knowing that your transactions are safe and convenient. No need to worry about logistics issues, our efficient shipping methods guarantee that your instrument arrives safely and swiftly at your doorstep. So what are you waiting for? come and join us and discover the perfect instrument to accompany your musical journey.
+                        oh and is there any changes u want to make on the project? If not then I will start screenshot the pages</p>
                 </section>
                 <section>
                     <h2>Our Story</h2>
